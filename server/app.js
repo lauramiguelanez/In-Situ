@@ -8,6 +8,7 @@ const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+require('dotenv').config();
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -16,7 +17,7 @@ const cors = require("cors");
 
 mongoose
   .connect(
-    "mongodb://localhost/server",
+    process.env.MONGODB_URI,
     { useNewUrlParser: true }
   )
   .then(x => {
