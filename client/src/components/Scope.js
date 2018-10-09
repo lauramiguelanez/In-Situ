@@ -11,7 +11,6 @@ export class Scope extends React.Component {
       scene: new THREE.Scene(),
       renderer: new THREE.WebGLRenderer({antialias: true})
     };
-    //console.log(DeviceOrientationControls);
   }
 
   init = ({ camera, scene, renderer }) => {
@@ -54,6 +53,6 @@ export class Scope extends React.Component {
   };
 
   render() {
-    return <canvas id="scope" />;
+    return <div/>;
   }
 }

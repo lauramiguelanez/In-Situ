@@ -16,7 +16,6 @@ export class CanvasPanorama extends React.Component {
   init = ({ camera, scene, renderer, mesh }) => {
     //camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
     camera = this.state.camera;
-    console.log(camera);
     camera.position.z = 400;
     //scene = new THREE.Scene();
     //var texture = new THREE.TextureLoader().load("textures/crate.gif");
@@ -37,7 +36,6 @@ export class CanvasPanorama extends React.Component {
     mesh.rotation.x += 0.005;
     mesh.rotation.y += 0.01;
     renderer.render(scene, camera);
-    console.log(scene);
   };
 
   componentDidMount = () => {
