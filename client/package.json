@@ -3,18 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "parcel": "^1.10.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "2.0.4",
+    "react-three-renderer": "^3.2.4",
+    "three": "^0.86.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build-dev": "dotenv -e .env.development react-scripts build", 
+    "build-dev": "dotenv -e .env.development react-scripts build",
     "build-prod": "dotenv -e .env.production react-scripts build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -26,4 +28,3 @@
     "not op_mini all"
   ]
 }
-
