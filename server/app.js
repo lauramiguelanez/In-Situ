@@ -8,7 +8,7 @@ const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
-require('dotenv').config();
+require("dotenv").config();
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -17,7 +17,8 @@ const cors = require("cors");
 
 mongoose
   .connect(
-    process.env.MONGODB_URI,
+    //process.env.MONGODB_URI,
+    "http://localhost:3001",
     { useNewUrlParser: true }
   )
   .then(x => {
@@ -69,7 +70,7 @@ hbs.registerHelper("ifUndefined", (value, options) => {
 });
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "In-Situ";
 
 // Enable authentication using session + passport
 app.use(
@@ -80,6 +81,14 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
+
+///From heroku deploy
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
+/////
+
 app.use(flash());
 require("./passport")(app);
 
@@ -87,6 +96,6 @@ const index = require("./routes/index");
 app.use("/", index);
 
 const authRoutes = require("./routes/auth");
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 
 module.exports = app;

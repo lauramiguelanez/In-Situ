@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {CanvasPanorama} from "./components/CanvasPanorama";
+/* import {DeviceOrientationControls} from "./lib/DeviceOrientationControls";
+import {renderPanorama} from "./lib/renderPanorama"; */
 
 class App extends Component {
   render() {
-    return (
+    
+
+    return (<div>
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+      <script src="../src/lib/DeviceOrientationControls.js"></script>
+    <script src="../src/lib/renderPanorama.js"></script>
+        <header className="header">
+        <h1>App</h1>
         </header>
+       <CanvasPanorama/>
+      </div>
+{/* <script src="../src/lib/three.js"></script>
+    <script src="../src/lib/DeviceOrientationControls.js"></script>
+    <script src="../src/lib/renderPanorama.js"></script> */}
       </div>
     );
   }
