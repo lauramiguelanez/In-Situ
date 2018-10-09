@@ -5,6 +5,8 @@
  * W3C Device Orientation control (http://w3c.github.io/deviceorientation/spec-source-orientation.html)
  */
 
+var THREE = require('three');
+
 THREE.DeviceOrientationControls = function ( object ) {
 
 	var scope = this;
@@ -109,3 +111,5 @@ THREE.DeviceOrientationControls = function ( object ) {
 	this.connect();
 
 };
+
+export default THREE.DeviceOrientationControls;

@@ -46,6 +46,6 @@ export class CanvasPanorama extends React.Component {
   };
 
   render() {
-    return <canvas id="scope" />;
+    return <div/>;
   }
 }
