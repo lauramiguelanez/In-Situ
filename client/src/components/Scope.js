@@ -14,9 +14,9 @@ export class Scope extends React.Component {
   }
 
   getImage = ()=>{
-    return axios.get("http://localhost:3010/api/spaces/5bbe1a3b59e92718a3b15f0f")
+    let id = "5bbe25ab0fc16b19a0788676"
+    return axios.get(`http://localhost:3010/api/spaces/${id}`)
     .then( (space) => {
-        // this.props.getData();
         this.setState({image: space.data.image});
         console.log("Image from DB " + space.data.image);
     })
@@ -24,7 +24,7 @@ export class Scope extends React.Component {
   }
 
   init = ({ camera, scene, renderer }) => {
-    this.setState({controls:new DeviceOrientationControls(camera)});
+    this.setState({controls: new DeviceOrientationControls(camera)});
     
     console.log("Image at INIT " + this.state.image);
     var geometry = new THREE.SphereBufferGeometry(500, 60, 40);
@@ -32,17 +32,15 @@ export class Scope extends React.Component {
 
     const loader = new THREE.TextureLoader()
     loader.crossOrigin = '';
-    const map = loader.load(this.state.image) //panoramas/maxresdefault.jpg
-
+    const map = loader.load(this.state.image);
     var material = new THREE.MeshBasicMaterial({map});
-
     var sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
 
-    var helperGeometry = new THREE.BoxBufferGeometry(100, 100, 100, 4, 4, 4);
+    /* var helperGeometry = new THREE.BoxBufferGeometry(100, 100, 100, 4, 4, 4);
     var helperMaterial = new THREE.MeshBasicMaterial({color: 0xff00ff, wireframe: true});
     var helper = new THREE.Mesh(helperGeometry, helperMaterial);
-    //scene.add(helper);
+    scene.add(helper); */
 
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -58,10 +56,9 @@ export class Scope extends React.Component {
   };
 
   onWindowResize = () => {
-    let { camera, scene, renderer, controls } = this.state;
+    let { camera, renderer } = this.state;
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
     renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
