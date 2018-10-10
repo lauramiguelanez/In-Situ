@@ -9,21 +9,24 @@ export class Scope extends React.Component {
     this.state = {
       camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100),
       scene: new THREE.Scene(),
-      renderer: new THREE.WebGLRenderer({antialias: true}),
-      image: "https://res.cloudinary.com/dmtbzrye8/image/upload/v1539164954/panoramas/2294472375_24a3b8ef46_o.jpg"
+      renderer: new THREE.WebGLRenderer({antialias: true})
     };
   }
 
   getImage = ()=>{
-  
-
-
+    return axios.get("http://localhost:3010/api/spaces/5bbe1a3b59e92718a3b15f0f")
+    .then( (space) => {
+        // this.props.getData();
+        this.setState({image: space.data.image});
+        console.log("Image from DB " + space.data.image);
+    })
+    .catch( error => console.log(error) )
   }
 
   init = ({ camera, scene, renderer }) => {
-    this.state.controls = new DeviceOrientationControls(camera);
-    //this.setState({controls: new DeviceOrientationControls(camera)})
-
+    this.setState({controls:new DeviceOrientationControls(camera)});
+    
+    console.log("Image at INIT " + this.state.image);
     var geometry = new THREE.SphereBufferGeometry(500, 60, 40);
     geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
 
@@ -63,8 +66,10 @@ export class Scope extends React.Component {
   }
 
   componentDidMount = () => {
-    this.init(this.state);
-    this.animate();
+    this.getImage().then(()=>{
+      this.init(this.state);
+      this.animate();
+    })
   };
 
   render() {

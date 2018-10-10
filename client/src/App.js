@@ -8,7 +8,7 @@ class App extends Component {
       <div>
         <div className="App">
           <header className="header">
-            <h1>Wellcome to Scope</h1>
+            <h1>Welcome to Scope</h1>
           </header>
           <ScopeView/>
         </div>
