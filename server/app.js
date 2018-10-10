@@ -3,27 +3,26 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-const favicon = require("serve-favicon");
 const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
-require("dotenv").config();
-
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 const cors = require("cors");
 
+//const {MONGODB_URI} = process.private.env;
+mongoose.Promise = Promise;
 mongoose
   .connect(
-    //process.env.MONGODB_URI,
-    "http://localhost:3001",
+    //process.private.env.MONGODB_URI,
+    "mongodb://localhost:27017",
     { useNewUrlParser: true }
   )
   .then(x => {
     console.log(
-      `Connected to Mongo! Database name: "${x.connections[0].name}"`
+      `Connected to Mongo! Database name:`
     );
   })
   .catch(err => {
@@ -31,14 +30,15 @@ mongoose
   });
 
 const app_name = require("./package.json").name;
-const debug = require("debug")(
-  `${app_name}:${path.basename(__filename).split(".")[0]}`
-);
+const debug = require("debug")(`${app_name}:${path.basename(__filename).split(".")[0]}`);
 
 const app = express();
 
 // Middleware Setup
-app.use(cors());
+var corsOptions = {
+  credentials: true
+};
+app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -54,10 +54,6 @@ app.use(
   })
 );
 
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
-app.use(express.static(path.join(__dirname, "public")));
-app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 hbs.registerHelper("ifUndefined", (value, options) => {
   if (arguments.length < 2)
@@ -70,7 +66,7 @@ hbs.registerHelper("ifUndefined", (value, options) => {
 });
 
 // default value for title local
-app.locals.title = "In-Situ";
+app.locals.title = "Scope App";
 
 // Enable authentication using session + passport
 app.use(
@@ -82,20 +78,25 @@ app.use(
   })
 );
 
-///From heroku deploy
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+app.use(express.static(path.join(__dirname, 'public')));
+
+/* ///From heroku deploy
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
   res.sendFile(__dirname + "/public/index.html");
 });
-/////
+///// */
 
 app.use(flash());
 require("./passport")(app);
 
-const index = require("./routes/index");
-app.use("/", index);
 
-const authRoutes = require("./routes/auth");
-app.use("/api/auth", authRoutes);
+const authRouter = require('./routes/auth');
+const genericCrud = require('./routes/genericCRUD');
+app.use('/api/auth', authRouter);
+
+
 
 module.exports = app;
