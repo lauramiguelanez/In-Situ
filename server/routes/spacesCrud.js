@@ -1,7 +1,8 @@
 const express = require('express');
 const _ = require('lodash');
+const Space = require('../models/Space');
 
-const spacesCrud = (Space, extensionFn) => {
+const spacesCRUD = (Space, extensionFn) => {
     let router  = express.Router();
 
     // Detect paths from model
@@ -68,6 +69,6 @@ const spacesCrud = (Space, extensionFn) => {
 }
 
 
-module.exports = spacesCrud;
+module.exports = spacesCRUD;
 
 

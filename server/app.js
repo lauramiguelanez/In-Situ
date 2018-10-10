@@ -22,7 +22,7 @@ mongoose
   )
   .then(x => {
     console.log(
-      `Connected to Mongo! Database name:`
+      `Connected to Mongo! Database`
     );
   })
   .catch(err => {
@@ -88,8 +88,10 @@ require("./passport")(app);
 
 
 const authRouter = require('./routes/auth');
-const genericCrud = require('./routes/genericCRUD');
 app.use('/api/auth', authRouter);
+//const genericCrud = require('./routes/genericCRUD');
+const spacesCrud = require('./routes/spacesCRUD');
+app.use('/api/spaces', spacesCrud(require('./models/Space')));
 
 
 
