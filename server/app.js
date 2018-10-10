@@ -89,10 +89,10 @@ require("./passport")(app);
 
 const authRouter = require('./routes/auth');
 app.use('/api/auth', authRouter);
-//const genericCrud = require('./routes/genericCRUD');
 const spacesCrud = require('./routes/spacesCRUD');
 app.use('/api/spaces', spacesCrud(require('./models/Space')));
-
+const cloudinary = require('./routes/uploadCloud');
+app.use('/uploadCloud', cloudinary);
 
 
 module.exports = app;
