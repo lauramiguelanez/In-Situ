@@ -22,8 +22,8 @@ export class Scope extends React.Component {
     });
   }
 
-  getImage = () => {
-    let id = this.state.id; //"5bbf32254f84d027ada1a4f3"
+  getImage = (id) => {
+    //let id = this.state.id; //"5bbf32254f84d027ada1a4f3"
     console.log("ID from DB " + id);
     return this.service
       .get(`/spaces/${id}`)
@@ -76,7 +76,9 @@ export class Scope extends React.Component {
   };
 
   componentDidMount = () => {
-    this.getImage().then(() => {
+    let id = this.state.id;
+    console.log("FIRST ID "+id)
+    this.getImage(id).then(() => {
       this.init(this.state);
       this.animate();
     });
@@ -85,21 +87,18 @@ export class Scope extends React.Component {
   //forceUpdate(){}
 
   componentDidUpdate = prevProps => {
-
     console.log("DID UPDATE");
     console.log(this.props.id);
     console.log(prevProps.id);
-    
     if (this.props.id !== prevProps.id) {
-      let newId=this.props.id;
-      this.setState({id:newId});
+      let newId = this.props.id;
+      this.setState({ id: newId });
       console.log("DID UPDATE STATE");
       console.log(this.state.id);
-      this.getImage().then(() => {
+      this.getImage(newId).then(() => {
         this.init(this.state);
         this.animate();
       });
-      
     }
   };
   /* 
