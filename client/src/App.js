@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./App.scss";
 import { ScopeView } from "./components/ScopeView";
+import { UploadSpace } from "./components/UploadSpace";
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
           <header className="header">
             <h1>Welcome to Scope</h1>
           </header>
+          <UploadSpace/>
           <ScopeView/>
         </div>
       </div>

@@ -92,7 +92,7 @@ app.use('/api/auth', authRouter);
 const spacesCrud = require('./routes/spacesCRUD');
 app.use('/api/spaces', spacesCrud(require('./models/Space')));
 const cloudinary = require('./routes/uploadCloud');
-app.use('/uploadCloud', cloudinary);
+app.use('/api/uploadCloud', cloudinary);
 
 
 module.exports = app;
