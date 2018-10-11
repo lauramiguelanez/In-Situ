@@ -5,7 +5,7 @@ export class ScopeView extends Component {
     render() {
       return (
           <div className="ScopeView">
-            <Scope />
+            <Scope id={this.props.id}/>
           </div>
       );
     }

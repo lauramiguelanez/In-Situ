@@ -17,6 +17,7 @@ export class UploadSpace extends React.Component {
       file: e.target.files[0]
     })
   }
+  
   handleSubmit(e) {
     e.preventDefault()
     this.uploadImage(this.state.file).then(()=>{
@@ -29,13 +30,13 @@ export class UploadSpace extends React.Component {
   uploadImage(file) {
     const formData = new FormData();
     formData.append("photo", file);
-    console.log("DEBUG formData", formData.get("picture"));
+    //console.log("DEBUG formData", formData.get("photo"));
     return this.service.post("/uploadCloud", formData, {
         headers: {"Content-Type": "multipart/form-data"}
       })
       .then(img => {
         this.setState({ img_url: img.data.url });
-        console.log("Image from Cloud");
+        console.log("Image from CLOUD");
         console.log(img.data.url);
       })
       .catch(error => console.log(error));
@@ -46,9 +47,13 @@ export class UploadSpace extends React.Component {
     return this.service.post("/spaces", space)
     .then((space) => {
         console.log("CREATED NEW SPACE:");
-        console.log(space.data.image);
+        console.log(space.data);
+        this.sendNewSpace(space.data);
     })
     .catch( error => console.log(error) )
+  }
+  sendNewSpace = (space) => {
+    this.props.newEspace(space._id);
   }
 
   render() {
