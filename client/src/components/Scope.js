@@ -10,15 +10,18 @@ export class Scope extends React.Component {
       camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100),
       scene: new THREE.Scene(),
       renderer: new THREE.WebGLRenderer({antialias: true})
-    };
+    }
+    this.service = axios.create({
+      baseURL: 'http://localhost:3010/api'
+    })
   }
 
   getImage = ()=>{
-    let id = "5bbe25ab0fc16b19a0788676"
-    return axios.get(`http://localhost:3010/api/spaces/${id}`)
+    let id = "5bbf32254f84d027ada1a4f3"
+    return this.service.get(`/spaces/${id}`)
     .then( (space) => {
         this.setState({image: space.data.image});
-        console.log("Image from DB " + space.data.image);
+        //console.log("Image from DB " + space.data.image);
     })
     .catch( error => console.log(error) )
   }
@@ -26,7 +29,8 @@ export class Scope extends React.Component {
   init = ({ camera, scene, renderer }) => {
     this.setState({controls: new DeviceOrientationControls(camera)});
     
-    console.log("Image at INIT " + this.state.image);
+    //console.log("Image at INIT " + this.state.image);
+
     var geometry = new THREE.SphereBufferGeometry(500, 60, 40);
     geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
 

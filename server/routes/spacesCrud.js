@@ -29,6 +29,7 @@ const spacesCRUD = (Space, extensionFn) => {
     // CRUD: CREATE
     router.post('/',(req,res,next) => {
         const object = _.pickBy(req.body, (e,k) => paths.includes(k));
+        //const object = req.body;
         Space.create(object)
             .then( obj => res.status(200).json(obj))
             .catch(e => next(e))
