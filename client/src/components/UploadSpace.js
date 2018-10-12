@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import geolocalize from "./maps/geolocalize";
 
 export class UploadSpace extends React.Component {
   constructor(props) {
@@ -20,10 +21,16 @@ export class UploadSpace extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.uploadImage(this.state.file).then(() => {
+    this.uploadImage(this.state.file)
+    .then(() => {
       console.log("uploaded image to create space");
       console.log(this.state.img_url);
-      this.createSpace(this.state.img_url);
+      geolocalize()
+      .then(center => {
+        console.log(center);
+        this.createSpace(this.state.img_url, center);
+      })
+      
     });
   }
 
@@ -43,9 +50,11 @@ export class UploadSpace extends React.Component {
       .catch(error => console.log(error));
   }
 
-  createSpace = image_url => {
+  createSpace = (image_url, center) => {
+    let {lat,lng} =center;
+    console.log(center);
     let user = this.state.loggedInUser;
-    let space = { image: image_url, creator: user._id };
+    let space = { image: image_url, creator: user._id, location:center};
     return this.service
       .post("/spaces", space)
       .then(space => {

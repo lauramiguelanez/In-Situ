@@ -5,7 +5,7 @@ const spaceSchema = new Schema(
   {
     creator: String,
     image: String,
-    location: { type: { type: String }, coordinates: [Number] },
+    location: {},
     isPrivate: Boolean,
     data: []
   },
@@ -16,6 +16,8 @@ const spaceSchema = new Schema(
     }
   }
 );
+
+spaceSchema.index({ location: "2dsphere" });
 
 const Space = mongoose.model("Space", spaceSchema);
 module.exports = Space;

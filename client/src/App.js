@@ -11,6 +11,7 @@ import Login from './components/auth/Login';
 
 import { ScopeView } from "./components/ScopeView";
 import { UploadSpace } from "./components/UploadSpace";
+import GoogleMap from './components/maps/GoogleMap';
 
 class App extends Component {
   constructor() {
@@ -81,6 +82,7 @@ class App extends Component {
             </Switch>
           </header>
           <ScopeView id={this.state.spaceId} />
+          {/* <GoogleMap /> */}
         </div>
       );
     }
