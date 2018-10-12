@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Switch, Route } from 'react-router-dom';
 
+//import "bulma/css/bulma.css";
 import "./App.scss";
-import "bulma/css/bulma.css";
 
 import Navbar from './components/Navbar';
 import AuthService from "./components/auth/AuthService";
@@ -62,27 +62,24 @@ class App extends Component {
       return (
         <div className="App">
           <header className="header">
+            <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
             <h1>Welcome to Scope</h1>
           </header>
-          
+          <UploadSpace newEspace={space => {this.actualizeSpace(space)}} userInSession={this.state.loggedInUser}/>
+          <ScopeView id={this.state.spaceId} />
         </div>
       );
     } else {
       return (
         <div className="App">
           <header className="header">
-            <h1>Welcome to Scope</h1>
             <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
+            <h1>Welcome to Scope</h1>
             <Switch>
               <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
               <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
             </Switch>
           </header>
-          <UploadSpace
-            newEspace={space => {
-              this.actualizeSpace(space);
-            }}
-          />
           <ScopeView id={this.state.spaceId} />
         </div>
       );

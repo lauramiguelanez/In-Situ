@@ -51,7 +51,7 @@ router.post('/signup', (req, res, next) => {
   .catch(e => next(e));
 });
 
-
+//LOGIN
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, theUser, failureDetails) => {
     
@@ -65,7 +65,7 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-
+//GET LOGGEDINUSER
 router.get('/currentuser', (req,res,next) => {
   if(req.user){
     res.status(200).json(req.user);
@@ -79,6 +79,8 @@ router.get('/logout', (req,res) => {
   req.logout();
   res.status(200).json({message:'logged out'})
 });
+
+
 
 
 router.use((err, req, res, next) => {

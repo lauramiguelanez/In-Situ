@@ -4,7 +4,7 @@ import axios from "axios";
 export class UploadSpace extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { loggedInUser: this.props.userInSession };
     this.service = axios.create({
         baseURL: 'http://localhost:3010/api'
       });
@@ -43,18 +43,38 @@ export class UploadSpace extends React.Component {
   }
 
   createSpace = (image_url)=>{
-    let space = {image: image_url}
+    let user = this.state.loggedInUser;
+    let space = {image: image_url, creator: user._id}
     return this.service.post("/spaces", space)
     .then((space) => {
         console.log("CREATED NEW SPACE:");
         console.log(space.data);
         this.sendNewSpace(space.data);
+        this.addSpaceToUser(space.data);
     })
-    .catch( error => console.log(error) )
+    .catch( error => console.log(error))
   }
+
   sendNewSpace = (space) => {
     this.props.newEspace(space._id);
   }
+/*   addSpaceToUser = (space) => {
+    let user = this.state.loggedInUser;
+    console.log("ADD TO USER")
+    console.log(space);
+    console.log(user);
+
+  
+  } */
+/*   patchUserSpaces = (id) => {
+    return this.service
+      .patch(`/auth/${id}`, {})
+      .then(user => {
+        this.setState({ loggedInUser: user });
+        console.log("Image from DB " + space.data.image);
+      })
+      .catch(error => console.log(error));
+  }; */
 
   render() {
     return (
