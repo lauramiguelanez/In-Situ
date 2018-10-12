@@ -42,8 +42,9 @@ const catalogCRUD = (Catalog, extensionFn) => {
         const {id} = req.params;
         const object = _.pickBy(req.body, (e,k) => paths.includes(k));
         const updates = _.pickBy(object, _.identity);
-        console.log(updates);
-        Catalog.findByIdAndUpdate(id, updates ,{new:true})
+        let newSpace = req.body;
+        console.log(newSpace.spaceId);
+        Catalog.findByIdAndUpdate(id, { $push: { spaces: newSpace.spaceId } } ,{new:true})
             .then( obj => {
                 res.status(200).json({status:'updated',obj});
             })

@@ -24,7 +24,7 @@ export class Scope extends React.Component {
 
   getImage = (id) => {
     //let id = this.state.id; //"5bbf32254f84d027ada1a4f3"
-    console.log("ID from DB " + id);
+    //console.log("ID from DB " + id);
     return this.service
       .get(`/spaces/${id}`)
       .then(space => {
@@ -37,7 +37,7 @@ export class Scope extends React.Component {
   init = ({ camera, scene, renderer }) => {
     this.setState({ controls: new DeviceOrientationControls(camera) });
 
-    console.log("Image at INIT " + this.state.image);
+    //console.log("Image at INIT " + this.state.image);
 
     var geometry = new THREE.SphereBufferGeometry(500, 60, 40);
     geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
@@ -77,7 +77,7 @@ export class Scope extends React.Component {
 
   componentDidMount = () => {
     let id = this.state.id;
-    console.log("FIRST ID "+id)
+    //console.log("FIRST ID "+id)
     this.getImage(id).then(() => {
       this.init(this.state);
       this.animate();
@@ -87,47 +87,20 @@ export class Scope extends React.Component {
   //forceUpdate(){}
 
   componentDidUpdate = prevProps => {
-    console.log("DID UPDATE");
-    console.log(this.props.id);
-    console.log(prevProps.id);
+    //console.log("DID UPDATE");
+    //console.log(this.props.id);
+    //console.log(prevProps.id);
     if (this.props.id !== prevProps.id) {
       let newId = this.props.id;
       this.setState({ id: newId });
-      console.log("DID UPDATE STATE");
-      console.log(this.state.id);
+      //console.log("DID UPDATE STATE");
+      //console.log(this.state.id);
       this.getImage(newId).then(() => {
         this.init(this.state);
         this.animate();
       });
     }
   };
-  /* 
-  static getDerivedStateFromProps(props, state){}
-  shouldComponentUpdate(){}
-  getSnapshotBeforeUpdate(){}
-  componentDidUpdate(){}
- */
-  /* 
-  componentWillReceiveProps(nextProps){
-
-  }
-  shouldComponentUpdate(nextProps, nextState){
-    console.log("PROPS "+nextProps.id+"--------" +this.props.id);
-    if(nextProps.id !== this.props.id){
-      console.log("SHOULD");
-      return true
-    } else {
-      return false;
-    }
-  }
-
-  componentWillUpdate = () => {
-    console.log("UPDATE");
-    this.getImage().then(()=>{
-      this.init(this.state);
-      this.animate();
-    })
-  }; */
 
   render() {
     return <div />;

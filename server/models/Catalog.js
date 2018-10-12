@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const catalogSchema = new Schema(
   {
     userId: String,
-    scopes: []
+    spaces: []
   },
   {
     timestamps: {
