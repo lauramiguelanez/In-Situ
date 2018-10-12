@@ -1,5 +1,14 @@
 import React, { Component } from "react";
+import { Switch, Route } from 'react-router-dom';
+
 import "./App.scss";
+import "bulma/css/bulma.css";
+
+import Navbar from './components/Navbar';
+import AuthService from "./components/auth/AuthService";
+import Signup from './components/auth/Signup';
+import Login from './components/auth/Login';
+
 import { ScopeView } from "./components/ScopeView";
 import { UploadSpace } from "./components/UploadSpace";
 
@@ -7,32 +16,77 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      spaceId:"5bbf66722a231332865b6405"
+      loggedInUser: null,
+      spaceId: "5bbfae0bcd9bc63679416c92"
     };
-  }
-  
-  actualizeSpace = (space)=>{
-    console.log("SPACE on PARENT");
-    console.log(space);
-    this.setState({spaceId:space});
-    console.log("SPACE on PARENT after change");
-    console.log(this.state.spaceId);
+    this.service = new AuthService();
   }
 
+  getTheUser = userObj => {
+    this.setState({
+      loggedInUser: userObj
+    });
+  };
+
+  logout = () => {
+    this.service.logout().then(() => {
+      this.setState({ loggedInUser: null });
+    });
+  };
+
+  fetchUser() {
+    if (this.state.loggedInUser === null) {
+      this.service
+        .loggedin()
+        .then(response => {
+          this.setState({
+            loggedInUser: response
+          });
+        })
+        .catch(err => {
+          this.setState({
+            loggedInUser: false
+          });
+        });
+    }
+  }
+
+  actualizeSpace = space => {
+    this.setState({ spaceId: space });
+  };
+
   render() {
-    console.log("SPACE on PARENT on RENDER");
-    console.log(this.state.spaceId);
-    return (
-      <div>
+    this.fetchUser();
+
+    if (this.state.loggedInUser) {
+      return (
         <div className="App">
           <header className="header">
             <h1>Welcome to Scope</h1>
           </header>
-          <UploadSpace newEspace = {space=>{this.actualizeSpace(space)}}/>
-          <ScopeView id = {this.state.spaceId}/>
+          
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="App">
+          <header className="header">
+            <h1>Welcome to Scope</h1>
+            <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
+            <Switch>
+              <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
+              <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
+            </Switch>
+          </header>
+          <UploadSpace
+            newEspace={space => {
+              this.actualizeSpace(space);
+            }}
+          />
+          <ScopeView id={this.state.spaceId} />
+        </div>
+      );
+    }
   }
 }
 

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const spaceSchema = new Schema(
   {
+    creator: String,
     image: String,
     location: { type: { type: String }, coordinates: [Number] },
     isPrivate: Boolean,

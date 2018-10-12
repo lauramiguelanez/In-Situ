@@ -20,8 +20,11 @@ class AuthService {
   }
 
   loggedin = () => {
-    return this.service.get('/currentUser',)
+    return this.service.get('/currentuser',)
     .then(response => response.data)
+    .catch(err => {
+      console.error('Error in getUser', err)
+    })
   }
 
   logout = () => {
