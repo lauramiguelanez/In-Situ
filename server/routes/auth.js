@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const Catalog = require('../models/Catalog');
 const passport = require('passport');
 
 
@@ -22,7 +23,7 @@ const login = (req, user) => {
 
 // SIGNUP
 router.post('/signup', (req, res, next) => {
-
+  let newUserId = "";
   const {username, password} = req.body;
 
   console.log('username', username)
@@ -32,7 +33,7 @@ router.post('/signup', (req, res, next) => {
   if (!username || !password){
     next(new Error('You must provide valid credentials'));
   }
-
+  
   // Check if user exists in DB
   User.findOne({ username })
   .then( foundUser => {
@@ -47,7 +48,18 @@ router.post('/signup', (req, res, next) => {
     }).save();
   })
   .then( savedUser => login(req, savedUser)) // Login the user using passport
-  .then( user => res.json({status: 'signup & login successfully', user})) // Answer JSON
+  .then( user => {
+    newUserId = user._id;
+    res.json({status: 'signup & login successfully', user}); // Answer JSON
+    return new Catalog({
+      userId: newUserId
+    }).save();
+  }) 
+  .then( savedCatalog => {
+    console.log("NEW USER ID " + newUserId);
+    return User.findByIdAndUpdate(newUserId, {catalog: savedCatalog._id}, {new:true}); 
+  })
+  .then( user => console.log(user))
   .catch(e => next(e));
 });
 
