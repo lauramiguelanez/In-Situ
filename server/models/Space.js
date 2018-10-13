@@ -16,7 +16,6 @@ const spaceSchema = new Schema(
     }
   }
 );
-
 spaceSchema.index({ location: "2dsphere" });
 
 const Space = mongoose.model("Space", spaceSchema);

@@ -24,7 +24,7 @@ export default class GoogleMap extends Component {
     const allScripts = document.getElementsByTagName( 'script' );
     [].filter.call(
       allScripts,
-      ( scpt ) => scpt.src.indexOf( 'key=AIzaSyDE2XTOO3mc5CnZSdVG0xVfs8L9DidM__0' ) >= 0
+      ( scpt ) => scpt.src.indexOf( 'key=AIzaSyA2VCIDASPyZRdr58uKR5ucueARsagOD6s' ) >= 0
     )[ 0 ].remove();
     window.google = {};
     console.log(Map.COORDINATES);

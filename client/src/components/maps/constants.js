@@ -4,7 +4,7 @@ exports.COORDINATES = {
   }
   
   exports.API_CONFIG = {
-    key:'AIzaSyDE2XTOO3mc5CnZSdVG0xVfs8L9DidM__0',
+    key:'AIzaSyA2VCIDASPyZRdr58uKR5ucueARsagOD6s',
     language: 'es'
   }
   
