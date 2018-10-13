@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import * as mapConstants from './constants';
 
 export default class Map extends Component {
   constructor(props) {
@@ -11,6 +12,13 @@ export default class Map extends Component {
     const map = new window.google.maps.Map(
       document.getElementById(this.props.id),
       this.props.options);
+
+      const newStyleMap = new window.google.maps.StyledMapType( mapConstants.STYLES, {name: 'BlackMap'});
+
+      map.mapTypes.set( 'BlackMap', newStyleMap );
+      map.setMapTypeId( 'BlackMap' );
+
+
     this.props.onMapLoad(map)
   }
 

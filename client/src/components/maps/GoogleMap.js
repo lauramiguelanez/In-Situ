@@ -36,8 +36,8 @@ export default class GoogleMap extends Component {
       const newStyleMap = new googleMaps.StyledMapType( Map.STYLES, {name: 'Retro'});
       const marker = new googleMaps.Marker( markerOptions( googleMaps, maps ));
 
-      //maps.mapTypes.set( 'Retro', newStyleMap );
-      //maps.setMapTypeId( 'Retro' );
+      maps.mapTypes.set( 'Retro', newStyleMap );
+      maps.setMapTypeId( 'Retro' );
 
       Map.resetMarkerAnimation( marker );
 
