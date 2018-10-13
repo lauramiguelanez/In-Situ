@@ -59,16 +59,22 @@ export class Scope extends React.Component {
     var helper = new THREE.Mesh(helperGeometry, helperMaterial);
     scene.add(helper);
 
+
     let element = document.createElement('div');
-    element.innerHTML = 'Plain text inside a div.';
+    //element.innerHTML = 'Plain text inside a div.';
     element.style.background = "#0094ff";
     element.style.fontSize = "2em";
     element.style.color = "white";
-    element.style.padding = "2em";
+    //element.style.padding = "2em";
+    let iframe = document.createElement( 'iframe' );
+    let video = "QigsTQd0S40";
+    iframe.src ='https://www.youtube.com/embed/41kZovcyHrU?&autoplay=1';
+		element.appendChild( iframe );
     let div = new CSS3DObject(element);
     div.position.x = 200;
     div.position.y = 200;
     div.position.z = 200;
+    div.rotation.y = Math.PI;
     sceneCSS.add(div);
     
 /*     var geometryP = new THREE.PlaneGeometry( 10, 10, 2,2 );
