@@ -1,7 +1,7 @@
 @import "scss/variables.scss"; 
 @import "scss/mixins.scss"; 
 
-canvas {
+.scope {
   position: absolute;
   top: 0;
   z-index: -1;

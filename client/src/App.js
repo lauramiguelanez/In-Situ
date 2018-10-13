@@ -83,15 +83,15 @@ class App extends Component {
               <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
             </Switch>
           </header>
-          {/* <GoogleMap /> */}
-          <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
+          
+          {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
             onMapLoad={map => {
               let marker = new window.google.maps.Marker({
               position: this.state.spaceLocation, map: map,
               title: 'Hello Istanbul!'
               });
             }}
-          />
+          /> */}
         </div>
       );
     }
