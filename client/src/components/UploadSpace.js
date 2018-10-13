@@ -67,7 +67,7 @@ export class UploadSpace extends React.Component {
   };
 
   sendNewSpace = space => {
-    this.props.newEspace(space._id);
+    this.props.newSpace(space._id, space.location);
   };
 
   addSpaceToUser = space => {
