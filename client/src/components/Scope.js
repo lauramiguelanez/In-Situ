@@ -67,8 +67,8 @@ export class Scope extends React.Component {
     element.style.color = "white";
     //element.style.padding = "2em";
     let iframe = document.createElement( 'iframe' );
-    let video = "QigsTQd0S40";
-    iframe.src ='https://www.youtube.com/embed/41kZovcyHrU?&autoplay=1';
+    let video = "41kZovcyHrU";
+    iframe.src =`https://www.youtube.com/embed/${video}?&autoplay=1`;
 		element.appendChild( iframe );
     let div = new CSS3DObject(element);
     div.position.x = 200;
