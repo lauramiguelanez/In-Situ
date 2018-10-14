@@ -43,7 +43,7 @@ export class Scope extends React.Component {
     /* this.state.controls.rotateSpeed = 1.0;
     this.state.controls.zoomSpeed = 1.2;
     this.state.controls.panSpeed = 0.8;*/
-    camera.position.set(0, 0, -0.001); //-0.001
+    camera.position.set(0, 0, -1000); //-0.001
 
     renderer.domElement.className = "scope";
     //Panorama Sphere
@@ -60,7 +60,7 @@ export class Scope extends React.Component {
     var helperGeometry = new THREE.BoxBufferGeometry(100, 100, 100, 4, 4, 4);
     var helperMaterial = new THREE.MeshBasicMaterial({color: 0xff00ff, wireframe: true});
     var helper = new THREE.Mesh(helperGeometry, helperMaterial);
-    scene.add(helper);
+    //scene.add(helper);
 
 
    /*  let element = document.createElement('div');
@@ -81,7 +81,7 @@ export class Scope extends React.Component {
     sceneCSS.add(div);*/
 
     let data = [];
-    for (let i=0; i<=7; i++){
+    for (let i=0; i<=3; i++){
       data.push("41kZovcyHrU")
     }
     console.log(data);
@@ -113,6 +113,7 @@ export class Scope extends React.Component {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    rendererCSS.setSize(window.innerWidth, window.innerHeight);
   };
 
   componentDidMount = () => {

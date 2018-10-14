@@ -34,7 +34,21 @@ const iframeElement = (ytID, x, y, z, ry) =>{
     iframe.style.height = '360px';
     iframe.style.border = '0px';
     iframe.src = [ 'https://www.youtube.com/embed/', ytID, '?rel=0' ].join( '' );
-    div.appendChild( iframe );
+    //div.appendChild( iframe );
+    var object = new THREE.CSS3DObject( div );
+    object.position.set( x, y, z );
+    object.rotation.y = ry;
+    return object;
+}
+const imageElement = (url, x, y, z, ry) =>{
+    var div = document.createElement( 'div' );
+    div.style.width = '50px';
+    div.style.height = '50px';
+    div.style.backgroundColor = '#000';
+    var image = document.createElement( 'img' );
+    image.style.border = '0px';
+    image.src = "https://storage.googleapis.com/fl-media/photo%2F61%2F62%2F11%2Fboyander%2F1223416899490_f.jpg?GoogleAccessId=legacy-storage%40fotolog-web.iam.gserviceaccount.com&Expires=1539561600&Signature=dBQv0M9Zn9%2BghCQ1V8Dtwf9tY9srbSR64Pbz9HxoJVAHYUJ4c9RDAL1bmJjj0UYeXMo2F%2FX5BQh0EpR1scyc9rtjohixVl22q0PD3%2FFmqXJ%2Bbu29PUQt5FHIeHND7%2FUbySd9aywiAhaqekpoZxzgwRrK0d6MRyhwPvkZJor5q3Roud216k2eCl5rS1PIC6NNhle1rLSRk75hkVVx6q%2FHx06Y8O63VvLVqb9NNDm0P6vLhe0t%2BoJxOFCnBQKRuWdmyrmkXcBuWEDvR3xirW1FR34mbtmjyYg1ZUk8dwm44NONBK5jRcT04Mty%2B8Z7o9wTjIP%2FyooBpyMbBd%2Ff61K%2Fyg%3D%3D";
+    div.appendChild( image );
     var object = new THREE.CSS3DObject( div );
     object.position.set( x, y, z );
     object.rotation.y = ry;
@@ -45,14 +59,19 @@ export const CSS3elements = (spaceRadius, data) => {
     let radius = spaceRadius-50;
     let many = data.length;
     let angle = Math.PI * 2 / many;
-    let x = 0;
+    let x,z;
     let y = spaceRadius/2;
-    let z = radius;
     let group = new THREE.Group();
     data.forEach((e,i) => {
         let ry = angle * i;
-        let newIFrame = new iframeElement(e, x, y, z, ry);
-        group.add(newIFrame);
+        x = radius * Math.cos(ry);
+        z = radius * Math.sin(ry);
+        let rot = Math.PI/2 - ry + angle/2;
+        //let newIFrame = new iframeElement(e, x, y, z, ry);
+        //group.add(newIFrame);
+        let newImage = new imageElement(e, x, y, z, rot);
+        group.add(newImage);
     });
+
     return group;
 }
