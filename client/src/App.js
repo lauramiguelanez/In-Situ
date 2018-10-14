@@ -11,10 +11,12 @@ import Login from './components/auth/Login';
 
 import { ScopeView } from "./components/ScopeView";
 import { UploadSpace } from "./components/upload/UploadSpace";
-import { UploadMedia} from "./components/upload/UploadMedia";
+import { UploadMediaImg} from "./components/upload/UploadMediaImg";
 import GoogleMap from './components/maps/GoogleMap';
 import Map from './components/maps/Map';
 import { Camera } from "./components/Camera";
+import { ScopeCamera } from "./components/3dSpace/ScopeCamera";
+import { UploadMediaVideo } from "./components/upload/UploadMediaVideo";
 
 class App extends Component {
   constructor() {
@@ -70,10 +72,12 @@ class App extends Component {
             <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
             <h1>Welcome to Scope</h1>
           </header>
-          {/* <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>
-          <UploadMedia userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
-          <ScopeView id={this.state.spaceId} /> */}
-          <Camera/>
+          <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>
+          <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
+          <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
+          <ScopeView id={this.state.spaceId} />
+          {/* <Camera/> */}
+          {/* <ScopeCamera/>  */}
         </div>
       );
     } else {

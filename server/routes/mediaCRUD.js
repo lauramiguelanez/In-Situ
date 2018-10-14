@@ -37,14 +37,14 @@ const mediaCRUD = (Media, extensionFn) => {
             .catch(e => next(e))
     })
     
-    // CRUD: UPDATE
+    // CRUD: UPDATE //Need fix
     router.patch('/:id',(req,res,next) => {
         const {id} = req.params;
         const object = _.pickBy(req.body, (e,k) => paths.includes(k));
         const updates = _.pickBy(object, _.identity);
-        let newSpace = req.body;
+        let newMedia = req.body;
         console.log(newMedia.spaceId);
-        Media.findByIdAndUpdate(id, { $push: { spaces: newMedia.spaceId } } ,{new:true})
+        Media.findByIdAndUpdate(id, { $push: { spaces: newMedia } } ,{new:true})
             .then( obj => {
                 res.status(200).json({status:'updated',obj});
             })

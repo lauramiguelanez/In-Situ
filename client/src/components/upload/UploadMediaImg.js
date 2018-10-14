@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios";
-import geolocalize from "../maps/geolocalize";
 
-export class UploadMedia extends React.Component {
+export class UploadMediaImg extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -46,7 +45,7 @@ export class UploadMedia extends React.Component {
   }
 
   createMedia = (image_url) => {
-    let media = { image: image_url, type: "IMAGE"};
+    let media = { url: image_url, type: "IMAGE"};
     return this.service
       .post("/media", media)
       .then(media => {
