@@ -14,6 +14,7 @@ import { UploadSpace } from "./components/upload/UploadSpace";
 import { UploadMedia} from "./components/upload/UploadMedia";
 import GoogleMap from './components/maps/GoogleMap';
 import Map from './components/maps/Map';
+import { Camera } from "./components/Camera";
 
 class App extends Component {
   constructor() {
@@ -69,9 +70,10 @@ class App extends Component {
             <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
             <h1>Welcome to Scope</h1>
           </header>
-          <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>
+          {/* <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>
           <UploadMedia userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
-          <ScopeView id={this.state.spaceId} />
+          <ScopeView id={this.state.spaceId} /> */}
+          <Camera/>
         </div>
       );
     } else {
