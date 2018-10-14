@@ -10,7 +10,8 @@ import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 
 import { ScopeView } from "./components/ScopeView";
-import { UploadSpace } from "./components/UploadSpace";
+import { UploadSpace } from "./components/upload/UploadSpace";
+import { UploadMedia} from "./components/upload/UploadMedia";
 import GoogleMap from './components/maps/GoogleMap';
 import Map from './components/maps/Map';
 
@@ -69,6 +70,7 @@ class App extends Component {
             <h1>Welcome to Scope</h1>
           </header>
           <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>
+          <UploadMedia userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
           <ScopeView id={this.state.spaceId} />
         </div>
       );

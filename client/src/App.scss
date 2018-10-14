@@ -4,6 +4,11 @@
 .scope {
   position: absolute;
   top: 0;
+  z-index: -2;
+}
+.scopeCSS{
+  position: absolute;
+  top: 0;
   z-index: -1;
 }
 

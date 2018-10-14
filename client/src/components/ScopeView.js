@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Scope } from "../components/Scope";
+import { Scope } from "./3dSpace/Scope";
 
 export class ScopeView extends Component {
     render() {

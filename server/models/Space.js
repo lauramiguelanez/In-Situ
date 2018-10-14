@@ -7,7 +7,7 @@ const spaceSchema = new Schema(
     image: String,
     location: {},
     isPrivate: Boolean,
-    data: []
+    media: []
   },
   {
     timestamps: {
@@ -16,6 +16,7 @@ const spaceSchema = new Schema(
     }
   }
 );
+
 spaceSchema.index({ location: "2dsphere" });
 
 const Space = mongoose.model("Space", spaceSchema);

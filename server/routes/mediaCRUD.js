@@ -1,27 +1,29 @@
 const express = require('express');
 const _ = require('lodash');
 const Space = require('../models/Space');
+const Media = require('../models/Media');
 
-const spacesCRUD = (Space, extensionFn) => {
+
+const mediaCRUD = (Media, extensionFn) => {
     let router  = express.Router();
 
     // Detect paths from model
     let notUsedPaths = ['_id','updated_at','created_at','__v'];
-    let paths = Object.keys(Space.schema.paths).filter(e => !notUsedPaths.includes(e));
+    let paths = Object.keys(Media.schema.paths).filter(e => !notUsedPaths.includes(e));
     if(extensionFn){
         router = extensionFn(router);
     }
 
     // CRUD: RETRIEVE
     router.get('/',(req,res,next) => {
-        Space.find()
+        Media.find()
             .then( objList => res.status(200).json(objList))
             .catch(e => next(e))
     })
 
     router.get('/:id',(req,res,next) => {
         const {id} = req.params;
-        Space.findById(id)
+        Media.findById(id)
             .then( obj => res.status(200).json(obj))
             .catch(e => next(e))
     })
@@ -30,7 +32,7 @@ const spacesCRUD = (Space, extensionFn) => {
     router.post('/',(req,res,next) => {
         const object = _.pickBy(req.body, (e,k) => paths.includes(k));
         //const object = req.body;
-        Space.create(object)
+        Media.create(object)
             .then( obj => res.status(200).json(obj))
             .catch(e => next(e))
     })
@@ -40,20 +42,19 @@ const spacesCRUD = (Space, extensionFn) => {
         const {id} = req.params;
         const object = _.pickBy(req.body, (e,k) => paths.includes(k));
         const updates = _.pickBy(object, _.identity);
-        let newMedia = req.body;
-        console.log(newMedia);
-        Space.findByIdAndUpdate(id, { $push: { media: newMedia } } ,{new:true})
+        let newSpace = req.body;
+        console.log(newMedia.spaceId);
+        Media.findByIdAndUpdate(id, { $push: { spaces: newMedia.spaceId } } ,{new:true})
             .then( obj => {
                 res.status(200).json({status:'updated',obj});
             })
             .catch(e => next(e))
     })
-
     
     // CRUD: DELETE
     router.delete('/:id',(req,res,next) => {
         const {id} = req.params;
-        Space.findByIdAndRemove(id)
+        Media.findByIdAndRemove(id)
             .then( obj => {
                 if(obj){
                     res.status(200).json({status:`Removed from db`});
@@ -72,6 +73,6 @@ const spacesCRUD = (Space, extensionFn) => {
 }
 
 
-module.exports = spacesCRUD;
+module.exports = mediaCRUD;
 
 

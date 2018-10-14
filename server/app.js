@@ -103,6 +103,8 @@ const spacesCRUD = require('./routes/spacesCRUD');
 app.use('/api/spaces', spacesCRUD(require('./models/Space')));
 const catalogCRUD = require('./routes/catalogCRUD');
 app.use('/api/catalog', catalogCRUD(require('./models/Catalog')));
+const mediaCRUD = require('./routes/mediaCRUD');
+app.use('/api/media', mediaCRUD(require('./models/Media')));
 
 
 module.exports = app;

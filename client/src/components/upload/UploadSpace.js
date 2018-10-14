@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import geolocalize from "./maps/geolocalize";
+import geolocalize from "../maps/geolocalize";
 
 export class UploadSpace extends React.Component {
   constructor(props) {

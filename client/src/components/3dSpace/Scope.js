@@ -1,11 +1,11 @@
 import React from "react";
 import * as THREE from "three";
-import DeviceOrientationControls from "../lib/DeviceOrientationControls";
-import TrackballControls from "../lib/TrackballControls";
-import OrbitControls from "../lib/OrbitControls";
-import CSS3DRenderer from "../lib/CSS3DRenderer";
-import CSS3DObject from "../lib/CSS3DObject";
-import {CSS3elements} from "../components/3dSpace/CSS3elements";
+import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
+import TrackballControls from "../../lib/TrackballControls";
+import OrbitControls from "../../lib/OrbitControls";
+import CSS3DRenderer from "../../lib/CSS3DRenderer";
+import CSS3DObject from "../../lib/CSS3DObject";
+import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
 
 
@@ -43,9 +43,11 @@ export class Scope extends React.Component {
     /* this.state.controls.rotateSpeed = 1.0;
     this.state.controls.zoomSpeed = 1.2;
     this.state.controls.panSpeed = 0.8;*/
-    camera.position.set(0, 0, -1000); //-0.001
+    camera.position.set(0, 0, -0.001); //-0.001
 
     renderer.domElement.className = "scope";
+    rendererCSS.domElement.className = "scopeCSS";
+    
     //Panorama Sphere
     var geometry = new THREE.SphereBufferGeometry(this.state.spaceRadius, 60, 40);
     geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward

@@ -23,15 +23,16 @@ THREE.CSS3DSprite = function ( element ) {
 THREE.CSS3DSprite.prototype = Object.create( THREE.CSS3DObject.prototype );
 THREE.CSS3DSprite.prototype.constructor = THREE.CSS3DSprite;
 
+let elementSize = "200px"
 
 const iframeElement = (ytID, x, y, z, ry) =>{
     var div = document.createElement( 'div' );
-    div.style.width = '480px';
-    div.style.height = '360px';
+    //div.style.width = '480px';
+    //div.style.height = '360px';
     div.style.backgroundColor = '#000';
     var iframe = document.createElement( 'iframe' );
-    iframe.style.width = '480px';
-    iframe.style.height = '360px';
+    iframe.style.width = elementSize;
+    //iframe.style.height = '360px';
     iframe.style.border = '0px';
     iframe.src = [ 'https://www.youtube.com/embed/', ytID, '?rel=0' ].join( '' );
     //div.appendChild( iframe );
@@ -42,12 +43,14 @@ const iframeElement = (ytID, x, y, z, ry) =>{
 }
 const imageElement = (url, x, y, z, ry) =>{
     var div = document.createElement( 'div' );
-    div.style.width = '50px';
-    div.style.height = '50px';
+    //div.style.width = '50px';
+    //div.style.height = '50px';
     div.style.backgroundColor = '#000';
     var image = document.createElement( 'img' );
     image.style.border = '0px';
     image.src = "https://storage.googleapis.com/fl-media/photo%2F61%2F62%2F11%2Fboyander%2F1223416899490_f.jpg?GoogleAccessId=legacy-storage%40fotolog-web.iam.gserviceaccount.com&Expires=1539561600&Signature=dBQv0M9Zn9%2BghCQ1V8Dtwf9tY9srbSR64Pbz9HxoJVAHYUJ4c9RDAL1bmJjj0UYeXMo2F%2FX5BQh0EpR1scyc9rtjohixVl22q0PD3%2FFmqXJ%2Bbu29PUQt5FHIeHND7%2FUbySd9aywiAhaqekpoZxzgwRrK0d6MRyhwPvkZJor5q3Roud216k2eCl5rS1PIC6NNhle1rLSRk75hkVVx6q%2FHx06Y8O63VvLVqb9NNDm0P6vLhe0t%2BoJxOFCnBQKRuWdmyrmkXcBuWEDvR3xirW1FR34mbtmjyYg1ZUk8dwm44NONBK5jRcT04Mty%2B8Z7o9wTjIP%2FyooBpyMbBd%2Ff61K%2Fyg%3D%3D";
+    image.style.width = elementSize;
+    //image.style.height = '100px';
     div.appendChild( image );
     var object = new THREE.CSS3DObject( div );
     object.position.set( x, y, z );
