@@ -5,12 +5,15 @@ import TrackballControls from "../lib/TrackballControls";
 import OrbitControls from "../lib/OrbitControls";
 import CSS3DRenderer from "../lib/CSS3DRenderer";
 import CSS3DObject from "../lib/CSS3DObject";
+import {CSS3elements} from "../components/3dSpace/CSS3elements";
 import axios from "axios";
+
 
 export class Scope extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      spaceRadius: 500,
       camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100),
       scene: new THREE.Scene(),
       sceneCSS: new THREE.Scene(), 
@@ -44,7 +47,7 @@ export class Scope extends React.Component {
 
     renderer.domElement.className = "scope";
     //Panorama Sphere
-    var geometry = new THREE.SphereBufferGeometry(500, 60, 40);
+    var geometry = new THREE.SphereBufferGeometry(this.state.spaceRadius, 60, 40);
     geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
     const loader = new THREE.TextureLoader();
     loader.crossOrigin = "";
@@ -60,7 +63,7 @@ export class Scope extends React.Component {
     scene.add(helper);
 
 
-    let element = document.createElement('div');
+   /*  let element = document.createElement('div');
     //element.innerHTML = 'Plain text inside a div.';
     element.style.background = "#0094ff";
     element.style.fontSize = "2em";
@@ -71,17 +74,20 @@ export class Scope extends React.Component {
     iframe.src =`https://www.youtube.com/embed/${video}?&autoplay=1`;
 		element.appendChild( iframe );
     let div = new CSS3DObject(element);
-    div.position.x = 200;
-    div.position.y = 200;
-    div.position.z = 200;
-    div.rotation.y = Math.PI;
-    sceneCSS.add(div);
-    
-/*     var geometryP = new THREE.PlaneGeometry( 10, 10, 2,2 );
-    var materialP = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-    var plane = new THREE.Mesh( geometryP, materialP );
-    plane.position.set(20, 20, 10);
-    scene.add( plane );  */
+    div.position.x = 0;
+    div.position.y = 250;
+    div.position.z = 480;
+    div.rotation.y = Math.PI; 
+    sceneCSS.add(div);*/
+
+    let data = [];
+    for (let i=0; i<=7; i++){
+      data.push("41kZovcyHrU")
+    }
+    console.log(data);
+    let group = CSS3elements (this.state.spaceRadius, data)
+    sceneCSS.add(group);
+
 
 
     //renderer.setPixelRatio(window.devicePixelRatio);

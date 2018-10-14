@@ -19,7 +19,7 @@ class App extends Component {
     super();
     this.state = {
       loggedInUser: null,
-      spaceId: "5bbfae0bcd9bc63679416c92",
+      spaceId: "5bc3313fdd315804e045a573",
       spaceLocation: {lat: 40.3923451, lng: -3.6985332999999994}
     };
     this.service = new AuthService();
