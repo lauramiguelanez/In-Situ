@@ -35,11 +35,11 @@ export class Scope extends React.Component {
   };
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
-    //this.setState({ controls: new DeviceOrientationControls(camera) });
-    this.setState({ controls: new TrackballControls(camera) });
+    this.setState({ controls: new DeviceOrientationControls(camera) });
+    /* this.setState({ controls: new TrackballControls(camera) });
     this.state.controls.rotateSpeed = 1.0;
     this.state.controls.zoomSpeed = 1.2;
-    this.state.controls.panSpeed = 0.8;
+    this.state.controls.panSpeed = 0.8; */
     camera.position.set(0, 0, -0.0001); //-0.001
 
     renderer.domElement.className = "scope";

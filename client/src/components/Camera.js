@@ -29,9 +29,9 @@ export class Camera extends React.Component {
   render() {
     window.addEventListener("load", this.cameraStart, false);
     return (
-      <main id="camera">
+      
         <video className="camera"id="camera--view" autoPlay playsInline />
-      </main>
+      
     );
   }
 }

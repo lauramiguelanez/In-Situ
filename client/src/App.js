@@ -76,8 +76,7 @@ class App extends Component {
           <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
           <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
           <ScopeView id={this.state.spaceId} />
-          {/* <Camera/> */}
-          {/* <ScopeCamera/>  */}
+          {/* <ScopeCamera id={this.state.spaceId}/> */}
         </div>
       );
     } else {
