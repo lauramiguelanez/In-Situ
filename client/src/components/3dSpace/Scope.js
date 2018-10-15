@@ -61,23 +61,16 @@ export class Scope extends React.Component {
     var helper = new THREE.Mesh(helperGeometry, helperMaterial);
     //scene.add(helper);
 
-    let data = [];
-    for (let i=0; i<=5; i++){
-      data.push("VVsCOnWGHh8")
-    }
     console.log("MEDIA FROM THIS SPACE DB");
     console.log(this.state.media);
     let group = CSS3elements (this.state.spaceRadius, this.state.media);
     sceneCSS.add(group);
 
-
-
-    //renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
     rendererCSS.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(rendererCSS.domElement);
-    //.setAttribute("id", "scope");
     window.addEventListener("resize", this.onWindowResize, false);
   };
 
@@ -87,7 +80,6 @@ export class Scope extends React.Component {
     controls.update();
     renderer.render(scene, camera);
     rendererCSS.render(sceneCSS, camera);
-    //console.log(this.state.image)
   };
 
   onWindowResize = () => {

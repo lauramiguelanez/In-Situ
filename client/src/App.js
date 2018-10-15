@@ -75,8 +75,8 @@ class App extends Component {
           <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>
           <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
           <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
-          <ScopeView id={this.state.spaceId} />
-          {/* <ScopeCamera id={this.state.spaceId}/> */}
+          {/* <ScopeView id={this.state.spaceId} /> */} 
+          <ScopeCamera id={this.state.spaceId}/>
         </div>
       );
     } else {
