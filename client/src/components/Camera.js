@@ -11,6 +11,8 @@ export class Camera extends React.Component {
       cameraView: document.querySelector("#camera--view"),
       constraints: { video: { facingMode: "user" }, audio: false }
     };
+
+    window.addEventListener("load", this.cameraStart, false);
   }
 
   cameraStart = () => {
@@ -27,11 +29,8 @@ export class Camera extends React.Component {
   };
 
   render() {
-    window.addEventListener("load", this.cameraStart, false);
     return (
-      
-        <video className="camera"id="camera--view" autoPlay playsInline />
-      
+      <video className="camera"id="camera--view" autoPlay playsInline />      
     );
   }
 }

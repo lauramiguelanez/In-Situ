@@ -33,6 +33,16 @@
 .nav-style{
   background-color: $secondary-color;
   z-index: 5;
+  display: flex
+  & li{
+    display: inline;
+    text-decoration: none;
+  }
+}
+li{
+  display: inline;
+  text-decoration: none;
+  padding: 10px;
 }
 
 .App {

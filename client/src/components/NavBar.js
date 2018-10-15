@@ -23,6 +23,12 @@ export default class Navbar extends Component {
         <nav className="nav-style">
           <ul>
             <li><a onClick={this.handleLogout}>Logout</a></li>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/scope'>See Scope</Link></li> {/* FALTA ID */}
+            <li><Link to='/camera'>See AR</Link></li> {/* FALTA ID */}
+            <li><Link to='/upload-scope'>New Scope</Link></li>
+            <li><Link to='/upload-media-img'>Add Image</Link></li>
+            <li><Link to='/upload-media-video'>Add Video</Link></li>
           </ul>
 
           <h2>Welcome, {this.state.loggedInUser.username}</h2>
@@ -33,6 +39,7 @@ export default class Navbar extends Component {
         <div>
           <nav className="nav-style">
             <ul>
+            <li><Link to='/'>Home</Link></li>
             <li><Link to='/signup'>Signup</Link></li>
             <li><Link to='/login'>Login</Link></li>
             </ul>

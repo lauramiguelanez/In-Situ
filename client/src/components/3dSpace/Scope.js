@@ -4,6 +4,7 @@ import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
+import { Camera } from "../Camera";
 import axios from "axios";
 
 

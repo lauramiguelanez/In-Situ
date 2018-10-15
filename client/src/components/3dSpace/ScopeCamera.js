@@ -2,20 +2,21 @@ import React from "react";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
-import { CSS3elements } from "./CSS3elements";
+import {CSS3elements} from "./CSS3elements";
 import { Camera } from "../Camera";
 import axios from "axios";
+
 
 export class ScopeCamera extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       spaceRadius: 500,
-      camera: new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 ),
+      camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100),
       scene: new THREE.Scene(),
-      sceneCSS: new THREE.Scene(),
+      sceneCSS: new THREE.Scene(), 
       renderer: new THREE.WebGLRenderer({ antialias: true }),
-      rendererCSS: new CSS3DRenderer(),
+      rendererCSS: new CSS3DRenderer(), 
       id: this.props.id
     };
     this.service = axios.create({
@@ -23,7 +24,7 @@ export class ScopeCamera extends React.Component {
     });
   }
 
-  getImage = id => {
+  getImage = (id) => {
     return this.service
       .get(`/spaces/${id}`)
       .then(space => {
@@ -35,20 +36,31 @@ export class ScopeCamera extends React.Component {
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
     this.setState({ controls: new DeviceOrientationControls(camera) });
-    camera.position.set(0, 0, -0.0001);
+  
+    camera.position.set(0, 0, -0.0001); //-0.001
 
     renderer.domElement.className = "scopehidden";
     rendererCSS.domElement.className = "scopeCSS";
-
+    
+    //Panorama Sphere
+    var geometry = new THREE.SphereBufferGeometry(this.state.spaceRadius, 60, 40);
+    geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
+    const loader = new THREE.TextureLoader();
+    loader.crossOrigin = "";
+    const map = loader.load(this.state.image);
+    var material = new THREE.MeshBasicMaterial({ map });
+    var sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+    
     //Helper Geometry
     var helperGeometry = new THREE.BoxBufferGeometry(100, 100, 100, 4, 4, 4);
-    var helperMaterial = new THREE.MeshBasicMaterial({ color: 0xff00ff, wireframe: true });
+    var helperMaterial = new THREE.MeshBasicMaterial({color: 0xff00ff, wireframe: true});
     var helper = new THREE.Mesh(helperGeometry, helperMaterial);
-    scene.add(helper);
+    //scene.add(helper);
 
     console.log("MEDIA FROM THIS SPACE DB");
     console.log(this.state.media);
-    let group = CSS3elements(this.state.spaceRadius, this.state.media);
+    let group = CSS3elements (this.state.spaceRadius, this.state.media);
     sceneCSS.add(group);
 
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -56,7 +68,6 @@ export class ScopeCamera extends React.Component {
     document.body.appendChild(renderer.domElement);
     rendererCSS.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(rendererCSS.domElement);
-    //.setAttribute("id", "scope");
     window.addEventListener("resize", this.onWindowResize, false);
   };
 
@@ -66,7 +77,6 @@ export class ScopeCamera extends React.Component {
     controls.update();
     renderer.render(scene, camera);
     rendererCSS.render(sceneCSS, camera);
-    //console.log(this.state.image)
   };
 
   onWindowResize = () => {
@@ -79,24 +89,25 @@ export class ScopeCamera extends React.Component {
 
   componentDidMount = () => {
     let id = this.state.id;
-    this.init(this.state);
-    this.animate();
+    //console.log("FIRST ID "+id)
+    this.getImage(id).then(() => {
+      this.init(this.state);
+      this.animate();
+    });
   };
 
   componentDidUpdate = prevProps => {
     if (this.props.id !== prevProps.id) {
       let newId = this.props.id;
       this.setState({ id: newId });
-      this.init(this.state);
-      this.animate();
+      this.getImage(newId).then(() => {
+        this.init(this.state);
+        this.animate();
+      });
     }
   };
 
   render() {
-    return (
-      <div>
-        <Camera />
-      </div>
-    );
+    return <div><Camera/></div>;
   }
 }

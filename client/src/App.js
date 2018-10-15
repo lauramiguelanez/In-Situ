@@ -64,44 +64,35 @@ class App extends Component {
 
   render() {
     this.fetchUser();
+    return (
+      <div className="App">
+        <header className="header">
+          <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
+        </header>
+          <Switch>
+            <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
+            <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
+            <Route exact path='/scope' render={() => <ScopeView id={this.state.spaceId}/>}/>
+            <Route exact path='/camera' render={() => <ScopeCamera id={this.state.spaceId}/>}/>
+            <Route exact path='/upload-scope' render={() => <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>}/>
+            <Route exact path='/upload-media-img' render={() => <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
+            <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
+          </Switch>
+        
 
-    if (this.state.loggedInUser) {
-      return (
-        <div className="App">
-          <header className="header">
-            <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
-            <h1>Welcome to Scope</h1>
-          </header>
-          <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>
-          <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
-          <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
-          {/* <ScopeView id={this.state.spaceId} /> */} 
-          <ScopeCamera id={this.state.spaceId}/>
-        </div>
-      );
-    } else {
-      return (
-        <div className="App">
-          <header className="header">
-            <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
-            <h1>Welcome to Scope</h1>
-            <Switch>
-              <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
-              <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
-            </Switch>
-          </header>
-          
-          {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
-            onMapLoad={map => {
-              let marker = new window.google.maps.Marker({
-              position: this.state.spaceLocation, map: map,
-              title: 'Hello Istanbul!'
-              });
-            }}
-          /> */}
-        </div>
-      );
-    }
+        {/* <ScopeView id={this.state.spaceId}/> */}
+        {/* <ScopeCamera id={this.state.spaceId}/> */}
+
+        <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
+          onMapLoad={map => {
+            let marker = new window.google.maps.Marker({
+            position: this.state.spaceLocation, map: map,
+            title: 'Hello Istanbul!'
+            });
+          }}
+        />
+      </div>
+    );
   }
 }
 
