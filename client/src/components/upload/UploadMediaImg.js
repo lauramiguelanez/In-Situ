@@ -77,7 +77,7 @@ export class UploadMediaImg extends React.Component {
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
           <input type="file" onChange={e => this.handleChange(e)} /> <br />
-          <button type="submit">Upload a image to your space</button>
+          <button type="submit">Upload Image</button>
         </form>
       </div>
     );

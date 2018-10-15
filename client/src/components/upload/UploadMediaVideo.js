@@ -6,7 +6,8 @@ export class UploadMediaVideo extends React.Component {
     super(props);
     this.state = {
       loggedInUser: this.props.userInSession,
-      spaceID: this.props.currentSpace
+      spaceID: this.props.currentSpace,
+      youtubeID: ""
     };
     this.service = axios.create({
       baseURL: "http://localhost:3010/api"
@@ -21,8 +22,11 @@ export class UploadMediaVideo extends React.Component {
   }
 
   handleChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    /* const { name, value } = event.target;
+    this.setState({ [name]: value }); */
+    console.log(event);
+    const value = event.target.value;
+    this.setState({ youtubeID: value }); 
   };
 
   createMedia = youtubeID => {
@@ -60,11 +64,9 @@ export class UploadMediaVideo extends React.Component {
             type="text"
             name="youtubeID"
             onChange={e => this.handleChange(e)}
-            placeholder="B-DuL2W71W4"
-            onChange={e => this.handleChange(e)}
-          />{" "}
-          <br />
-          <button type="submit">Upload a image to your space</button>
+            placeholder="VVsCOnWGHh8"
+          />
+          <button type="submit">Upload Media</button>
         </form>
       </div>
     );

@@ -2,9 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 import TrackballControls from "../../lib/TrackballControls";
-import OrbitControls from "../../lib/OrbitControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
-import CSS3DObject from "../../lib/CSS3DObject";
 import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
 
@@ -30,7 +28,7 @@ export class Scope extends React.Component {
     return this.service
       .get(`/spaces/${id}`)
       .then(space => {
-        this.setState({ image: space.data.image });
+        this.setState({ image: space.data.image, media: space.data.media });
         console.log("Image from DB " + space.data.image);
       })
       .catch(error => console.log(error));
@@ -39,11 +37,10 @@ export class Scope extends React.Component {
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
     //this.setState({ controls: new DeviceOrientationControls(camera) });
     this.setState({ controls: new TrackballControls(camera) });
-    //this.setState({ controls: new OrbitControls(camera) });
-    /* this.state.controls.rotateSpeed = 1.0;
+    this.state.controls.rotateSpeed = 1.0;
     this.state.controls.zoomSpeed = 1.2;
-    this.state.controls.panSpeed = 0.8;*/
-    camera.position.set(0, 0, -0.001); //-0.001
+    this.state.controls.panSpeed = 0.8;
+    camera.position.set(0, 0, -0.0001); //-0.001
 
     renderer.domElement.className = "scope";
     rendererCSS.domElement.className = "scopeCSS";
@@ -64,30 +61,13 @@ export class Scope extends React.Component {
     var helper = new THREE.Mesh(helperGeometry, helperMaterial);
     //scene.add(helper);
 
-
-   /*  let element = document.createElement('div');
-    //element.innerHTML = 'Plain text inside a div.';
-    element.style.background = "#0094ff";
-    element.style.fontSize = "2em";
-    element.style.color = "white";
-    //element.style.padding = "2em";
-    let iframe = document.createElement( 'iframe' );
-    let video = "41kZovcyHrU";
-    iframe.src =`https://www.youtube.com/embed/${video}?&autoplay=1`;
-		element.appendChild( iframe );
-    let div = new CSS3DObject(element);
-    div.position.x = 0;
-    div.position.y = 250;
-    div.position.z = 480;
-    div.rotation.y = Math.PI; 
-    sceneCSS.add(div);*/
-
     let data = [];
-    for (let i=0; i<=3; i++){
-      data.push("41kZovcyHrU")
+    for (let i=0; i<=5; i++){
+      data.push("VVsCOnWGHh8")
     }
-    console.log(data);
-    let group = CSS3elements (this.state.spaceRadius, data)
+    console.log("MEDIA FROM THIS SPACE DB");
+    console.log(this.state.media);
+    let group = CSS3elements (this.state.spaceRadius, this.state.media);
     sceneCSS.add(group);
 
 

@@ -93,7 +93,7 @@ export class UploadSpace extends React.Component {
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
           <input type="file" onChange={e => this.handleChange(e)} /> <br />
-          <button type="submit">Upload a panorama of your space</button>
+          <button type="submit">Upload Space</button>
         </form>
       </div>
     );
