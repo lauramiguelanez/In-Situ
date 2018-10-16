@@ -83,13 +83,13 @@ class App extends Component {
         {/* <ScopeView id={this.state.spaceId}/> */}
         {/* <ScopeCamera id={this.state.spaceId}/> */}
 
-        <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
+        {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
           onMapLoad={map => {
             let marker = new window.google.maps.Marker({
             position: this.state.spaceLocation, map: map,
             title: 'Hello Istanbul!'
             });
-          }}
+          }} */}
         />
       </div>
     );
