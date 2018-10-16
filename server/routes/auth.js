@@ -86,6 +86,22 @@ router.get('/currentuser', (req,res,next) => {
   }
 })
 
+//GET OTHER USERS
+router.get('/:id',(req,res,next) => {
+  const {id} = req.params;
+  User.findById({id})
+      .then( obj => res.status(200).json(obj))
+      .catch(e => next(e))
+})
+
+router.get('/user/:username',(req,res,next) => {
+  const {username} = req.params;
+  console.log(username);
+  User.findOne({username: username})
+      .then( obj => res.status(200).json(obj))
+      .catch(e => next(e))
+})
+
 
 router.get('/logout', (req,res) => {
   req.logout();

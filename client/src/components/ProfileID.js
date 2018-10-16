@@ -3,10 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Navbar, NavbarMenu, NavbarItem } from "bloomer";
 
-export default class Profile extends Component {
+export default class ProfileID extends Component {
   constructor(props) {
     super(props);
-    this.state = { loggedInUser: null };
+    this.state = {};
     this.service = axios.create({
       baseURL: "http://localhost:3010/api"
     });
@@ -18,11 +18,16 @@ export default class Profile extends Component {
   }
 
   getScopes = () => {
-    let catalogId = this.state.loggedInUser.catalog;
+    let username = this.props.match.params.username;
     let promises = [];
-    this.setState({ catalogId: catalogId });
-    return this.service
-      .get(`/catalog/${catalogId}`)
+    this.service.get(`auth/user/${username}`)
+      .then(user => {
+        let catalogId = user.data.catalog;
+        console.log("USER FROM DB TO PROFILE");
+        console.log(user);
+        this.setState({ catalogId: catalogId });
+        return this.service.get(`/catalog/${catalogId}`);
+      })
       .then(catalog => {
         let spacesId = catalog.data.spaces;
         spacesId.forEach(spaceId => {
@@ -44,8 +49,7 @@ export default class Profile extends Component {
     let userSpaces = this.state.userSpaces;
 
     if (userSpaces) {
-      userSpaces.forEach(e => {
-      });
+      userSpaces.forEach(e => {});
       return (
         <div>
           <h1 className="profile-feed">Profile</h1>
@@ -53,7 +57,11 @@ export default class Profile extends Component {
             return (
               <div key={space._id} className="scope-in-feed">
                 <Link to={`/scope/${space._id}`}>
-                    <img className="panorama-feed"  height="50px" src={space.image} />
+                  <img
+                    className="panorama-feed"
+                    height="50px"
+                    src={space.image}
+                  />
                 </Link>
               </div>
             );

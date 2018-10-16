@@ -19,6 +19,8 @@ import { ScopeCamera } from "./components/3dSpace/ScopeCamera";
 import { UploadMediaVideo } from "./components/upload/UploadMediaVideo";
 import BottomMenu from "./components/BottomMenu";
 import Profile from "./components/Profile";
+import ProfileID from "./components/ProfileID";
+import { ScopeID } from "./components/3dSpace/ScopeID";
 
 class App extends Component {
   constructor() {
@@ -74,7 +76,9 @@ class App extends Component {
           <Switch>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
+            <Route path='/profile/:username' render={(props) => <ProfileID {...props}/>}/>
             <Route exact path='/profile' render={() => <Profile userInSession={this.state.loggedInUser}/>}/>
+            <Route path='/scope/:id' render={(props) => <ScopeID {...props}/>}/>
             <Route exact path='/scope' render={() => <ScopeView id={this.state.spaceId}/>}/>
             <Route exact path='/camera' render={() => <ScopeCamera id={this.state.spaceId}/>}/>
             <Route exact path='/upload-scope' render={() => <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>}/>
@@ -82,9 +86,6 @@ class App extends Component {
             <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
           </Switch>
         {/* <BottomMenu/> */}
-
-        {/* <ScopeView id={this.state.spaceId}/> */}
-        {/* <ScopeCamera id={this.state.spaceId}/> */}
 
         {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
           onMapLoad={map => {

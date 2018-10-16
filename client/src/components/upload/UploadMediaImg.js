@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import "bulma/css/bulma.css";
+//import "bulma/css/bulma.css";
 import { Button } from "bloomer";
 
 export class UploadMediaImg extends React.Component {

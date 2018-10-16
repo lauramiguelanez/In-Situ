@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import geolocalize from "../maps/geolocalize";
-import "bulma/css/bulma.css";
+//import "bulma/css/bulma.css";
 import { Button } from "bloomer";
 
 export class UploadSpace extends React.Component {
