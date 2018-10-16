@@ -12,8 +12,7 @@ import Login from './components/auth/Login';
 import { ScopeView } from "./components/ScopeView";
 import { UploadSpace } from "./components/upload/UploadSpace";
 import { UploadMediaImg} from "./components/upload/UploadMediaImg";
-import GoogleMap from './components/maps/GoogleMap';
-import Map from './components/maps/Map';
+//import Map from './components/maps/Map';
 import { Camera } from "./components/Camera";
 import { ScopeCamera } from "./components/3dSpace/ScopeCamera";
 import { UploadMediaVideo } from "./components/upload/UploadMediaVideo";
@@ -21,6 +20,7 @@ import BottomMenu from "./components/BottomMenu";
 import Profile from "./components/Profile";
 import ProfileID from "./components/ProfileID";
 import { ScopeID } from "./components/3dSpace/ScopeID";
+import { Welcome } from "./components/3dSpace/Welcome";
 
 class App extends Component {
   constructor() {
@@ -86,7 +86,7 @@ class App extends Component {
             <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
           </Switch>
         {/* <BottomMenu/> */}
-
+          <Welcome/>
         {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
           onMapLoad={map => {
             let marker = new window.google.maps.Marker({
