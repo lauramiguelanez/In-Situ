@@ -63,11 +63,14 @@ export class ScopeCamera extends React.Component {
     let group = CSS3elements (this.state.spaceRadius, this.state.media);
     sceneCSS.add(group);
 
+    let scopeDiv = document.getElementById("scopecamdiv");
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    //document.body.appendChild(renderer.domElement);
+    scopeDiv.appendChild(renderer.domElement);
     rendererCSS.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(rendererCSS.domElement);
+    //document.body.appendChild(rendererCSS.domElement);
+    scopeDiv.appendChild(rendererCSS.domElement);
     window.addEventListener("resize", this.onWindowResize, false);
   };
 
@@ -108,6 +111,6 @@ export class ScopeCamera extends React.Component {
   };
 
   render() {
-    return <div><Camera/></div>;
+    return <div id="scopecamdiv"><Camera/></div>;
   }
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import geolocalize from "../maps/geolocalize";
+import "bulma/css/bulma.css";
+import { Button } from "bloomer";
 
 export class UploadSpace extends React.Component {
   constructor(props) {
@@ -21,16 +23,13 @@ export class UploadSpace extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.uploadImage(this.state.file)
-    .then(() => {
+    this.uploadImage(this.state.file).then(() => {
       console.log("uploaded image to create space");
       console.log(this.state.img_url);
-      geolocalize()
-      .then(center => {
+      geolocalize().then(center => {
         console.log(center);
         this.createSpace(this.state.img_url, center);
-      })
-      
+      });
     });
   }
 
@@ -51,10 +50,10 @@ export class UploadSpace extends React.Component {
   }
 
   createSpace = (image_url, center) => {
-    let {lat,lng} =center;
+    let { lat, lng } = center;
     console.log(center);
     let user = this.state.loggedInUser;
-    let space = { image: image_url, creator: user._id, location:center};
+    let space = { image: image_url, creator: user._id, location: center };
     return this.service
       .post("/spaces", space)
       .then(space => {
@@ -79,7 +78,7 @@ export class UploadSpace extends React.Component {
   };
 
   updateCatalog = (catalogId, spaceId) => {
-    let newSpace = {spaceId};
+    let newSpace = { spaceId };
     return this.service
       .patch(`/catalog/${catalogId}`, newSpace)
       .then(catalog => {
@@ -91,10 +90,15 @@ export class UploadSpace extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <input type="file" onChange={e => this.handleChange(e)} /> <br />
-          <button type="submit">Upload Space</button>
-        </form>
+        <div class="file is-boxed">
+          <form onSubmit={e => this.handleSubmit(e)}>
+            <input className="file-input" type="file" onChange={e => this.handleChange(e)} /> <br />
+            <span className="file-cta">
+              <span className="file-label">Choose a panorama</span>
+            </span>
+            <Button type="submit" isColor='primary'>Upload Space</Button>
+          </form>
+        </div>
       </div>
     );
   }

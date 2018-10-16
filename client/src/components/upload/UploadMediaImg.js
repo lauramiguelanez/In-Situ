@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import "bulma/css/bulma.css";
+import { Button } from "bloomer";
 
 export class UploadMediaImg extends React.Component {
   constructor(props) {
@@ -75,10 +77,15 @@ export class UploadMediaImg extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <input type="file" onChange={e => this.handleChange(e)} /> <br />
-          <button type="submit">Upload Image</button>
-        </form>
+        <div class="file is-boxed">
+          <form onSubmit={e => this.handleSubmit(e)}>
+            <input className="file-input" type="file" onChange={e => this.handleChange(e)} /> <br />
+            <span className="file-cta">
+              <span className="file-label">Choose an image</span>
+            </span>
+            <Button type="submit" isColor='primary'>Upload Images to this Scope</Button>
+          </form>
+        </div>
       </div>
     );
   }

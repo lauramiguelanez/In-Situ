@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //import AuthService from '../auth/AuthService';
+import "bulma/css/bulma.css";
+import { Button } from "bloomer";
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -36,15 +38,14 @@ export default class Navbar extends Component {
       )
     } else {
       return (
-        <div>
-          <nav className="nav-style">
+          <nav className="navbar" role="navigation" aria-label="main navigation">
+
             <ul>
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/signup'>Signup</Link></li>
             <li><Link to='/login'>Login</Link></li>
             </ul>
           </nav>
-        </div>
       )
     }
   }
