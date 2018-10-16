@@ -89,8 +89,8 @@ class App extends Component {
             position: this.state.spaceLocation, map: map,
             title: 'Hello Istanbul!'
             });
-          }} */}
-        />
+          }} 
+        />*/}
       </div>
     );
   }
