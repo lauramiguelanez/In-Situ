@@ -43,7 +43,7 @@ export class UploadSpace extends React.Component {
         headers: { "Content-Type": "multipart/form-data" }
       })
       .then(img => {
-        this.setState({ img_url: img.data.url });
+        this.setState({ img_url: img.data.secure_url });
         //console.log("Image from CLOUD");
         //console.log(img.data.url);
       })
