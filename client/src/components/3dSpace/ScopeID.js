@@ -36,14 +36,14 @@ export class ScopeID extends React.Component {
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
     this.setState({ controls: new DeviceOrientationControls(camera) });
-    camera.position.set(0, 0, -0.0001); //-0.001
+    camera.position.set(0, 0, -1000); //-0.001
 
     renderer.domElement.className = "scope";
     rendererCSS.domElement.className = "scopeCSS";
     
     //Panorama Sphere
     var geometry = new THREE.SphereBufferGeometry(this.state.spaceRadius, 60, 40);
-    geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
+    geometry.scale(1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
     const loader = new THREE.TextureLoader();
     loader.crossOrigin = "";
     const map = loader.load(this.state.image);

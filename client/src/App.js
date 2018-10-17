@@ -86,7 +86,7 @@ class App extends Component {
             <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
           </Switch>
         {/* <BottomMenu/> */}
-          <Welcome/>
+         {/*  <Welcome/> */}
         {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
           onMapLoad={map => {
             let marker = new window.google.maps.Marker({

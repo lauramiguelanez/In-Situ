@@ -24,10 +24,10 @@ export class Welcome extends React.Component {
     //Panorama Sphere
     var geometry = new THREE.SphereBufferGeometry(this.state.spaceRadius, 100, 40);
     geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
-    const loader = new THREE.TextureLoader();
-    const map = loader.load("/stripes.png");
-    var material = new THREE.MeshBasicMaterial({ map });
-    //var material = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+    //const loader = new THREE.TextureLoader();
+    //const map = loader.load("/stripes.png");
+    //var material = new THREE.MeshBasicMaterial({ map });
+    var material = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
     sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
     scene.background = new THREE.Color( 0xffffff );
