@@ -86,16 +86,11 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  // If no routes match, send them the React HTML.
-  res.sendFile(__dirname + "/public/index.html");
-});
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 app.use(flash());
 require("./passport")(app);
@@ -112,5 +107,9 @@ app.use('/api/catalog', catalogCRUD(require('./models/Catalog')));
 const mediaCRUD = require('./routes/mediaCRUD');
 app.use('/api/media', mediaCRUD(require('./models/Media')));
 
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 module.exports = app;
