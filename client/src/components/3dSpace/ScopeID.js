@@ -32,6 +32,7 @@ export class ScopeID extends React.Component {
       .get(`/spaces/${id}`)
       .then(space => {
         this.setState({ image: space.data.image, mediaIDs: space.data.media });
+        //this.sendNewSpace(space.data);
         console.log("Image from DB " + space.data.image);
       })
       .then(()=>{
@@ -53,13 +54,17 @@ export class ScopeID extends React.Component {
       .catch(error => console.log(error));
   };
 
+ /*  sendNewSpace = space => {
+    this.props.newSpace(space._id, space.location);
+  }; */
+
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
     this.setState({ controls: new DeviceOrientationControls(camera) });
-//this.setState({ controls: new TrackballControls(camera) });
+    //this.setState({ controls: new TrackballControls(camera) });
     /* this.state.controls.rotateSpeed = 1.0;
     this.state.controls.zoomSpeed = 1.2;
-    this.state.controls.panSpeed = 0.8;  */
-    camera.position.set(0, 0, -0.001); //-0.001
+    this.state.controls.panSpeed = 0.8;*/
+    camera.position.set(0, 0, -0.001);
 
     renderer.domElement.className = "scope";
     rendererCSS.domElement.className = "scopeCSS";

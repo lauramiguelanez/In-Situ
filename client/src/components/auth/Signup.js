@@ -33,21 +33,21 @@ class Signup extends Component {
 
   render() {
     return(
-      <div>
-        <h3>Welcome!, create your account next:</h3>
+      <div className="card">
+        <h3 class="label is-medium">Welcome! create your account next:</h3>
 
         <form onSubmit={this.handleFormSubmit}>
-          <fieldset>
-            <label>Username:</label>
-            <input type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
-          </fieldset>
+          <div className="field">
+            <label className="label">Username:</label>
+            <input className="input" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
+          </div>
           
-          <fieldset>
-            <label>Password:</label>
-            <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
-          </fieldset>
+          <div className="field">
+            <label className="label">Password:</label>
+            <input  className="input" type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+          </div>
           
-          <input type="submit" value="Sign up" />
+          <input className="button is-primary" type="submit" value="Sign up" />
         </form>
 
       </div>

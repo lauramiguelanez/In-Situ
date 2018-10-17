@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-//import "bulma/css/bulma.css";
 import { Button } from "bloomer";
 require('dotenv').config();
 
@@ -29,7 +28,6 @@ export class UploadMediaImg extends React.Component {
       console.log("uploaded image to this space");
       console.log(this.state.img_url);
       this.createMedia(this.state.img_url);
-      
     });
   }
 

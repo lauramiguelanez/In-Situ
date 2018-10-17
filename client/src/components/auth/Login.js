@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 //import { Link } from 'react-router-dom';
 import AuthService from "./AuthService";
-//import "bulma/css/bulma.css";
 
 class Login extends Component {
   constructor(props) {
@@ -43,37 +42,42 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="card">
+        <h3 class="label is-medium">Please, login</h3>
+        <form onSubmit={this.handleFormSubmit} >
 
-        <h3>Please, login to our site</h3>
-        <form onSubmit={this.handleFormSubmit}>
-          <fieldset>
-            <label>Username:</label>
+          <div className="field">
+            <label className="label">Username:</label>
             <input
+              className="input"
               type="text"
               name="username"
               value={this.state.username}
               onChange={e => this.handleChange(e)}
             />
-          </fieldset>
+          </div>
 
-          <fieldset>
-            <label>Password:</label>
+          <div className="field">
+            <label className="label">Password:</label>
             <input
+              className="input"
               type="password"
               name="password"
               value={this.state.password}
               onChange={e => this.handleChange(e)}
             />
-          </fieldset>
+          </div>
 
-          <input type="submit" value="Login" />
+          <input className="button is-primary" type="submit" value="Login" />
         </form>
 
         <h1>{this.state.error ? "Error" : ""}</h1>
+
+        
       </div>
     );
   }
 }
 
 export default Login;
+

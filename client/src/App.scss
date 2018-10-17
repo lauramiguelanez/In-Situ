@@ -1,10 +1,18 @@
 @import "scss/variables.scss"; 
 @import "scss/mixins.scss"; 
 
+
+main {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  
+}
+
 .scope {
   position: absolute;
   top: 0;
-  z-index: -2;
+  z-index: -4;
 }
 .scopehidden {
   position: absolute;
@@ -15,7 +23,7 @@
 .scopeCSS{
   position: absolute;
   top: 0;
-  z-index: 3;
+  z-index: -1;
 }
 .camera {
   position: absolute;
@@ -26,29 +34,44 @@
   height: 100vh;
 }
 
+#bottom-nav{
+  position: absolute;
+  bottom: 0;
+}
+
 .map-google{
   z-index: 10;
 }
 
 .nav-style{
   z-index: 5;
-  display: flex
+  padding: 7px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-image: linear-gradient(white, white);
+  width: 100vw;
   & li{
     display: inline;
     text-decoration: none;
+    padding: 3px;
   }
 }
-li{
+ul{
   display: inline;
+  //align-content: center;
   text-decoration: none;
   padding: 10px;
 }
 
 
-
-.App-link {
-  color: #61dafb;
+.card{
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  //top: 20vh;
 }
+
 
 @keyframes App-logo-spin {
   from {

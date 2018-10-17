@@ -46,11 +46,17 @@ THREE.DeviceOrientationControls = function ( object ) {
 		scope.enabled = false;
 	};
 	this.update = function () {
+		let eyeAngle;
 		if ( scope.enabled === false ) return;
 		var device = scope.deviceOrientation;
+		if( window.screen.width <= 740 ) {     
+			eyeAngle = 0; 
+		}else{
+			eyeAngle = 90;
+		}
 		if ( device ) {
 			var alpha = device.alpha ? THREE.Math.degToRad( device.alpha ) + scope.alphaOffset : 0; // Z
-			var beta = device.beta ? THREE.Math.degToRad( device.beta + 0) : THREE.Math.degToRad(0); // X'
+			var beta = device.beta ? THREE.Math.degToRad( device.beta + eyeAngle) : THREE.Math.degToRad(eyeAngle); // X'
 			var gamma = device.gamma ? THREE.Math.degToRad( device.gamma ) : 0; // Y''
 			var orient = scope.screenOrientation ? THREE.Math.degToRad( scope.screenOrientation ) : 0; // O
 			setObjectQuaternion( scope.object.quaternion, alpha, beta, gamma, orient );

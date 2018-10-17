@@ -9,9 +9,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
+  //background-color: #ffffff;
   overflow: hidden;
   color: $primary-color;
+  height: 100vh;
+}
+.App{
+  height: 90vh;
 }
 
 code {

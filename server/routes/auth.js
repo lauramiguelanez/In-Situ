@@ -102,14 +102,11 @@ router.get('/user/:username',(req,res,next) => {
       .catch(e => next(e))
 })
 
-
 router.get('/logout', (req,res) => {
   console.log("TRYING LOGOUT AT BACK");
   req.logout();
   res.status(200).json({message:'logged out'})
 });
-
-
 
 
 router.use((err, req, res, next) => {

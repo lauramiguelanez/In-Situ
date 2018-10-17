@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from 'react-router-dom';
 
-//import "bulma/css/bulma.css";
+
 import "./App.scss";
 
 import Navbar from './components/Navbar';
@@ -15,7 +15,7 @@ import { UploadMediaImg} from "./components/upload/UploadMediaImg";
 //import Map from './components/maps/Map';
 import { ScopeCamera } from "./components/3dSpace/ScopeCamera";
 import { UploadMediaVideo } from "./components/upload/UploadMediaVideo";
-//import BottomMenu from "./components/BottomMenu";
+import BottomMenu from "./components/BottomMenu";
 import Profile from "./components/Profile";
 import ProfileID from "./components/ProfileID";
 import { ScopeID } from "./components/3dSpace/ScopeID";
@@ -66,25 +66,32 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.spaceId)
     this.fetchUser();
     return (
       <div className="App">
         <header className="header">
           <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
         </header>
+        <main>
           <Switch>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
             <Route path='/profile/:username' render={(props) => <ProfileID {...props}/>}/>
             <Route exact path='/profile' render={() => <Profile userInSession={this.state.loggedInUser}/>}/>
-            <Route path='/scope/:id' render={(props) => <ScopeID {...props}/>}/>
+            <Route path='/scope/:id' render={(props) => <ScopeID {...props}/>} /* newSpace={(space, location) => {this.actualizeSpace(space, location)}} *//>
             <Route exact path='/scope' render={() => <ScopeView id={this.state.spaceId}/>}/>
             <Route exact path='/camera' render={() => <ScopeCamera id={this.state.spaceId}/>}/>
             <Route exact path='/upload-scope' render={() => <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>}/>
             <Route exact path='/upload-media-img' render={() => <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
             <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
           </Switch>
-        {/* <BottomMenu/> */}
+        
+        </main>
+        <footer>
+            <BottomMenu userInSession={this.state.loggedInUser}/>
+        </footer>
+          
          {/*  <Welcome/> */}
         {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
           onMapLoad={map => {

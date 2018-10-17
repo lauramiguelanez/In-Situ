@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//import AuthService from '../auth/AuthService';
-import "bulma/css/bulma.css";
-import { Button } from "bloomer";
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -20,8 +17,6 @@ export default class Navbar extends Component {
   }
 
   render() {
-    console.log("USER IN NAVBAR");
-    console.log(this.state.loggedInUser);
     if (this.state.loggedInUser) {
 
       return (
@@ -29,15 +24,9 @@ export default class Navbar extends Component {
           <ul>
             <li><a onClick={this.handleLogout}>Logout</a></li>
             <li><Link to='/'>Home</Link></li>
-            <li><Link to='/scope'>See Scope</Link></li> {/* FALTA ID */}
-            <li><Link to='/camera'>See AR</Link></li> {/* FALTA ID */}
-            <li><Link to='/upload-scope'>New Scope</Link></li>
-            <li><Link to='/upload-media-img'>Add Image</Link></li>
-            <li><Link to='/upload-media-video'>Add Video</Link></li>
-            <li><Link to='/profile'>My Profile</Link></li>
+            <li><Link to='/scope'>Scope</Link></li>
+            <li><Link to='/profile'>{this.state.loggedInUser.username}</Link></li>
           </ul>
-
-          <h2>Welcome, {this.state.loggedInUser.username}</h2>
         </nav>
       )
     } else {
