@@ -20,7 +20,10 @@ export default class Navbar extends Component {
   }
 
   render() {
+    console.log("USER IN NAVBAR");
+    console.log(this.state.loggedInUser);
     if (this.state.loggedInUser) {
+
       return (
         <nav className="nav-style">
           <ul>

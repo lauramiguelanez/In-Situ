@@ -2,24 +2,24 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Navbar, NavbarMenu, NavbarItem } from "bloomer";
-require('dotenv').config();
+require("dotenv").config();
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {loggedInUser: props.userInSession};
+    this.state = { loggedInUser: props.userInSession };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
+    this.getScopes();
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
-    this.getScopes();
   }
 
   getScopes = () => {
-    let catalogId = this.state.loggedInUser.catalog;
+    let catalogId = this.props.userInSession.catalog;
     let promises = [];
     this.setState({ catalogId: catalogId });
     return this.service
@@ -42,31 +42,37 @@ export default class Profile extends Component {
   };
 
   render() {
-    let userSpaces = this.state.userSpaces;
-
-    if (userSpaces) {
-      userSpaces.forEach(e => {
-      });
-      return (
-        <div>
-          <h1 className="profile-feed">Profile</h1>
-          {userSpaces.map(space => {
-            return (
-              <div key={space._id} className="scope-in-feed">
-                <Link to={`/scope/${space._id}`}>
-                    <img className="panorama-feed"  height="50px" src={space.image} />
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      );
+    if (this.props.userInSession) {
+      let userSpaces = this.state.userSpaces;
+      if (userSpaces) {
+        userSpaces.forEach(e => {});
+        return (
+          <div>
+            <h1 className="profile-feed">Profile</h1>
+            {userSpaces.map(space => {
+              return (
+                <div key={space._id} className="scope-in-feed">
+                  <Link to={`/scope/${space._id}`}>
+                    <img
+                      className="panorama-feed"
+                      height="50px"
+                      src={space.image}
+                    />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        );
+      } else {
+        return (
+          <div className="profile-feed">
+            <h1>Profile</h1>
+          </div>
+        );
+      }
     } else {
-      return (
-        <div className="profile-feed">
-          <h1>Profile</h1>
-        </div>
-      );
+      return <div />;
     }
   }
 }
