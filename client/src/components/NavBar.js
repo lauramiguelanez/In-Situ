@@ -31,6 +31,7 @@ export default class Navbar extends Component {
             <li><Link to='/upload-scope'>New Scope</Link></li>
             <li><Link to='/upload-media-img'>Add Image</Link></li>
             <li><Link to='/upload-media-video'>Add Video</Link></li>
+            <li><Link to='/profile'>My Profile</Link></li>
           </ul>
 
           <h2>Welcome, {this.state.loggedInUser.username}</h2>

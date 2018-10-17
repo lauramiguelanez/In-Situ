@@ -7,7 +7,7 @@ require('dotenv').config();
 export default class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = { loggedInUser: null };
+    this.state = {loggedInUser: props.userInSession};
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
