@@ -105,7 +105,7 @@ const authRouter = require('./routes/auth');
 app.use('/api/auth', authRouter);
 const cloudinary = require('./routes/uploadCloud');
 app.use('/api/uploadCloud', cloudinary);
-const spacesCRUD = require('./routes/spacesCRUD');
+const spacesCRUD = require('./routes/spacesCrud');
 app.use('/api/spaces', spacesCRUD(require('./models/Space')));
 const catalogCRUD = require('./routes/catalogCRUD');
 app.use('/api/catalog', catalogCRUD(require('./models/Catalog')));
