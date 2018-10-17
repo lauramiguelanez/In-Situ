@@ -33,7 +33,7 @@ const iframeElement = (ytID, x, y, z, ry) =>{
     //iframe.style.width = "480px";
     //iframe.style.height = '360px';
     iframe.style.border = '0px';
-    ytID = "B-DuL2W71W4";
+    //ytID = "B-DuL2W71W4";
     let url = [ 'https://www.youtube.com/embed/', ytID, '?rel=0' ].join( '' );
     iframe.src = url;
     div.appendChild( iframe );
@@ -51,7 +51,7 @@ const imageElement = (url, x, y, z, ry) =>{
     div.style.backgroundColor = '#000';
     var image = document.createElement( 'img' );
     image.style.border = '0px';
-    image.src = /* url;// */"https://scontent-mad1-1.cdninstagram.com/vp/30f76f820acdb893b9cb648ae0adfd57/5C5FEA68/t51.2885-15/e35/25018699_872711359576719_1019478494217764864_n.jpg";
+    image.src = url;// */"https://scontent-mad1-1.cdninstagram.com/vp/30f76f820acdb893b9cb648ae0adfd57/5C5FEA68/t51.2885-15/e35/25018699_872711359576719_1019478494217764864_n.jpg";
     image.style.width = `${elementSize}px`;
     image.style.height = 'auto';
     div.appendChild( image );
@@ -62,7 +62,7 @@ const imageElement = (url, x, y, z, ry) =>{
     return object;
 }
 
-/* export const CSS3elements = (spaceRadius, media) => {
+export const CSS3elements = (spaceRadius, media) => {
     console.log("MEDIA SEND TO CSS ELEMENTS");
     console.log(media);
     let radius = spaceRadius-50;
@@ -92,9 +92,8 @@ const imageElement = (url, x, y, z, ry) =>{
     });
     return group;
 }
- */
 
-export const CSS3elements = (spaceRadius, data) => {
+/* export const CSS3elements = (spaceRadius, data) => {
     let radius = spaceRadius-50;
     let many = data.length;
     let angle = Math.PI * 2 / many;
@@ -115,4 +114,4 @@ export const CSS3elements = (spaceRadius, data) => {
         } 
     });
     return group;
-} 
+}  */
