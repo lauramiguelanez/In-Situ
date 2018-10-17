@@ -4,6 +4,7 @@ import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
+require('dotenv').config();
 
 
 export class ScopeID extends React.Component {
@@ -18,7 +19,7 @@ export class ScopeID extends React.Component {
       rendererCSS: new CSS3DRenderer()
     };
     this.service = axios.create({
-      baseURL: "http://localhost:3010/api"
+      baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
     console.log("COMPONENT SCOPE ID")
     console.log(this.props)

@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Navbar, NavbarMenu, NavbarItem } from "bloomer";
+require('dotenv').config();
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = { loggedInUser: null };
     this.service = axios.create({
-      baseURL: "http://localhost:3010/api"
+      baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
   }
 

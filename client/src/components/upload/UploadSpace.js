@@ -3,13 +3,14 @@ import axios from "axios";
 import geolocalize from "../maps/geolocalize";
 //import "bulma/css/bulma.css";
 import { Button } from "bloomer";
+require('dotenv').config();
 
 export class UploadSpace extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loggedInUser: this.props.userInSession };
     this.service = axios.create({
-      baseURL: "http://localhost:3010/api"
+      baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
   }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+require('dotenv').config();
 
 export class UploadMediaVideo extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export class UploadMediaVideo extends React.Component {
       youtubeID: ""
     };
     this.service = axios.create({
-      baseURL: "http://localhost:3010/api"
+      baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
   }
 

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 //import "bulma/css/bulma.css";
 import { Button } from "bloomer";
+require('dotenv').config();
 
 export class UploadMediaImg extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export class UploadMediaImg extends React.Component {
       spaceID: this.props.currentSpace
     };
     this.service = axios.create({
-      baseURL: "http://localhost:3010/api"
+      baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
   }
 

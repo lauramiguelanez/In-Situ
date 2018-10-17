@@ -1,10 +1,11 @@
 // auth/auth-service.js
 import axios from 'axios';
+require('dotenv').config();
 
 class AuthService {
   constructor() {
     this.service = axios.create({
-      baseURL: 'https://in-situ.herokuapp.com/api/auth',//http://localhost:3010/api/auth
+      baseURL: `${process.env.REACT_APP_API_URL}/api/auth`,
       withCredentials: true
     });
   }

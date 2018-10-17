@@ -6,6 +6,7 @@ import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
 import { Camera } from "../Camera";
 import axios from "axios";
+require('dotenv').config();
 
 
 export class Scope extends React.Component {
@@ -21,7 +22,7 @@ export class Scope extends React.Component {
       id: this.props.id
     };
     this.service = axios.create({
-      baseURL: "http://localhost:3010/api"
+      baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
   }
 
