@@ -37,7 +37,7 @@ export class ScopeID extends React.Component {
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
     this.setState({ controls: new DeviceOrientationControls(camera) });
-    camera.position.set(0, 0, -1000); //-0.001
+    camera.position.set(0, 0, -0.001); //-0.001
 
     renderer.domElement.className = "scope";
     rendererCSS.domElement.className = "scopeCSS";
