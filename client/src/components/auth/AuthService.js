@@ -29,6 +29,7 @@ class AuthService {
   }
 
   logout = () => {
+    console.log("TRYING AT FRONT");
     return this.service.get('/logout',)
     .then(response => response.data)
   }

@@ -13,14 +13,13 @@ import { ScopeView } from "./components/ScopeView";
 import { UploadSpace } from "./components/upload/UploadSpace";
 import { UploadMediaImg} from "./components/upload/UploadMediaImg";
 //import Map from './components/maps/Map';
-import { Camera } from "./components/Camera";
 import { ScopeCamera } from "./components/3dSpace/ScopeCamera";
 import { UploadMediaVideo } from "./components/upload/UploadMediaVideo";
-import BottomMenu from "./components/BottomMenu";
+//import BottomMenu from "./components/BottomMenu";
 import Profile from "./components/Profile";
 import ProfileID from "./components/ProfileID";
 import { ScopeID } from "./components/3dSpace/ScopeID";
-import { Welcome } from "./components/3dSpace/Welcome";
+//import { Welcome } from "./components/3dSpace/Welcome";
 
 class App extends Component {
   constructor() {
