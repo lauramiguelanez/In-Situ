@@ -3,7 +3,7 @@ import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
-import {CSS3elements} from "./CSS3elements";
+import {CSS3elementsPREV} from "./CSS3elementsPREV";
 import { Camera } from "../Camera";
 import axios from "axios";
 require('dotenv').config();
@@ -30,8 +30,8 @@ export class Scope extends React.Component {
     return this.service
       .get(`/spaces/${id}`)
       .then(space => {
+        console.log("Image from DB " + space.data);
         this.setState({ image: space.data.image, media: space.data.media });
-        console.log("Image from DB " + space.data.image);
       })
       .catch(error => console.log(error));
   };
@@ -65,7 +65,7 @@ export class Scope extends React.Component {
 
     console.log("MEDIA FROM THIS SPACE DB");
     console.log(this.state.media);
-    let group = CSS3elements (this.state.spaceRadius, this.state.media);
+    let group = CSS3elementsPREV (this.state.spaceRadius, this.state.media);
     sceneCSS.add(group);
 
     let scopeDiv = document.getElementById("scopediv");

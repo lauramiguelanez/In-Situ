@@ -1,6 +1,7 @@
 import React from "react";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
+import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
@@ -53,7 +54,11 @@ export class ScopeID extends React.Component {
   };
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
-    this.setState({ controls: new DeviceOrientationControls(camera) });
+    //this.setState({ controls: new DeviceOrientationControls(camera) });
+this.setState({ controls: new TrackballControls(camera) });
+    /* this.state.controls.rotateSpeed = 1.0;
+    this.state.controls.zoomSpeed = 1.2;
+    this.state.controls.panSpeed = 0.8;  */
     camera.position.set(0, 0, -0.001); //-0.001
 
     renderer.domElement.className = "scope";
@@ -72,6 +77,7 @@ export class ScopeID extends React.Component {
     console.log("MEDIA FROM THIS SPACE DB");
     console.log(this.state.media);
     let group = CSS3elements (this.state.spaceRadius, this.state.media);
+    console.log(group);
     sceneCSS.add(group);
 
     let scopeDiv = document.getElementById("scopediv");
