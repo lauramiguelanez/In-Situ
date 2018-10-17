@@ -62,6 +62,8 @@ const imageElement = (url, x, y, z, ry) =>{
 }
 
 export const CSS3elements = (spaceRadius, media) => {
+    console.log("MEDIA SEND TO CSS ELEMENTS");
+    console.log(media);
     let radius = spaceRadius-50;
     let many = media.length;
     let angle = Math.PI * 2 / many;
@@ -75,10 +77,10 @@ export const CSS3elements = (spaceRadius, media) => {
         let rot = 3*Math.PI/2 - ry;
         if (e.type == "IMAGE"){
             let newImage = new imageElement(e.url, x, y, z, rot);
-            //console.log(e);
+            console.log(e);
             group.add(newImage);
         } else if (e.type == "YOUTUBE"){
-            //console.log(e);
+            console.log(e);
             let newIFrame = new iframeElement(e.url, x, y, z, rot);
             group.add(newIFrame);
         }else {

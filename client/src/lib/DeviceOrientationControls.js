@@ -50,7 +50,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 		var device = scope.deviceOrientation;
 		if ( device ) {
 			var alpha = device.alpha ? THREE.Math.degToRad( device.alpha ) + scope.alphaOffset : 0; // Z
-			var beta = device.beta ? THREE.Math.degToRad( device.beta + 0) : THREE.Math.degToRad(0); // X'
+			var beta = device.beta ? THREE.Math.degToRad( device.beta + 90) : THREE.Math.degToRad(90); // X'
 			var gamma = device.gamma ? THREE.Math.degToRad( device.gamma ) : 0; // Y''
 			var orient = scope.screenOrientation ? THREE.Math.degToRad( scope.screenOrientation ) : 0; // O
 			setObjectQuaternion( scope.object.quaternion, alpha, beta, gamma, orient );

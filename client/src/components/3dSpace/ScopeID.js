@@ -26,11 +26,28 @@ export class ScopeID extends React.Component {
   }
 
   getImage = (id) => {
+    let promises = [];
     return this.service
       .get(`/spaces/${id}`)
       .then(space => {
-        this.setState({ image: space.data.image, media: space.data.media });
+        this.setState({ image: space.data.image, mediaIDs: space.data.media });
         console.log("Image from DB " + space.data.image);
+      })
+      .then(()=>{
+        let mediaIDs = this.state.mediaIDs;
+        mediaIDs.forEach(mediaID => {
+          promises.push(this.service.get(`/media/${mediaID}`));
+        });
+        return Promise.all(promises);
+      })
+      .then(promises => {
+        let mediaArr=[];
+        promises.forEach(prom => {
+          mediaArr.push(prom.data);
+        })
+        this.setState({media: mediaArr});
+        console.log("MEDIA OBJECTS IN STATE");
+        console.log(this.state.media);
       })
       .catch(error => console.log(error));
   };
@@ -51,12 +68,6 @@ export class ScopeID extends React.Component {
     var material = new THREE.MeshBasicMaterial({ map });
     var sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
-    
-    //Helper Geometry
-    var helperGeometry = new THREE.BoxBufferGeometry(100, 100, 100, 4, 4, 4);
-    var helperMaterial = new THREE.MeshBasicMaterial({color: 0xff00ff, wireframe: true});
-    var helper = new THREE.Mesh(helperGeometry, helperMaterial);
-    //scene.add(helper);
 
     console.log("MEDIA FROM THIS SPACE DB");
     console.log(this.state.media);
@@ -67,8 +78,8 @@ export class ScopeID extends React.Component {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     scopeDiv.appendChild(renderer.domElement);
-    //rendererCSS.setSize(window.innerWidth, window.innerHeight);
-    //scopeDiv.appendChild(rendererCSS.domElement);
+    rendererCSS.setSize(window.innerWidth, window.innerHeight);
+    scopeDiv.appendChild(rendererCSS.domElement);
     window.addEventListener("resize", this.onWindowResize, false);
   };
 
@@ -89,8 +100,6 @@ export class ScopeID extends React.Component {
   };
 
   componentDidMount = () => {
-    //let id = this.state.id;
-    console.log(this.props)
     let id =  this.props.match.params.id
     this.getImage(id).then(() => {
       this.init(this.state);
@@ -98,20 +107,7 @@ export class ScopeID extends React.Component {
     });
   };
 
-  /* componentDidUpdate = prevProps => {
-    if (this.props.id !== prevProps.id) {
-      let newId = this.props.match.params.id;
-      this.setState({ id: newId });
-      this.getImage(newId).then(() => {
-        this.init(this.state);
-        this.animate();
-      });
-    }
-  }; */
-
   render() {
-      console.log("RENDER SCOPE ID")
-      //console.log(this.props.match.params.id)
     return <div id="scopediv"/>;
   }
 }
