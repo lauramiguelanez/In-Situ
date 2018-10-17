@@ -44,7 +44,7 @@ export class ScopeID extends React.Component {
     
     //Panorama Sphere
     var geometry = new THREE.SphereBufferGeometry(this.state.spaceRadius, 60, 40);
-    geometry.scale(1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
+    geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
     const loader = new THREE.TextureLoader();
     loader.crossOrigin = "";
     const map = loader.load(this.state.image);
