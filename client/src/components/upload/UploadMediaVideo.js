@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import axios from "axios";
 require('dotenv').config();
 
@@ -8,7 +9,8 @@ export class UploadMediaVideo extends React.Component {
     this.state = {
       loggedInUser: this.props.userInSession,
       spaceID: this.props.currentSpace,
-      youtubeID: ""
+      youtubeID: "",
+      redirect: false
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
@@ -25,7 +27,7 @@ export class UploadMediaVideo extends React.Component {
   handleChange = event => {
     console.log(event);
     const value = event.target.value;
-    this.setState({ youtubeID: value }); 
+    this.setState({ youtubeID: value, redirect: true }); 
   };
 
   createMedia = youtubeID => {
@@ -57,6 +59,9 @@ export class UploadMediaVideo extends React.Component {
 
   render() {
     console.log("SPACE ID UPLOAD VIDEO "+ this.state.spaceID)
+
+    if(this.state.redirect) return <Redirect to="/profile" />
+    
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>

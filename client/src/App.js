@@ -20,7 +20,7 @@ import BottomMenu from "./components/BottomMenu";
 import Profile from "./components/Profile";
 import ProfileID from "./components/ProfileID";
 import { ScopeID } from "./components/3dSpace/ScopeID";
-//import { Welcome } from "./components/3dSpace/Welcome";
+import { Welcome } from "./components/3dSpace/Welcome";
 
 class App extends Component {
   constructor() {
@@ -75,9 +75,10 @@ class App extends Component {
         <header className="header">
           <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
         </header>
-        <div className="grower"></div>
+        <div className="fix-top"></div>
         <main>
           <Switch>
+            <Route exact path='/' render={() => <Welcome/> }/>  
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
             <Route path='/profile/:username' render={(props) => <ProfileID {...props}/>}/>
@@ -91,12 +92,10 @@ class App extends Component {
             <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
           </Switch>
         </main>
-        <div className="grower"></div>
+        <div className="fix-bottom"></div>
         <footer>
             <BottomMenu userInSession={this.state.loggedInUser}/>
         </footer>
-          
-         {/*  <Welcome/> */}
         {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
           onMapLoad={map => {
             let marker = new window.google.maps.Marker({

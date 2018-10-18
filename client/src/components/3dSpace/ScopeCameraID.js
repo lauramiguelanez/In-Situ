@@ -130,9 +130,7 @@ export class ScopeCameraID extends React.Component {
     console.log("id a route scope "+id);
     return (
         <div id="scopecamdiv">
-            
-                <button className="button is-primary is-rounded switch-button"><Link to={`/scope/${id}`}>VR</Link></button>
-            
+                <button className="button is-danger is-inverted is-outlined is-rounded switch-button"><Link to={`/scope/${id}`}>VR</Link></button>
             <Camera/>
         </div>
     );

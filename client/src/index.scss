@@ -9,16 +9,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  //background-color: #ffffff;
+  background-color: $secondary-color; //$bulma;
   overflow: hidden;
   color: $primary-color;
+  z-index: -30;
 }
 .App{
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-
 }
 
 code {

@@ -18,7 +18,7 @@ export default class Navbar extends Component {
   render() {
     if (this.state.loggedInUser) {
       return (
-        <nav className="nav-style box">
+        <nav className="nav-style box" id="top-nav">
           <ul>
             <li><a onClick={this.handleLogout}>Logout</a></li>
             <li className="has-text-danger"><Link to='/'>Home</Link></li>
@@ -28,7 +28,7 @@ export default class Navbar extends Component {
       )
     } else {
       return (
-          <nav className="navbar nav-style box" role="navigation" aria-label="main navigation">
+          <nav className="nav-style box" id="top-nav" role="navigation" aria-label="main navigation">
 
             <ul>
             <li><Link to='/'>Home</Link></li>

@@ -27,7 +27,7 @@ export class Welcome extends React.Component {
     //const loader = new THREE.TextureLoader();
     //const map = loader.load("/stripes.png");
     //var material = new THREE.MeshBasicMaterial({ map });
-    var material = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+    var material = new THREE.MeshBasicMaterial({color: 0x00d1b2, wireframe: true, wireframeLinewidth: 20});
     sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
     scene.background = new THREE.Color( 0xffffff );
@@ -41,9 +41,9 @@ export class Welcome extends React.Component {
   animate = () => {
     let { camera, scene, renderer} = this.state;
     window.requestAnimationFrame(this.animate);
-    sphere.rotation.x += 0.001;
-    sphere.rotation.y += 0.002;
-    sphere.rotation.z += 0.001;
+    sphere.rotation.x += 0.0015;
+    sphere.rotation.y += 0.001;
+    sphere.rotation.z += 0.0004;
     renderer.render(scene, camera);
   };
 
@@ -60,6 +60,12 @@ export class Welcome extends React.Component {
   };
 
   render() {
-    return <div id="welcome"/>;
+    return (
+      <div id="welcome" className="welcome">
+        {/* <div className="card box" id="welcome-card">
+          <p>Scope!</p>
+        </div> */}
+      </div>
+    );
   }
 }

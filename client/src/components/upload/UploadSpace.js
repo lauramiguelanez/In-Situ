@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import axios from "axios";
 import geolocalize from "../maps/geolocalize";
 require('dotenv').config();
@@ -6,7 +7,7 @@ require('dotenv').config();
 export class UploadSpace extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loggedInUser: this.props.userInSession };
+    this.state = { loggedInUser: this.props.userInSession, redirect: false };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
@@ -45,7 +46,7 @@ export class UploadSpace extends React.Component {
         headers: { "Content-Type": "multipart/form-data" }
       })
       .then(img => {
-        this.setState({ img_url: img.data.secure_url });
+        this.setState({ img_url: img.data.secure_url, redirect: true });
         //console.log("Image from CLOUD");
         //console.log(img.data.url);
       })
@@ -93,6 +94,9 @@ export class UploadSpace extends React.Component {
   };
 
   render() {
+
+    if(this.state.redirect) return <Redirect to="/profile" />
+
     return (
       <div>
         <div className="file">

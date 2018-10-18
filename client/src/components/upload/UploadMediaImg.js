@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import axios from "axios";
 require('dotenv').config();
 
@@ -7,7 +8,8 @@ export class UploadMediaImg extends React.Component {
     super(props);
     this.state = { 
       loggedInUser: this.props.userInSession,
-      spaceID: this.props.currentSpace
+      spaceID: this.props.currentSpace, 
+      redirect: false
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
@@ -39,7 +41,7 @@ export class UploadMediaImg extends React.Component {
         headers: { "Content-Type": "multipart/form-data" }
       })
       .then(img => {
-        this.setState({ img_url: img.data.secure_url });
+        this.setState({ img_url: img.data.secure_url, redirect: true });
       })
       .catch(error => console.log(error));
   }
@@ -74,7 +76,11 @@ export class UploadMediaImg extends React.Component {
   };
 
   render() {
-    console.log("SPACE ID UPLOAD IMG "+ this.state.spaceID)
+    
+    console.log("SPACE ID UPLOAD IMG "+ this.state.spaceID);
+
+    if(this.state.redirect) return <Redirect to="/profile" />
+
     return (
       <div>
         <div /* class="file is-boxed" */>

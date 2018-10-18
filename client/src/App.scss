@@ -1,24 +1,71 @@
 @import "scss/variables.scss";
 @import "scss/mixins.scss";
 
+
+
 main {
   display: flex;
   justify-content: center;
   align-content: center;
   //min-height: 90vh;
   overflow: hidden;
-  flex-grow: 1;
+  flex: 1 0;
 }
+a{
+  color: $bulma;//$primary-color;
+}
+.nav-style {
+  //align-self: flex-start;
+  color: $bulma;
+  z-index: 50;
+  padding: 7px;
+  height: 55px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-image: linear-gradient(white, white);
+  width: 100vw;
+  border-radius: 0px;
+  & li {
+    display: inline;
+    text-decoration: none;
+    padding: 3px;
+  }
+}
+#top-nav  {
+  position: fixed;
+  top: 0; 
+}
+ul {
+  display: inline;
+  //align-content: center;
+  text-decoration: none;
+  padding: 10px;
+}
+#bottom-nav {
+  position: fixed;
+  bottom: 0;
+}
+
 .grower{
-  flex-grow: 2;
-  min-height: 20px;
+  flex-grow: 5;
+  min-height: 5px;
+}
+.fix-top{
+  flex: 0 0 55px;
+}
+.fix-bottom{
+  flex: 0 0 55px;
 }
 
 .card {
+  align-self: center;
   width: 300px;
+  max-height: 270px;
   padding: 10px;
   border-radius: 10px;
   margin: 50px;
+  z-index: 3;
 }
 
 .scope {
@@ -29,6 +76,16 @@ main {
   /* display: flex;
   justify-content: center;
   align-content: center;  */
+}
+.welcome{
+  position: absolute;
+  top: 0;
+  left: 0;
+  //z-index: -1;
+}
+#welcome-card{
+  align-self: center;
+  justify-self: center;
 }
 .scopehidden {
   position: absolute;
@@ -52,60 +109,31 @@ main {
   height: 100vh;
 }
 
-
 .map-google {
   z-index: 10;
 }
-
-.nav-style {
-  align-self: flex-start;
-  z-index: 50;
-  padding: 7px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  background-image: linear-gradient(white, white);
-  width: 100vw;
-  border-radius: 0px;
-  & li {
-    display: inline;
-    text-decoration: none;
-    padding: 3px;
-  }
-}
-ul {
-  display: inline;
-  //align-content: center;
-  text-decoration: none;
-  padding: 10px;
-}
-#bottom-nav {
-  align-self: flex-end;
-  //position: absolute;
-  bottom: 0;
-}
-
 
 .profile-feed {
   width: 100vw;
   max-width: 900px;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  margin: 20px;
-  
+  margin: 0 35px;
+  //background: linear-gradient(top, to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 8%,rgba(255,255,255,0) 92%,rgba(255,255,255,1) 100%);
 }
 .scope-in-feed {
-/*   width: 25vw;
-  height: 25vw; */
-  margin: 15px;
+  align-self: center;
+  margin: 10px;
 }
 .panorama-feed {
   object-fit: cover;
   width: 20vw;
   height: 20vw;
   align-content: center;
-  border-radius: 100px;
+  border-radius: 10vw;
 }
 /* .switch-button-container{
   width: 100vw;
@@ -125,4 +153,20 @@ ul {
   to {
     transform: rotate(360deg);
   }
+}
+
+
+@media only screen and (max-width: 500px){
+  .profile-feed {
+    padding-top:120vw; 
+    flex-direction: row;
+    margin: 0 20px;
+    overflow: scroll;
+  }
+  .panorama-feed {
+    width: 80vw;
+    height: 80vw;
+    border-radius: 40vw;
+  }
+  
 }
