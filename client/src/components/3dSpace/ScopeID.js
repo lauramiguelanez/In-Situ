@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 //import TrackballControls from "../../lib/TrackballControls";
@@ -126,6 +127,14 @@ export class ScopeID extends React.Component {
   };
 
   render() {
-    return <div id="scopediv"/>;
+    let id =  this.props.match.params.id;
+    console.log("id a route camera "+id);
+    return (
+    <div id="scopediv">
+      <span className="switch-button-container">
+        <button className="button is-primary is-rounded switch-button"><Link to={`/camera/${id}`}>AR</Link></button>
+      </span>
+    </div>
+    );
   }
 }

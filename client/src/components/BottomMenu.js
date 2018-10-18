@@ -17,10 +17,9 @@ export default class BottomMenu extends Component {
       return (
         <nav className="nav-style box" id="bottom-nav">
           <ul>
-            <li><Link to='/camera'>Camera</Link></li> {/* FALTA ID */}
-            <li><Link to='/upload-media-img'>Add Image</Link></li>
+            <li><Link to='/upload-media-img'>+Image</Link></li>
             <li>{/* <button className="button is-primary is-rounded"> */}<Link to='/upload-scope/'>New</Link>{/* </button> */}</li>
-            <li><Link to='/upload-media-video'>Add Video</Link></li>
+            <li><Link to='/upload-media-video'>+Video</Link></li>
           </ul>
         </nav>
       )
@@ -31,7 +30,10 @@ export default class BottomMenu extends Component {
             <li><Link to='/'>Home</Link></li>
             </ul>
           </nav>
+          
       )
     } */
   }
 }
+
+

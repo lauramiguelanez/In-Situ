@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
@@ -127,6 +128,15 @@ export class ScopeCameraID extends React.Component {
 
 
   render() {
-    return <div id="scopecamdiv"><Camera/></div>;
+    let id =  this.props.match.params.id;
+    console.log("id a route scope "+id);
+    return (
+        <div id="scopecamdiv">
+            <span className="switch-button-container">
+                <button className="button is-primary is-rounded switch-button"><Link to={`/scope/${id}`}>VR</Link></button>
+            </span>
+            <Camera/>
+        </div>
+    );
   }
 }
