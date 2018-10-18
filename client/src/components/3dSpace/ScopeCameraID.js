@@ -36,6 +36,9 @@ export class ScopeCameraID extends React.Component {
       .then(()=>{
         let mediaIDs = this.state.mediaIDs;
         mediaIDs.forEach(mediaID => {
+            if (typeof mediaID == "object"){
+                mediaID = mediaID._id;
+            }
           promises.push(this.service.get(`/media/${mediaID}`));
         });
         return Promise.all(promises);

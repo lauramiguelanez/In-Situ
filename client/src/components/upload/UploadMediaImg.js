@@ -77,9 +77,9 @@ export class UploadMediaImg extends React.Component {
     console.log("SPACE ID UPLOAD IMG "+ this.state.spaceID)
     return (
       <div>
-        <div class="file is-boxed">
+        <div /* class="file is-boxed" */>
           <form onSubmit={e => this.handleSubmit(e)}>
-            <input className="file-input" type="file" onChange={e => this.handleChange(e)} /> <br />
+            <input /* className="file-input" */ type="file" onChange={e => this.handleChange(e)} /> <br />
             <span className="file-cta">
               <span className="file-label">Choose an image</span>
             </span>
