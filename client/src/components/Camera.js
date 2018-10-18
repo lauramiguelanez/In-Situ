@@ -1,6 +1,5 @@
 import React from "react";
 
-
 export class Camera extends React.Component {
   constructor() {
     super();

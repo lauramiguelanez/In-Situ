@@ -117,8 +117,6 @@ export class ScopeCameraID extends React.Component {
 
   componentDidMount = () => {
     let id =  this.props.match.params.id;
-    console.log("COMPONENT CAMERA SCOPE ID")
-    console.log(id);
     this.setState({id: id});
     this.getImage(id).then(() => {
       this.init(this.state);
@@ -132,9 +130,9 @@ export class ScopeCameraID extends React.Component {
     console.log("id a route scope "+id);
     return (
         <div id="scopecamdiv">
-            <span className="switch-button-container">
+            
                 <button className="button is-primary is-rounded switch-button"><Link to={`/scope/${id}`}>VR</Link></button>
-            </span>
+            
             <Camera/>
         </div>
     );

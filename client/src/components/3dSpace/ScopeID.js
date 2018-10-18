@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import geolocalize from "../maps/geolocalize";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 import TrackballControls from "../../lib/TrackballControls";
@@ -18,7 +19,8 @@ export class ScopeID extends React.Component {
       scene: new THREE.Scene(),
       sceneCSS: new THREE.Scene(), 
       renderer: new THREE.WebGLRenderer({ antialias: true }),
-      rendererCSS: new CSS3DRenderer()
+      rendererCSS: new CSS3DRenderer(),
+      isInLocation: false
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
@@ -63,8 +65,8 @@ export class ScopeID extends React.Component {
   }; 
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
-    this.setState({ controls: new DeviceOrientationControls(camera) });
-    //this.setState({ controls: new TrackballControls(camera) });
+    //his.setState({ controls: new DeviceOrientationControls(camera) });
+    this.setState({ controls: new TrackballControls(camera) });
     /* this.state.controls.rotateSpeed = 1.0;
     this.state.controls.zoomSpeed = 1.2;
     this.state.controls.panSpeed = 0.8;*/
@@ -119,7 +121,11 @@ export class ScopeID extends React.Component {
   };
 
   componentDidMount = () => {
-    let id =  this.props.match.params.id
+    let id =  this.props.match.params.id;
+    geolocalize().then(center => {
+      console.log(center);
+      this.setState({currrentLocation: center});
+    });
     this.getImage(id).then(() => {
       this.init(this.state);
       this.animate();
@@ -128,12 +134,11 @@ export class ScopeID extends React.Component {
 
   render() {
     let id =  this.props.match.params.id;
-    console.log("id a route camera "+id);
     return (
     <div id="scopediv">
-      <span className="switch-button-container">
+      
         <button className="button is-primary is-rounded switch-button"><Link to={`/camera/${id}`}>AR</Link></button>
-      </span>
+      
     </div>
     );
   }
