@@ -85,14 +85,13 @@ router.get('/currentuser', (req,res,next) => {
     next(new Error('Not logged in'))
   }
 })
+router.get('/logout', (req,res) => {
+  console.log("TRYING LOGOUT AT BACK");
+  req.logout();
+  res.status(200).json({message:'logged out'})
+});
 
 //GET OTHER USERS
-router.get('/:id',(req,res,next) => {
-  const {id} = req.params;
-  User.findById({id})
-      .then( obj => res.status(200).json(obj))
-      .catch(e => next(e))
-})
 
 router.get('/user/:username',(req,res,next) => {
   const {username} = req.params;
@@ -102,11 +101,12 @@ router.get('/user/:username',(req,res,next) => {
       .catch(e => next(e))
 })
 
-router.get('/logout', (req,res) => {
-  console.log("TRYING LOGOUT AT BACK");
-  req.logout();
-  res.status(200).json({message:'logged out'})
-});
+router.get('/:id',(req,res,next) => {
+  const {id} = req.params;
+  User.findById({id})
+      .then( obj => res.status(200).json(obj))
+      .catch(e => next(e))
+})
 
 
 router.use((err, req, res, next) => {

@@ -52,6 +52,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// Enable authentication using session + passport
+app.use(
+  session({
+    secret: "irongenerator",
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
+require("./passport")(app);
 // Express View engine setup
 
 app.use(
@@ -76,15 +86,6 @@ hbs.registerHelper("ifUndefined", (value, options) => {
 // default value for title local
 app.locals.title = "Scope App";
 
-// Enable authentication using session + passport
-app.use(
-  session({
-    secret: "irongenerator",
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-  })
-);
 
 
 
@@ -93,7 +94,6 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(flash());
-require("./passport")(app);
 
 
 const authRouter = require('./routes/auth');
