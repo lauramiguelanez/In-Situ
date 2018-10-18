@@ -12,10 +12,13 @@ body {
   //background-color: #ffffff;
   overflow: hidden;
   color: $primary-color;
-  height: 100vh;
 }
 .App{
-  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+
 }
 
 code {

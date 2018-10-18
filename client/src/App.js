@@ -75,6 +75,7 @@ class App extends Component {
         <header className="header">
           <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
         </header>
+        <div className="grower"></div>
         <main>
           <Switch>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
@@ -90,6 +91,7 @@ class App extends Component {
             <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
           </Switch>
         </main>
+        <div className="grower"></div>
         <footer>
             <BottomMenu userInSession={this.state.loggedInUser}/>
         </footer>

@@ -5,8 +5,13 @@ main {
   display: flex;
   justify-content: center;
   align-content: center;
-  min-height: 90vh;
+  //min-height: 90vh;
   overflow: hidden;
+  flex-grow: 1;
+}
+.grower{
+  flex-grow: 2;
+  min-height: 20px;
 }
 
 .card {
@@ -47,16 +52,13 @@ main {
   height: 100vh;
 }
 
-#bottom-nav {
-  position: absolute;
-  bottom: 0;
-}
 
 .map-google {
   z-index: 10;
 }
 
 .nav-style {
+  align-self: flex-start;
   z-index: 50;
   padding: 7px;
   display: flex;
@@ -77,6 +79,12 @@ ul {
   text-decoration: none;
   padding: 10px;
 }
+#bottom-nav {
+  align-self: flex-end;
+  //position: absolute;
+  bottom: 0;
+}
+
 
 .profile-feed {
   width: 100vw;
