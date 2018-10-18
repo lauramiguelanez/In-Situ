@@ -1,8 +1,5 @@
 import React from "react";
 
-//var constraints = { video: { facingMode: "user" }, audio: false };
-//const cameraView = document.querySelector("#camera--view");
-//const cameraSensor = document.querySelector("#camera--sensor");
 
 export class Camera extends React.Component {
   constructor() {
@@ -11,9 +8,10 @@ export class Camera extends React.Component {
       cameraView: document.querySelector("#camera--view"),
       constraints: { video: { facingMode: "environment" }, audio: false }
     };
-
-    window.addEventListener("load", this.cameraStart, false);
+    //window.addEventListener("load", this.cameraStart, false);
   }
+
+ 
 
   cameraStart = () => {
     let cameraView = document.querySelector("#camera--view");
@@ -27,6 +25,10 @@ export class Camera extends React.Component {
         console.error("Oops. Something is broken.", error);
       });
   };
+
+  componentDidMount=()=>{
+    this.cameraStart();
+  }
 
   render() {
     return (

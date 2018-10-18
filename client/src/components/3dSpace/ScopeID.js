@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
-//import TrackballControls from "../../lib/TrackballControls";
+import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
