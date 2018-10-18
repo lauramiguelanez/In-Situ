@@ -11,9 +11,7 @@ main {
   overflow: hidden;
   flex: 1 0;
 }
-a{
-  color: $bulma;//$primary-color;
-}
+
 .nav-style {
   //align-self: flex-start;
   color: $bulma;
@@ -30,6 +28,9 @@ a{
     display: inline;
     text-decoration: none;
     padding: 3px;
+  }
+  a{
+    color: $bulma;//$primary-color;
   }
 }
 #top-nav  {
@@ -155,6 +156,19 @@ ul {
   }
 }
 
+.danger{
+  color:hsl(348, 100%, 61%);
+  a{
+    color:hsl(348, 100%, 61%);
+  }
+}
+
+.white{
+  color: white;
+  a{
+    color: white;
+  }
+}
 
 @media only screen and (max-width: 500px){
   .profile-feed {

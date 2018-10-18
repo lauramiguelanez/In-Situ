@@ -137,7 +137,7 @@ export class ScopeID extends React.Component {
     return (
     <div id="scopediv">
       
-        <button className="button is-primary is-inverted is-outlined is-rounded switch-button"><Link to={`/camera/${id}`}>AR</Link></button>
+        <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
       
     </div>
     );
