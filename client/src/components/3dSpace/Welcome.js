@@ -27,10 +27,10 @@ export class Welcome extends React.Component {
     //const loader = new THREE.TextureLoader();
     //const map = loader.load("/stripes.png");
     //var material = new THREE.MeshBasicMaterial({ map });
-    var material = new THREE.MeshBasicMaterial({color: 0x00d1b2, wireframe: true, wireframeLinewidth: 20});
+    var material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true, wireframeLinewidth: 10});
     sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
-    scene.background = new THREE.Color( 0xffffff );
+    scene.background = new THREE.Color( 0x00d1b2 );
     let scopeDiv = document.getElementById("welcome");
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
