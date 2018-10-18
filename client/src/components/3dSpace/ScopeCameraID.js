@@ -1,14 +1,14 @@
 import React from "react";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
-//import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
+import { Camera } from "../Camera";
 import axios from "axios";
 require('dotenv').config();
 
 
-export class ScopeID extends React.Component {
+export class ScopeCameraID extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +22,6 @@ export class ScopeID extends React.Component {
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
-    console.log("COMPONENT SCOPE ID")
-    console.log(this.props)
   }
 
   getImage = (id) => {
@@ -60,13 +58,10 @@ export class ScopeID extends React.Component {
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
     this.setState({ controls: new DeviceOrientationControls(camera) });
-    //this.setState({ controls: new TrackballControls(camera) });
-    /* this.state.controls.rotateSpeed = 1.0;
-    this.state.controls.zoomSpeed = 1.2;
-    this.state.controls.panSpeed = 0.8;*/
-    camera.position.set(0, 0, -0.001);
+  
+    camera.position.set(0, 0, -0.0001); //-0.001
 
-    renderer.domElement.className = "scope";
+    renderer.domElement.className = "scopehidden";
     rendererCSS.domElement.className = "scopeCSS";
     
     //Panorama Sphere
@@ -88,12 +83,14 @@ export class ScopeID extends React.Component {
       console.log(group);
       sceneCSS.add(group);
     }
-  
-    let scopeDiv = document.getElementById("scopediv");
+
+    let scopeDiv = document.getElementById("scopecamdiv");
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
     scopeDiv.appendChild(renderer.domElement);
     rendererCSS.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(rendererCSS.domElement);
     scopeDiv.appendChild(rendererCSS.domElement);
     window.addEventListener("resize", this.onWindowResize, false);
   };
@@ -115,14 +112,18 @@ export class ScopeID extends React.Component {
   };
 
   componentDidMount = () => {
-    let id =  this.props.match.params.id
+    let id =  this.props.match.params.id;
+    console.log("COMPONENT CAMERA SCOPE ID")
+    console.log(id);
+    this.setState({id: id});
     this.getImage(id).then(() => {
       this.init(this.state);
       this.animate();
     });
   };
 
+
   render() {
-    return <div id="scopediv"/>;
+    return <div id="scopecamdiv"><Camera/></div>;
   }
 }

@@ -23,8 +23,6 @@ export class UploadMediaVideo extends React.Component {
   }
 
   handleChange = event => {
-    /* const { name, value } = event.target;
-    this.setState({ [name]: value }); */
     console.log(event);
     const value = event.target.value;
     this.setState({ youtubeID: value }); 
@@ -58,6 +56,7 @@ export class UploadMediaVideo extends React.Component {
   };
 
   render() {
+    console.log("SPACE ID UPLOAD VIDEO "+ this.state.spaceID)
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>

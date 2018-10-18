@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { Button } from "bloomer";
 require('dotenv').config();
 
 export class UploadMediaImg extends React.Component {
@@ -60,6 +59,7 @@ export class UploadMediaImg extends React.Component {
 
   addMediaToSpace = media => {
     let spaceID = this.state.spaceID;
+    console.log("SPACE ID UPLOAD IMG "+ spaceID)
     this.updateSpace(media, spaceID);
   };
 
@@ -74,6 +74,7 @@ export class UploadMediaImg extends React.Component {
   };
 
   render() {
+    console.log("SPACE ID UPLOAD IMG "+ this.state.spaceID)
     return (
       <div>
         <div class="file is-boxed">
@@ -82,7 +83,7 @@ export class UploadMediaImg extends React.Component {
             <span className="file-cta">
               <span className="file-label">Choose an image</span>
             </span>
-            <Button type="submit" isColor='primary'>Upload Images to this Scope</Button>
+            <button type="submit" isColor='primary'>Upload Images to this Scope</button>
           </form>
         </div>
       </div>

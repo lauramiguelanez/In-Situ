@@ -1,6 +1,6 @@
 // auth/Signup.js
 import React, { Component } from "react";
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthService from "./AuthService";
 
 class Login extends Component {
@@ -42,7 +42,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="card">
+      <div className="card box">
         <h3 class="label is-medium">Please, login</h3>
         <form onSubmit={this.handleFormSubmit} >
 
@@ -68,7 +68,8 @@ class Login extends Component {
             />
           </div>
 
-          <input className="button is-primary" type="submit" value="Login" />
+          <input className="button is-primary is-rounded" type="submit" value="Login"><Link to='/'></Link></input>
+
         </form>
 
         <h1>{this.state.error ? "Error" : ""}</h1>

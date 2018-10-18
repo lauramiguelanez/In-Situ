@@ -3,10 +3,16 @@
 
 
 main {
-  display: flex;
+ /*  display: flex;
   justify-content: center;
-  align-content: center;
-  
+  align-content: center; */
+}
+
+.card{
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 50px;
 }
 
 .scope {
@@ -64,13 +70,16 @@ ul{
   padding: 10px;
 }
 
-
-.card{
-  width: 300px;
-  padding: 10px;
-  border-radius: 10px;
-  //top: 20vh;
+.profile-feed{
+  display: flex;
 }
+.panorama-feed{
+  object-fit: cover;
+}
+.scope-in-feed{
+  width: 30%;
+}
+
 
 
 @keyframes App-logo-spin {

@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import geolocalize from "../maps/geolocalize";
-import { Button } from "bloomer";
 require('dotenv').config();
 
 export class UploadSpace extends React.Component {
@@ -90,16 +89,25 @@ export class UploadSpace extends React.Component {
   render() {
     return (
       <div>
-        <div class="file is-boxed">
+        <div className="file">
+
           <form onSubmit={e => this.handleSubmit(e)}>
-            <input className="file-input" type="file" onChange={e => this.handleChange(e)} /> <br />
-            <span className="file-cta">
-              <span className="file-label">Choose a panorama</span>
-            </span>
-            <Button type="submit" isColor='primary'>Upload Space</Button>
+            <label className="file-label">
+              <input className="file-input" type="file" onChange={e => this.handleChange(e)} />
+              <span className="file-cta">
+                <span className="file-label">Choose a panorama</span>
+              </span>
+            </label>
+            <button className="button is-primary" type="submit">Upload a panorama of your space</button>
           </form>
+
         </div>
       </div>
     );
   }
 }
+
+
+
+
+

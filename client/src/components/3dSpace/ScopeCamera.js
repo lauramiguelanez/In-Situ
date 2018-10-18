@@ -59,15 +59,22 @@ export class ScopeCamera extends React.Component {
     var helper = new THREE.Mesh(helperGeometry, helperMaterial);
     //scene.add(helper);
 
+    let media = this.state.media;
+    let group;
     console.log("MEDIA FROM THIS SPACE DB");
-    console.log(this.state.media);
-    let group = CSS3elements (this.state.spaceRadius, this.state.media);
-    sceneCSS.add(group);
+    console.log(media);
+    if(media!=undefined){
+      group = CSS3elements (this.state.spaceRadius, media);
+      console.log(group);
+      sceneCSS.add(group);
+    }
+
+
 
     let scopeDiv = document.getElementById("scopecamdiv");
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    //document.body.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement);
     scopeDiv.appendChild(renderer.domElement);
     rendererCSS.setSize(window.innerWidth, window.innerHeight);
     //document.body.appendChild(rendererCSS.domElement);

@@ -33,7 +33,7 @@ class Signup extends Component {
 
   render() {
     return(
-      <div className="card">
+      <div className="card box">
         <h3 class="label is-medium">Welcome! create your account next:</h3>
 
         <form onSubmit={this.handleFormSubmit}>
@@ -47,7 +47,7 @@ class Signup extends Component {
             <input  className="input" type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
           </div>
           
-          <input className="button is-primary" type="submit" value="Sign up" />
+          <input className="button is-primary is-rounded" type="submit" value="Sign up" />
         </form>
 
       </div>

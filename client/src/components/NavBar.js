@@ -5,7 +5,6 @@ export default class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = { loggedInUser: null };
-    //this.service = new AuthService();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -18,9 +17,8 @@ export default class Navbar extends Component {
 
   render() {
     if (this.state.loggedInUser) {
-
       return (
-        <nav className="nav-style">
+        <nav className="nav-style box">
           <ul>
             <li><a onClick={this.handleLogout}>Logout</a></li>
             <li><Link to='/'>Home</Link></li>

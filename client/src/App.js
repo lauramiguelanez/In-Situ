@@ -14,6 +14,7 @@ import { UploadSpace } from "./components/upload/UploadSpace";
 import { UploadMediaImg} from "./components/upload/UploadMediaImg";
 //import Map from './components/maps/Map';
 import { ScopeCamera } from "./components/3dSpace/ScopeCamera";
+import { ScopeCameraID } from "./components/3dSpace/ScopeCameraID";
 import { UploadMediaVideo } from "./components/upload/UploadMediaVideo";
 import BottomMenu from "./components/BottomMenu";
 import Profile from "./components/Profile";
@@ -66,6 +67,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("SPACE ID STATE!!!!!!!!")
     console.log(this.state.spaceId)
     this.fetchUser();
     return (
@@ -79,14 +81,14 @@ class App extends Component {
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
             <Route path='/profile/:username' render={(props) => <ProfileID {...props}/>}/>
             <Route exact path='/profile' render={() => <Profile userInSession={this.state.loggedInUser}/>}/>
-            <Route path='/scope/:id' render={(props) => <ScopeID {...props}/>} /* newSpace={(space, location) => {this.actualizeSpace(space, location)}} *//>
+            <Route path='/scope/:id' render={(props) => <ScopeID newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>} newSpace={(space, location) => {this.actualizeSpace(space, location)}}/>
             <Route exact path='/scope' render={() => <ScopeView id={this.state.spaceId}/>}/>
+            <Route exact path='/camera/:id' render={(props) => <ScopeCameraID newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>}/>
             <Route exact path='/camera' render={() => <ScopeCamera id={this.state.spaceId}/>}/>
             <Route exact path='/upload-scope' render={() => <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>}/>
             <Route exact path='/upload-media-img' render={() => <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
             <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
           </Switch>
-        
         </main>
         <footer>
             <BottomMenu userInSession={this.state.loggedInUser}/>
