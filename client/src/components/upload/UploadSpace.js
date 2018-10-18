@@ -12,6 +12,10 @@ export class UploadSpace extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] })
+  }
+
   handleChange(e) {
     //console.log('handleChange');
     //console.log('DEBUG e.target.files[0]', e.target.files[0]);
@@ -52,6 +56,8 @@ export class UploadSpace extends React.Component {
     let { lat, lng } = center;
     console.log(center);
     let user = this.state.loggedInUser;
+    console.log("USER IN CREATE SPACE");
+    console.log(user);
     let space = { image: image_url, creator: user._id, location: center };
     return this.service
       .post("/spaces", space)
