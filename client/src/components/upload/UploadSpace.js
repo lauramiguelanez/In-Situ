@@ -95,12 +95,11 @@ export class UploadSpace extends React.Component {
 
   render() {
 
-    if(this.state.redirect) return <Redirect to="/profile" />
+    if(this.state.redirect) return <Redirect to="/" />
 
     return (
-      <div>
+      <div className="card box">
         <div className="file">
-
           <form onSubmit={e => this.handleSubmit(e)}>
             <label className="file-label">
               <input className="file-input" type="file" onChange={e => this.handleChange(e)} />

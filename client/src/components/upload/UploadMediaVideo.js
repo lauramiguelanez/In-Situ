@@ -60,7 +60,7 @@ export class UploadMediaVideo extends React.Component {
   render() {
     console.log("SPACE ID UPLOAD VIDEO "+ this.state.spaceID)
 
-    if(this.state.redirect) return <Redirect to="/profile" />
+    if(this.state.redirect) return <Redirect to="/" />
     
     return (
       <div>

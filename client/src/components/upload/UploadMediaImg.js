@@ -79,7 +79,7 @@ export class UploadMediaImg extends React.Component {
     
     console.log("SPACE ID UPLOAD IMG "+ this.state.spaceID);
 
-    if(this.state.redirect) return <Redirect to="/profile" />
+    if(this.state.redirect) return <Redirect to="/" />
 
     return (
       <div>
