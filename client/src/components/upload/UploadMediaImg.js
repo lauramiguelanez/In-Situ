@@ -82,14 +82,16 @@ export class UploadMediaImg extends React.Component {
     if(this.state.redirect) return <Redirect to="/" />
 
     return (
-      <div>
-        <div /* class="file is-boxed" */>
+      <div className="form-card box">
+        <div className="file">
           <form onSubmit={e => this.handleSubmit(e)}>
-            <input /* className="file-input" */ type="file" onChange={e => this.handleChange(e)} /> <br />
+          <label className="file-label">
+            <input className="file-input" type="file" onChange={e => this.handleChange(e)} /> <br />
             <span className="file-cta">
-              <span className="file-label">Choose an image</span>
+              <span className="file-label">Add an image to this Scope</span>
             </span>
-            <button type="submit" isColor='primary'>Upload Images to this Scope</button>
+            </label>
+            <button type="submit" className="button is-primary">Upload</button>
           </form>
         </div>
       </div>

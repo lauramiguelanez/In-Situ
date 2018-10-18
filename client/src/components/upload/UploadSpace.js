@@ -98,16 +98,16 @@ export class UploadSpace extends React.Component {
     if(this.state.redirect) return <Redirect to="/" />
 
     return (
-      <div className="card box">
+      <div className="form-card box">
         <div className="file">
           <form onSubmit={e => this.handleSubmit(e)}>
             <label className="file-label">
               <input className="file-input" type="file" onChange={e => this.handleChange(e)} />
               <span className="file-cta">
-                <span className="file-label">Choose a panorama</span>
+                <span className="file-label">Take a panoramic photo</span>
               </span>
             </label>
-            <button className="button is-primary" type="submit">Upload a panorama of your space</button>
+            <button className="button is-primary" type="submit">Upload</button>
           </form>
 
         </div>

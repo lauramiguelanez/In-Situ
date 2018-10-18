@@ -1,7 +1,7 @@
 import React from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import axios from "axios";
-require('dotenv').config();
+require("dotenv").config();
 
 export class UploadMediaVideo extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export class UploadMediaVideo extends React.Component {
   handleChange = event => {
     console.log(event);
     const value = event.target.value;
-    this.setState({ youtubeID: value, redirect: true }); 
+    this.setState({ youtubeID: value, redirect: true });
   };
 
   createMedia = youtubeID => {
@@ -58,21 +58,29 @@ export class UploadMediaVideo extends React.Component {
   };
 
   render() {
-    console.log("SPACE ID UPLOAD VIDEO "+ this.state.spaceID)
+    console.log("SPACE ID UPLOAD VIDEO " + this.state.spaceID);
 
-    if(this.state.redirect) return <Redirect to="/" />
-    
+    if (this.state.redirect) return <Redirect to="/" />;
+
     return (
-      <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <input
-            type="text"
-            name="youtubeID"
-            onChange={e => this.handleChange(e)}
-            placeholder="VVsCOnWGHh8"
-          />
-          <button type="submit">Upload Media</button>
-        </form>
+      <div className="form-card box">
+        <div class="field">
+          <form onSubmit={e => this.handleSubmit(e)}>
+          <label class="label">Add a YouTube video to this Scope</label>
+            <div class="control">
+              <input
+                className="input is-primary"
+                type="text"
+                name="youtubeID"
+                onChange={e => this.handleChange(e)}
+                placeholder="VVsCOnWGHh8"
+              />
+            </div>
+            <button className="button is-primary" type="submit">
+              Upload
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
