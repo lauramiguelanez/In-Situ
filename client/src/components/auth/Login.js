@@ -1,6 +1,6 @@
 // auth/Signup.js
 import React, { Component } from "react";
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import AuthService from "./AuthService";
 
 class Login extends Component {

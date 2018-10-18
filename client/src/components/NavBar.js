@@ -21,8 +21,8 @@ export default class Navbar extends Component {
         <nav className="nav-style box">
           <ul>
             <li><a onClick={this.handleLogout}>Logout</a></li>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/profile'>{this.state.loggedInUser.username}</Link></li>
+            <li className="has-text-danger"><Link to='/'>Home</Link></li>
+            <li><Link to='/profile'>@{this.state.loggedInUser.username}</Link></li>
           </ul>
         </nav>
       )

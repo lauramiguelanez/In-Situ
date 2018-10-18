@@ -47,8 +47,7 @@ export default class Profile extends Component {
       if (userSpaces) {
         userSpaces.forEach(e => {});
         return (
-          <div>
-            <h1 className="profile-feed">Profile</h1>
+          <div className="profile-feed">
             {userSpaces.map(space => {
               return (
                 <div key={space._id} className="scope-in-feed">
@@ -67,7 +66,6 @@ export default class Profile extends Component {
       } else {
         return (
           <div className="profile-feed">
-            <h1>Profile</h1>
           </div>
         );
       }

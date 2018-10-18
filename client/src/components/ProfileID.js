@@ -20,12 +20,13 @@ export default class ProfileID extends Component {
 
   getScopes = () => {
     let username = this.props.match.params.username;
+    console.log(username);
     let promises = [];
     this.service.get(`auth/user/${username}`)
       .then(user => {
-        let catalogId = user.data.catalog;
         console.log("USER FROM DB TO PROFILE");
         console.log(user);
+        let catalogId = user.data.catalog;
         this.setState({ catalogId: catalogId });
         return this.service.get(`/catalog/${catalogId}`);
       })
@@ -52,8 +53,7 @@ export default class ProfileID extends Component {
     if (userSpaces) {
       userSpaces.forEach(e => {});
       return (
-        <div>
-          <h1 className="profile-feed">Profile</h1>
+        <div className="profile-feed">
           {userSpaces.map(space => {
             return (
               <div key={space._id} className="scope-in-feed">
@@ -72,7 +72,7 @@ export default class ProfileID extends Component {
     } else {
       return (
         <div className="profile-feed">
-          <h1>Profile</h1>
+          <h1>No profile</h1>
         </div>
       );
     }
