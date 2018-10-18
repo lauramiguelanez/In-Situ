@@ -5,7 +5,8 @@ main {
   display: flex;
   justify-content: center;
   align-content: center;
-  min-height: 80vh;
+  min-height: 90vh;
+  overflow: hidden;
 }
 
 .card {
@@ -87,17 +88,14 @@ ul {
   
 }
 .scope-in-feed {
-  width: 200px;
-  height: 200px;
-  //padding: 20px;
-  //border: 1px solid black;
+/*   width: 25vw;
+  height: 25vw; */
   margin: 15px;
-  
 }
 .panorama-feed {
   object-fit: cover;
-  width: 200px;
-  height: 200px;
+  width: 20vw;
+  height: 20vw;
   align-content: center;
   border-radius: 100px;
 }
