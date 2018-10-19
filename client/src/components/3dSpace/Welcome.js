@@ -2,6 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 import TrackballControls from "../../lib/TrackballControls";
+import logo from "../../scope white.png";
 
 var sphere;
 export class Welcome extends React.Component {
@@ -9,7 +10,12 @@ export class Welcome extends React.Component {
     super(props);
     this.state = {
       spaceRadius: 500,
-      camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1100),
+      camera: new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        1,
+        1100
+      ),
       scene: new THREE.Scene(),
       renderer: new THREE.WebGLRenderer({ antialias: true })
     };
@@ -17,20 +23,27 @@ export class Welcome extends React.Component {
 
   init = ({ camera, scene, renderer }) => {
     camera.position.set(0, 0, -100); //-0.001
-   
 
     renderer.domElement.className = "welcome";
-    
+
     //Panorama Sphere
-    var geometry = new THREE.SphereBufferGeometry(this.state.spaceRadius, 100, 40);
+    var geometry = new THREE.SphereBufferGeometry(
+      this.state.spaceRadius,
+      100,
+      40
+    );
     geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
     //const loader = new THREE.TextureLoader();
     //const map = loader.load("/stripes.png");
     //var material = new THREE.MeshBasicMaterial({ map });
-    var material = new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true, wireframeLinewidth: 10});
+    var material = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      wireframe: true,
+      wireframeLinewidth: 10
+    });
     sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
-    scene.background = new THREE.Color( 0x00d1b2 );
+    scene.background = new THREE.Color(0x00d1b2);
     let scopeDiv = document.getElementById("welcome");
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -39,7 +52,7 @@ export class Welcome extends React.Component {
   };
 
   animate = () => {
-    let { camera, scene, renderer} = this.state;
+    let { camera, scene, renderer } = this.state;
     window.requestAnimationFrame(this.animate);
     sphere.rotation.x += 0.0015;
     sphere.rotation.y += 0.001;
@@ -55,16 +68,19 @@ export class Welcome extends React.Component {
   };
 
   componentDidMount = () => {
-      this.init(this.state);
-      this.animate();
+    this.init(this.state);
+    this.animate();
   };
 
   render() {
     return (
-      <div id="welcome" className="welcome">
-        {/* <div className="card box" id="welcome-card">
-          <p>Scope!</p>
-        </div> */}
+      <div className="home">
+        <img src={logo} className="logo" />
+        <div id="welcome" className="welcome">
+          {/* <div className="card box" id="welcome-card"> */}
+
+          {/* </div>  */}
+        </div>
       </div>
     );
   }
