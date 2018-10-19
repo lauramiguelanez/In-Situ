@@ -22,12 +22,13 @@ export class UploadMediaVideo extends React.Component {
     console.log("uploaded youtube video to this space");
     console.log(this.state.img_url);
     this.createMedia(this.state.youtubeID);
+    this.setState({ redirect: true });
   }
 
   handleChange = event => {
     console.log(event);
     const value = event.target.value;
-    this.setState({ youtubeID: value, redirect: true });
+    this.setState({ youtubeID: value });
   };
 
   createMedia = youtubeID => {
