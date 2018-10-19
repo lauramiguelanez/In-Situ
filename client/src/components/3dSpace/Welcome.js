@@ -39,7 +39,7 @@ export class Welcome extends React.Component {
     var material = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       wireframe: true,
-      wireframeLinewidth: 10
+      wireframeLinewidth: 5
     });
     sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
