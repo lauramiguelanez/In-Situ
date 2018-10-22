@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import geolocalize from "../maps/geolocalize";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
-import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
@@ -25,8 +24,6 @@ export class ScopeID extends React.Component {
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
-    console.log("COMPONENT SCOPE ID")
-    console.log(this.props)
   }
 
   getImage = (id) => {
@@ -36,7 +33,6 @@ export class ScopeID extends React.Component {
       .then(space => {
         this.setState({ image: space.data.image, mediaIDs: space.data.media });
         this.sendNewSpace(space.data);
-        console.log("Image from DB " + space.data.image);
       })
       .then(()=>{
         let mediaIDs = this.state.mediaIDs;
@@ -54,8 +50,6 @@ export class ScopeID extends React.Component {
           mediaArr.push(prom.data);
         })
         this.setState({media: mediaArr});
-        console.log("MEDIA OBJECTS IN STATE");
-        console.log(this.state.media);
       })
       .catch(error => console.log(error));
   };
@@ -66,10 +60,6 @@ export class ScopeID extends React.Component {
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
     this.setState({ controls: new DeviceOrientationControls(camera) });
-    //this.setState({ controls: new TrackballControls(camera) });
-    /* this.state.controls.rotateSpeed = 1.0;
-    this.state.controls.zoomSpeed = 1.2;
-    this.state.controls.panSpeed = 0.8;*/
     camera.position.set(0, 0, -0.001);
 
     renderer.domElement.className = "scope";
@@ -87,11 +77,8 @@ export class ScopeID extends React.Component {
 
     let media = this.state.media;
     let group;
-    console.log("MEDIA FROM THIS SPACE DB");
-    console.log(media);
     if(media!==undefined){
       group = CSS3elements (this.state.spaceRadius, media);
-      console.log(group);
       sceneCSS.add(group);
     }
   
@@ -123,7 +110,6 @@ export class ScopeID extends React.Component {
   componentDidMount = () => {
     let id =  this.props.match.params.id;
     geolocalize().then(center => {
-      console.log(center);
       this.setState({currrentLocation: center});
     });
     this.getImage(id).then(() => {
@@ -136,9 +122,7 @@ export class ScopeID extends React.Component {
     let id =  this.props.match.params.id;
     return (
     <div id="scopediv">
-      
         <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
-      
     </div>
     );
   }

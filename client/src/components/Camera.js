@@ -7,7 +7,6 @@ export class Camera extends React.Component {
       cameraView: document.querySelector("#camera--view"),
       constraints: { video: { facingMode: "environment" }, audio: false }
     };
-    //window.addEventListener("load", this.cameraStart, false);
   }
 
  

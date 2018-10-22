@@ -108,6 +108,17 @@ router.get('/:id',(req,res,next) => {
       .catch(e => next(e))
 })
 
+router.patch('/:id',(req,res,next) => {
+  const {id} = req.params;
+  let followedID = req.body;
+  console.log(followedID);
+  User.findByIdAndUpdate(id, { $push: { following: followedID } } ,{new:true})
+      .then( user => {
+          res.status(200).json({status:'updated',user});
+      })
+      .catch(e => next(e))
+})
+
 
 router.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });

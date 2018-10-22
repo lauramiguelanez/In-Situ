@@ -7,7 +7,9 @@ require('dotenv').config();
 export default class ProfileID extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      followed: false
+    };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
@@ -16,6 +18,10 @@ export default class ProfileID extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
     this.getScopes();
+    let isFollowing = this.checkFollowing(this.state.userProfileID);
+    if (isFollowing){
+      this.setState({ followed: true });
+    }
   }
 
   getScopes = () => {
@@ -26,6 +32,7 @@ export default class ProfileID extends Component {
       .then(user => {
         console.log("USER FROM DB TO PROFILE");
         console.log(user);
+        this.setState({userProfileID: user.data._id});
         let catalogId = user.data.catalog;
         this.setState({ catalogId: catalogId });
         return this.service.get(`/catalog/${catalogId}`);
@@ -47,13 +54,44 @@ export default class ProfileID extends Component {
       .catch(error => console.log(error));
   };
 
+  handleSubmit(e) {
+    e.preventDefault();
+    this.followUser(this.state.userProfileID);
+    this.setState({ followed: true });
+  }
+
+  checkFollowing = followedUserID =>{
+    console.log("USER IN SESSION CHECK FOLLOWING")
+    console.log(this.state.loggedInUser.following)
+    let currentUserFollowing = this.state.loggedInUser.following;
+    let currentUserID = this.state.loggedInUser._id;
+    console.log(currentUserID, followedUserID);
+    return currentUserFollowing.includes(followedUserID);
+  }
+
+  followUser = followedUserID => {
+    let currentUserID = this.props.userInSession._id;
+    let isFollowing = this.checkFollowing(followedUserID);
+    if (!isFollowing){
+      return this.service
+      .patch(`/auth/${currentUserID}`, followedUserID)
+      .then(user => {
+        console.log("User updated on DB " + user.data);
+      })
+      .catch(error => console.log(error));
+    }
+  };
+
   render() {
     let userSpaces = this.state.userSpaces;
 
     if (userSpaces) {
-      userSpaces.forEach(e => {});
       return (
         <div className="profile-feed">
+        <form onSubmit={e => this.handleSubmit(e)}>
+        <button className="button is-primary" type="submit">Follow</button>
+        </form>
+        
           {userSpaces.map(space => {
             return (
               <div key={space._id} className="scope-in-feed">
