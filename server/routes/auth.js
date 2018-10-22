@@ -110,9 +110,10 @@ router.get('/:id',(req,res,next) => {
 
 router.patch('/:id',(req,res,next) => {
   const {id} = req.params;
-  let followedID = req.body;
-  console.log(followedID);
-  User.findByIdAndUpdate(id, { $push: { following: followedID } } ,{new:true})
+  let follow = req.body;
+  let followedID = follow.id;
+  console.log("BACK "+ followedID);
+  User.findByIdAndUpdate(id, { $push: { following: followedID} } ,{new:true})
       .then( user => {
           res.status(200).json({status:'updated',user});
       })

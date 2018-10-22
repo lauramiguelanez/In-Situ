@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Navbar, NavbarMenu, NavbarItem } from "bloomer";
 require('dotenv').config();
 
 export default class ProfileID extends Component {
@@ -18,12 +17,24 @@ export default class ProfileID extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
     this.getScopes();
-    let isFollowing = this.checkFollowing(this.state.userProfileID);
+/*     let isFollowing = this.checkFollowing(this.state.userProfileID);
     if (isFollowing){
       this.setState({ followed: true });
     }
-  }
+    console.log("Is followed " + this.state.followed) */
+  } 
 
+/*   componentWillMount () {
+    this.setState({loggedInUser: this.props.userInSession})
+    this.getScopes().then(()=>{
+      let isFollowing = this.checkFollowing(this.state.userProfileID);
+      if (isFollowing){
+        this.setState({ followed: true });
+      }
+      console.log("Is followed " + this.state.followed)
+    })
+  } */
+  
   getScopes = () => {
     let username = this.props.match.params.username;
     console.log(username);
@@ -66,21 +77,30 @@ export default class ProfileID extends Component {
     let currentUserFollowing = this.state.loggedInUser.following;
     let currentUserID = this.state.loggedInUser._id;
     console.log(currentUserID, followedUserID);
-    return currentUserFollowing.includes(followedUserID);
+    if (currentUserFollowing){
+      return currentUserFollowing.includes(followedUserID);
+    } else {
+      return false;
+    }
   }
 
   followUser = followedUserID => {
     let currentUserID = this.props.userInSession._id;
     let isFollowing = this.checkFollowing(followedUserID);
+    let follow = {id: followedUserID}
+    console.log("FRONT "+ followedUserID);
     if (!isFollowing){
       return this.service
-      .patch(`/auth/${currentUserID}`, followedUserID)
+      .patch(`/auth/${currentUserID}`, follow)
       .then(user => {
         console.log("User updated on DB " + user.data);
       })
       .catch(error => console.log(error));
     }
   };
+
+
+
 
   render() {
     let userSpaces = this.state.userSpaces;
