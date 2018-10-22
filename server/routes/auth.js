@@ -21,6 +21,7 @@ const login = (req, user) => {
   })
 }
 
+
 // SIGNUP
 router.post('/signup', (req, res, next) => {
   let newUserId = "";
@@ -92,6 +93,13 @@ router.get('/logout', (req,res) => {
 });
 
 //GET OTHER USERS
+router.get('/u/:id',(req,res,next) => {
+  const {id} = req.params;
+  console.log("BACK "+id);
+  User.findOne({_id: id})
+      .then( obj => res.status(200).json(obj))
+      .catch(e => next(e))
+})
 
 router.get('/user/:username',(req,res,next) => {
   const {username} = req.params;
@@ -101,12 +109,7 @@ router.get('/user/:username',(req,res,next) => {
       .catch(e => next(e))
 })
 
-router.get('/:id',(req,res,next) => {
-  const {id} = req.params;
-  User.findById({id})
-      .then( obj => res.status(200).json(obj))
-      .catch(e => next(e))
-})
+
 
 router.patch('/:id',(req,res,next) => {
   const {id} = req.params;

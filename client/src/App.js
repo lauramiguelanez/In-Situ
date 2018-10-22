@@ -21,6 +21,7 @@ import Profile from "./components/Profile";
 import ProfileID from "./components/ProfileID";
 import { ScopeID } from "./components/3dSpace/ScopeID";
 import { Welcome } from "./components/3dSpace/Welcome";
+import Feed from "./components/Feed";
 
 class App extends Component {
   constructor() {
@@ -79,6 +80,7 @@ class App extends Component {
         <main>
           <Switch>
             <Route exact path='/' render={() => <Welcome/> }/>  
+            <Route exact path='/feed' render={(props) => <Feed userInSession={this.state.loggedInUser} {...props}/>}/>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
             <Route path='/profile/:username' render={(props) => <ProfileID userInSession={this.state.loggedInUser} {...props}/>}/>
