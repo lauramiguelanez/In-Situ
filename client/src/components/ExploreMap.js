@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { render } from 'react-dom';
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
 import geolocalize from "./maps/geolocalize";
@@ -42,7 +41,6 @@ export class ExploreMap extends Component {
         if (this.state.redirect) {
             console.log(this.state.url)
             let url = `/scope/${this.state.url}`;
-            //let url = `/`;
           return <Redirect to={url} />
         }
       }
@@ -59,7 +57,7 @@ export class ExploreMap extends Component {
             spaces.forEach(space=>{
                 let  marker = new window.google.maps.Marker({
                 position: space.location, map: map,
-                //icon: "./marker.png",
+                icon: "./marker.png",
                 url: space._id,
                 title: 'Scope near you!'
                 });

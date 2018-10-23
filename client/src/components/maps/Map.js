@@ -12,10 +12,10 @@ export default class Map extends Component {
       document.getElementById(this.props.id),
       this.props.options);
 
-      const newStyleMap = new window.google.maps.StyledMapType( mapConstants.STYLES, {name: 'BlackMap'});
+      const newStyleMap = new window.google.maps.StyledMapType( mapConstants.STYLES, {name: 'MapStyled'});
 
-      map.mapTypes.set( 'BlackMap', newStyleMap );
-      map.setMapTypeId( 'BlackMap' );
+      map.mapTypes.set( 'MapStyled', newStyleMap );
+      map.setMapTypeId( 'MapStyled' );
 
     this.props.onMapLoad(map)
   }
