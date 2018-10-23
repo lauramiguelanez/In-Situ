@@ -18,13 +18,14 @@ const spacesCRUD = (Space, extensionFn) => {
             .then( objList => res.status(200).json(objList))
             .catch(e => next(e))
     })
-
+    
     router.get('/:id',(req,res,next) => {
         const {id} = req.params;
         Space.findById(id)
             .then( obj => res.status(200).json(obj))
             .catch(e => next(e))
     })
+    
     
     // CRUD: CREATE
     router.post('/',(req,res,next) => {

@@ -17,10 +17,10 @@ exports.COORDINATES = {
   exports.STYLES = [
     {
         "featureType": "all",
-        "elementType": "labels.text",
+        "elementType": "geometry",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#a7e1c8"
             }
         ]
     },
@@ -29,16 +29,10 @@ exports.COORDINATES = {
         "elementType": "labels.text.fill",
         "stylers": [
             {
-                "saturation": 36
+                "gamma": 0.01
             },
             {
-                "color": "#000000"
-            },
-            {
-                "lightness": 40
-            },
-            {
-                "visibility": "off"
+                "lightness": 20
             }
         ]
     },
@@ -47,13 +41,16 @@ exports.COORDINATES = {
         "elementType": "labels.text.stroke",
         "stylers": [
             {
-                "visibility": "off"
+                "saturation": -31
             },
             {
-                "color": "#000000"
+                "lightness": -33
             },
             {
-                "lightness": 16
+                "weight": 2
+            },
+            {
+                "gamma": 0.8
             }
         ]
     },
@@ -67,41 +64,14 @@ exports.COORDINATES = {
         ]
     },
     {
-        "featureType": "administrative",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 17
-            },
-            {
-                "weight": 1.2
-            }
-        ]
-    },
-    {
         "featureType": "landscape",
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "lightness": 30
             },
             {
-                "lightness": 20
+                "saturation": 30
             }
         ]
     },
@@ -110,120 +80,53 @@ exports.COORDINATES = {
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#000000"
+                "saturation": 20
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "lightness": 20
             },
             {
-                "lightness": 21
+                "saturation": -20
             }
         ]
     },
     {
         "featureType": "road",
-        "elementType": "geometry.fill",
+        "elementType": "geometry",
         "stylers": [
             {
-                "color": "#f9f9f9"
+                "lightness": 10
             },
             {
-                "visibility": "on"
+                "saturation": -30
             }
         ]
     },
     {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 17
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
+        "featureType": "road",
         "elementType": "geometry.stroke",
         "stylers": [
             {
-                "color": "#000000"
+                "saturation": 25
             },
             {
-                "lightness": 29
-            },
-            {
-                "weight": 0.2
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 18
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#ffffff"
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 16
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#fffcfc"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#000000"
-            },
-            {
-                "lightness": 19
+                "lightness": 25
             }
         ]
     },
     {
         "featureType": "water",
-        "elementType": "geometry",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 17
+                "lightness": -20
             }
         ]
     }
 ]
-  

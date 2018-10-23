@@ -12,7 +12,6 @@ import Login from './components/auth/Login';
 import { ScopeView } from "./components/ScopeView";
 import { UploadSpace } from "./components/upload/UploadSpace";
 import { UploadMediaImg} from "./components/upload/UploadMediaImg";
-//import Map from './components/maps/Map';
 import { ScopeCamera } from "./components/3dSpace/ScopeCamera";
 import { ScopeCameraID } from "./components/3dSpace/ScopeCameraID";
 import { UploadMediaVideo } from "./components/upload/UploadMediaVideo";
@@ -22,6 +21,7 @@ import ProfileID from "./components/ProfileID";
 import { ScopeID } from "./components/3dSpace/ScopeID";
 import { Welcome } from "./components/3dSpace/Welcome";
 import Feed from "./components/Feed";
+import { ExploreMap } from "./components/ExploreMap";
 
 class App extends Component {
   constructor() {
@@ -81,6 +81,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' render={() => <Welcome/> }/>  
             <Route exact path='/feed' render={(props) => <Feed userInSession={this.state.loggedInUser} {...props}/>}/>
+            <Route exact path='/explore' render={(props) => <ExploreMap location={this.state.spaceLocation} {...props}/>}/>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
             <Route path='/profile/:username' render={(props) => <ProfileID userInSession={this.state.loggedInUser} {...props}/>}/>
@@ -98,14 +99,6 @@ class App extends Component {
         <footer>
             <BottomMenu userInSession={this.state.loggedInUser}/>
         </footer>
-        {/* <Map id="myMap" options={{center: this.state.spaceLocation, zoom: 8}} 
-          onMapLoad={map => {
-            let marker = new window.google.maps.Marker({
-            position: this.state.spaceLocation, map: map,
-            title: 'Hello Istanbul!'
-            });
-          }} 
-        />*/}
       </div>
     );
   }

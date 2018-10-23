@@ -18,8 +18,6 @@ export class UploadSpace extends React.Component {
   }
 
   handleChange(e) {
-    //console.log('handleChange');
-    //console.log('DEBUG e.target.files[0]', e.target.files[0]);
     this.setState({
       file: e.target.files[0]
     });
@@ -40,15 +38,12 @@ export class UploadSpace extends React.Component {
   uploadImage(file) {
     const formData = new FormData();
     formData.append("photo", file);
-    //console.log("DEBUG formData", formData.get("photo"));
     return this.service
       .post("/uploadCloud", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       })
       .then(img => {
         this.setState({ img_url: img.data.secure_url, redirect: true });
-        //console.log("Image from CLOUD");
-        //console.log(img.data.url);
       })
       .catch(error => console.log(error));
   }
