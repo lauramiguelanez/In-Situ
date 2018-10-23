@@ -32,15 +32,17 @@ export class ExploreMap extends Component {
       }
 
     render(){
-        console.log(this.state.spaces);
+        let spaces = this.state.spaces;
+        console.log(spaces);
         return(
             <Map id="myMap" options={{center: this.state.location, zoom: 12}} 
           onMapLoad={map => {
-            
-            let marker = new window.google.maps.Marker({
-            position: this.state.location, map: map,
-            title: 'Hello Istanbul!'
-            });
+            spaces.forEach(space=>{
+                let marker = new window.google.maps.Marker({
+                position: space.location, map: map,
+                title: 'Hello Istanbul!'
+                });
+            })
           }} 
         />
         )
