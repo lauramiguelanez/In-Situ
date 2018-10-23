@@ -67,8 +67,8 @@ export class ScopeID extends React.Component {
   }; 
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
-    this.setState({ controls: new DeviceOrientationControls(camera) });
-    //this.setState({ controls: new TrackballControls(camera) });
+    //this.setState({ controls: new DeviceOrientationControls(camera) });
+    this.setState({ controls: new TrackballControls(camera) });
 
     camera.position.set(0, 0, -0.001);
 
@@ -123,7 +123,7 @@ export class ScopeID extends React.Component {
           let likes = this.state.likes + 1;
           this.setState({likes: likes});
           console.log(likes);
-          let space = {likes:likes, id: this.state.spaceID, usersWhoLiked: this.state.loggedInUser}
+          let space = {likes:likes, id: this.state.spaceID/* , usersWhoLiked: this.state.loggedInUser */}
           return this.service.post("/spaces/like", {space})
           .then(space => {
             console.log("Space updated on DB " + space.data);
