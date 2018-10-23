@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import * as mapConstants from './constants';
 
 export default class Map extends Component {
@@ -17,7 +16,6 @@ export default class Map extends Component {
 
       map.mapTypes.set( 'BlackMap', newStyleMap );
       map.setMapTypeId( 'BlackMap' );
-
 
     this.props.onMapLoad(map)
   }
