@@ -25,6 +25,19 @@ const spacesCRUD = (Space, extensionFn) => {
             .then( obj => res.status(200).json(obj))
             .catch(e => next(e))
     })
+
+    // ADD LIKE
+    router.post('/like',(req,res,next) => {
+        let {space} = req.body;
+        console.log(space);
+        console.log(space.id);
+        console.log(space.likes);
+        Space.findByIdAndUpdate(space.id, { likes: space.likes }/*  ,{new:false} */)
+            .then( obj => {
+                res.status(200).json({status:'updated',obj});
+            })
+            .catch(e => next(e))
+    })
     
     // CRUD: CREATE
     router.post('/',(req,res,next) => {
@@ -36,6 +49,7 @@ const spacesCRUD = (Space, extensionFn) => {
     })
     
     // CRUD: UPDATE
+    
     router.patch('/:id',(req,res,next) => {
         const {id} = req.params;
         const object = _.pickBy(req.body, (e,k) => paths.includes(k));
@@ -49,16 +63,7 @@ const spacesCRUD = (Space, extensionFn) => {
             .catch(e => next(e))
     })
 
-    router.patch('/like',(req,res,next) => {
-        let space = req.body;
-        console.log(space.id);
-        console.log(space.likes);
-        Space.findByIdAndUpdate(id, { likes: likes } ,{new:true})
-            .then( obj => {
-                res.status(200).json({status:'updated',obj});
-            })
-            .catch(e => next(e))
-    })
+   
 
     
     // CRUD: DELETE

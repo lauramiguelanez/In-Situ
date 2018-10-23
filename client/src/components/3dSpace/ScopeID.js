@@ -34,7 +34,7 @@ export class ScopeID extends React.Component {
     return this.service
       .get(`/spaces/${id}`)
       .then(space => {
-        console.log(space.data.likes)
+
         console.log(space.data.likes)
         this.setState({ image: space.data.image, mediaIDs: space.data.media, likes:space.data.likes });
         this.sendNewSpace(space.data);
@@ -121,7 +121,7 @@ export class ScopeID extends React.Component {
           this.setState({likes: likes});
           console.log(likes);
           let space = {likes:likes, id: this.state.spaceID}
-          return this.service.patch("/spaces/like", space)
+          return this.service.post("/spaces/like", {space})
           .then(space => {
             console.log("Space updated on DB " + space.data);
           })
