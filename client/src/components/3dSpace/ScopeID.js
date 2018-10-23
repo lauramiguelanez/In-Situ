@@ -28,6 +28,9 @@ export class ScopeID extends React.Component {
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
+  }
 
   getImage = (id) => {
     let promises = [];
@@ -120,7 +123,7 @@ export class ScopeID extends React.Component {
           let likes = this.state.likes + 1;
           this.setState({likes: likes});
           console.log(likes);
-          let space = {likes:likes, id: this.state.spaceID}
+          let space = {likes:likes, id: this.state.spaceID, usersWhoLiked: this.state.loggedInUser}
           return this.service.post("/spaces/like", {space})
           .then(space => {
             console.log("Space updated on DB " + space.data);

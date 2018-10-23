@@ -8,7 +8,8 @@ const spaceSchema = new Schema(
     location: {},
     isPrivate: Boolean,
     media: [],
-    likes: Number
+    likes: Number,
+    usersWhoLiked: []
   },
   {
     timestamps: {

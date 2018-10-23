@@ -86,7 +86,7 @@ class App extends Component {
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
             <Route path='/profile/:username' render={(props) => <ProfileID userInSession={this.state.loggedInUser} {...props}/>}/>
             <Route exact path='/profile' render={() => <Profile userInSession={this.state.loggedInUser}/>}/>
-            <Route path='/scope/:id' render={(props) => <ScopeID newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>} newSpace={(space, location) => {this.actualizeSpace(space, location)}}/>
+            <Route path='/scope/:id' render={(props) => <ScopeID  newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>} newSpace={(space, location) => {this.actualizeSpace(space, location)}}/>
             <Route exact path='/scope' render={() => <ScopeView id={this.state.spaceId}/>}/>
             <Route exact path='/camera/:id' render={(props) => <ScopeCameraID newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>}/>
             <Route exact path='/camera' render={() => <ScopeCamera id={this.state.spaceId}/>}/>

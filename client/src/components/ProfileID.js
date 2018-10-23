@@ -121,7 +121,7 @@ export default class ProfileID extends Component {
     } else {
       return (
         <div className="profile-feed">
-          <h1>No profile</h1>
+          <h1>Login to see profile</h1>
         </div>
       );
     }

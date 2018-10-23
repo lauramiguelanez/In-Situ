@@ -109,8 +109,6 @@ router.get('/user/:username',(req,res,next) => {
       .catch(e => next(e))
 })
 
-
-
 router.patch('/:id',(req,res,next) => {
   const {id} = req.params;
   let follow = req.body;
