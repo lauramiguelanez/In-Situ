@@ -26,7 +26,6 @@ const spacesCRUD = (Space, extensionFn) => {
             .catch(e => next(e))
     })
     
-    
     // CRUD: CREATE
     router.post('/',(req,res,next) => {
         const object = _.pickBy(req.body, (e,k) => paths.includes(k));
@@ -44,6 +43,17 @@ const spacesCRUD = (Space, extensionFn) => {
         let newMedia = req.body;
         console.log(newMedia);
         Space.findByIdAndUpdate(id, { $push: { media: newMedia } } ,{new:true})
+            .then( obj => {
+                res.status(200).json({status:'updated',obj});
+            })
+            .catch(e => next(e))
+    })
+
+    router.patch('/like',(req,res,next) => {
+        let space = req.body;
+        console.log(space.id);
+        console.log(space.likes);
+        Space.findByIdAndUpdate(id, { likes: likes } ,{new:true})
             .then( obj => {
                 res.status(200).json({status:'updated',obj});
             })

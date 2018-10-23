@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import geolocalize from "../maps/geolocalize";
 import * as THREE from "three";
 import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
+import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
@@ -19,7 +20,9 @@ export class ScopeID extends React.Component {
       sceneCSS: new THREE.Scene(), 
       renderer: new THREE.WebGLRenderer({ antialias: true }),
       rendererCSS: new CSS3DRenderer(),
-      isInLocation: false
+      isInLocation: false,
+      isLiked: false,
+      likes: 0
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
@@ -31,7 +34,9 @@ export class ScopeID extends React.Component {
     return this.service
       .get(`/spaces/${id}`)
       .then(space => {
-        this.setState({ image: space.data.image, mediaIDs: space.data.media });
+        console.log(space.data.likes)
+        console.log(space.data.likes)
+        this.setState({ image: space.data.image, mediaIDs: space.data.media, likes:space.data.likes });
         this.sendNewSpace(space.data);
       })
       .then(()=>{
@@ -59,7 +64,9 @@ export class ScopeID extends React.Component {
   }; 
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
-    this.setState({ controls: new DeviceOrientationControls(camera) });
+    //this.setState({ controls: new DeviceOrientationControls(camera) });
+    this.setState({ controls: new TrackballControls(camera) });
+
     camera.position.set(0, 0, -0.001);
 
     renderer.domElement.className = "scope";
@@ -107,15 +114,34 @@ export class ScopeID extends React.Component {
     rendererCSS.setSize(window.innerWidth, window.innerHeight);
   };
 
+  likeListener = () => {
+      document.body.addEventListener("click", e => {
+        if(e.target.id == "like-button"){
+          let likes = this.state.likes + 1;
+          this.setState({likes: likes});
+          console.log(likes);
+          let space = {likes:likes, id: this.state.spaceID}
+          return this.service.patch("/spaces/like", space)
+          .then(space => {
+            console.log("Space updated on DB " + space.data);
+          })
+          .catch(error => console.log(error));
+        }
+      });
+  }
+
   componentDidMount = () => {
     let id =  this.props.match.params.id;
+    this.setState({spaceID: id});
     geolocalize().then(center => {
       this.setState({currrentLocation: center});
     });
     this.getImage(id).then(() => {
       this.init(this.state);
       this.animate();
-    });
+    }).then(()=>{
+      this.likeListener();
+    })
   };
 
   render() {

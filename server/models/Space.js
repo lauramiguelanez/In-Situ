@@ -7,7 +7,8 @@ const spaceSchema = new Schema(
     image: String,
     location: {},
     isPrivate: Boolean,
-    media: []
+    media: [],
+    likes: Number
   },
   {
     timestamps: {

@@ -4,7 +4,6 @@ import DeviceOrientationControls from "../../lib/DeviceOrientationControls";
 //import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elementsPREV} from "./CSS3elementsPREV";
-//import { Camera } from "../Camera";
 import axios from "axios";
 require('dotenv').config();
 
