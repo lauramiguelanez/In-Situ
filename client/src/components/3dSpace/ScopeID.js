@@ -67,8 +67,8 @@ export class ScopeID extends React.Component {
   }; 
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
-    //this.setState({ controls: new DeviceOrientationControls(camera) });
-    this.setState({ controls: new TrackballControls(camera) });
+    this.setState({ controls: new DeviceOrientationControls(camera) });
+    //this.setState({ controls: new TrackballControls(camera) });
 
     camera.position.set(0, 0, -0.001);
 
