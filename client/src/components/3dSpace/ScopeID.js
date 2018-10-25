@@ -169,6 +169,8 @@ export class ScopeID extends React.Component {
 
   render() {
     let id =  this.props.match.params.id;
+    let likes = this.state.likes;
+
     if (this.state.loggedInUser){
       let isOwner = (this.state.owner == this.state.loggedInUser._id);
 
@@ -187,7 +189,7 @@ export class ScopeID extends React.Component {
         return (
           <div>
             <div className="card box modal">
-              <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
+              <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceID}/>
             </div>
             <div id="scopediv">
                 <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
@@ -199,7 +201,7 @@ export class ScopeID extends React.Component {
         return (
           <div> 
             <div className="card box modal">
-              <UploadMediaText userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
+              <UploadMediaText userInSession={this.state.loggedInUser} currentSpace={this.state.spaceID}/>
             </div>
             <div id="scopediv">
                 <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
@@ -211,7 +213,7 @@ export class ScopeID extends React.Component {
         return (
           <div>
             <div className="card box modal">
-              <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
+              <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceID}/>
             </div>
             <div id="scopediv">
                 <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
@@ -236,7 +238,7 @@ export class ScopeID extends React.Component {
         )
       }
     }
-    let likes = this.state.likes;
+    
     return (
       <div>
         <div id="scopediv">
