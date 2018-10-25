@@ -17,7 +17,6 @@ export class ExploreMap extends Component {
       console.log(center);
       this.setState({ location: center });
     });
-    
   }
 
   setRedirect = marker => {
@@ -40,43 +39,48 @@ export class ExploreMap extends Component {
       return <Redirect to={url} />;
     }
   };
-  componentDidMount(){
+
+  componentWillMount() {
     this.getMarkers();
     this.props.newPage();
   }
 
   render() {
     let spaces = this.state.spaces;
-    console.log(spaces);
-    return (
-      <div>
-        {this.renderRedirect()}
-        <Map
-          id="myMap"
-          options={{ center: this.state.location, zoom: 12 }}
-          onMapLoad={map => {
-            let markers = [];
-            if(spaces){
-              spaces.forEach(space => {
-                let marker = new window.google.maps.Marker({
-                  position: space.location,
-                  map: map,
-                  icon: "./marker.png",
-                  url: space._id,
-                  title: "Scope near you!"
+
+    if (spaces) {
+      return (
+        <div>
+          {this.renderRedirect()}
+          <Map
+            id="myMap"
+            options={{ center: this.state.location, zoom: 12 }}
+            onMapLoad={map => {
+              let markers = [];
+              if (spaces) {
+                spaces.forEach(space => {
+                  let marker = new window.google.maps.Marker({
+                    position: space.location,
+                    map: map,
+                    icon: "./marker.png",
+                    url: space._id,
+                    title: "Scope near you!"
+                  });
+                  markers.push(marker);
                 });
-                markers.push(marker);
+              }
+              markers.forEach(marker => {
+                marker.addListener("click", e => {
+                  this.setRedirect(marker.url);
+                  console.log(marker.url);
+                });
               });
-            }
-            markers.forEach(marker => {
-              marker.addListener("click", e => {
-                this.setRedirect(marker.url);
-                console.log(marker.url);
-              });
-            });
-          }}
-        />
-      </div>
-    );
+            }}
+          />
+        </div>
+      );
+    } else {
+      return <div/>
+    }
   }
 }

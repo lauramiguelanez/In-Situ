@@ -64,7 +64,7 @@ export class UploadMediaVideo extends React.Component {
     if (this.state.redirect) return <Redirect to="/" />;
 
     return (
-      <div className="form-card box">
+      <div className="form-card">
         <div class="field">
           <form onSubmit={e => this.handleSubmit(e)}>
           <label class="label">Add a YouTube video to this Scope</label>

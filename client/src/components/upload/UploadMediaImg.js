@@ -82,7 +82,7 @@ export class UploadMediaImg extends React.Component {
     if(this.state.redirect) return <Redirect to="/" />
 
     return (
-      <div className="form-card box">
+      <div className="form-card">
         <div className="file">
           <form onSubmit={e => this.handleSubmit(e)}>
           <label className="file-label">

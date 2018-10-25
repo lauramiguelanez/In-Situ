@@ -17,7 +17,6 @@ export default class ProfileID extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
-    
     this.getScopes();
   }
 
@@ -29,7 +28,6 @@ export default class ProfileID extends Component {
       .then(user => {
         this.setState({ userProfileID: user.data._id });
         let isFollowing = this.checkFollowing(user.data._id);
-        console.log(isFollowing)
         let catalogId = user.data.catalog;
         this.setState({ catalogId: catalogId, followed:isFollowing });
         return this.service.get(`/catalog/${catalogId}`);
@@ -89,9 +87,9 @@ export default class ProfileID extends Component {
     let userSpaces = this.state.userSpaces;
     let isFollowEnabled;
     let isFollowText;
+    console.log("is followed " + this.state.followed);
     this.state.followed? isFollowEnabled="button is-primary":isFollowEnabled="button is-primary is-outlined";
     this.state.followed? isFollowText="Follow":isFollowText="UnFollow";
-    console.log(this.state.followed);
     if (userSpaces) {
       return (
         <div className="profile-feed">
@@ -100,7 +98,6 @@ export default class ProfileID extends Component {
               {isFollowText}
             </button>
           </form>
-
           {userSpaces.map(space => {
             return (
               <div key={space._id} className="scope-in-feed">

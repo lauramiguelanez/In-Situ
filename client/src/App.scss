@@ -88,12 +88,12 @@ main {
 }
 
 .modal{
-  margin: 100px auto;
-  padding: 20px;
+  margin: auto auto;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-self: center;
+  max-width: 300px;
   z-index: 30;
 }
 
@@ -169,29 +169,6 @@ main {
   z-index: 10;
 }
 
-.profile-feed {
-  width: 100vw;
-  max-width: 900px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  margin: 0 35px;
-  //background: linear-gradient(top, to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 8%,rgba(255,255,255,0) 92%,rgba(255,255,255,1) 100%);
-}
-.scope-in-feed {
-  align-self: center;
-  margin: 10px;
-}
-.panorama-feed {
-  object-fit: cover;
-  width: 20vw;
-  height: 20vw;
-  align-content: center;
-  border-radius: 10vw;
-}
-
 .switch-button {
   position: absolute;
   top: 80px;
@@ -202,9 +179,10 @@ main {
 
 .likes-button{
   position: absolute;
-  bottom: 20px;
+  top: 80px;
+  left: 30px;
   //margin: 0 auto;
-  align-self: center;
+  //align-self: center;
   z-index: 30;
   margin: auto;
 }
@@ -241,9 +219,33 @@ main {
   z-index: 10;
 }
 
+.profile-feed {
+  width: 100vw;
+  max-width: 900px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  margin: 0 35px;
+  //background: linear-gradient(top, to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 8%,rgba(255,255,255,0) 92%,rgba(255,255,255,1) 100%);
+}
+.scope-in-feed {
+  align-self: center;
+  margin: 10px;
+}
+.panorama-feed {
+  object-fit: cover;
+  width: 20vw;
+  height: 20vw;
+  align-content: center;
+  border-radius: 10vw;
+}
+
 @media only screen and (max-width: 500px){
   .profile-feed {
-    padding-top:120vw; 
+    //padding-top:120vw; 
+    align-content: flex-start;
     flex-direction: row;
     margin: 0 20px;
     overflow: scroll;
