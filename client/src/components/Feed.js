@@ -17,7 +17,7 @@ export default class Feed extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
     this.props.newPage();
-    this.getFeedScopes();
+    //this.getFeedScopes();
   }
 
   getFeedScopes = () => {
@@ -69,6 +69,9 @@ export default class Feed extends Component {
         .catch(error => console.log(error));
     });
   };
+  componentDidMount(){
+    this.getFeedScopes();
+  }
 
   render() {
     let feedSpaces = this.state.feedSpaces;
