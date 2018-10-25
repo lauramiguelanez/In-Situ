@@ -12,11 +12,12 @@ export default class ProfileID extends Component {
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
+    this.props.newPage();
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
-    this.props.newPage();
+    
     this.getScopes();
   }
 

@@ -72,7 +72,6 @@ class App extends Component {
   render() {
     console.log("SPACE ID STATE APP")
     console.log(this.state.spaceId)
-    console.log(this.state.page)
     this.fetchUser();
     return (
       <div className="App">
@@ -87,7 +86,7 @@ class App extends Component {
             <Route exact path='/explore' render={(props) => <ExploreMap location={this.state.spaceLocation} {...props} newPage={()=>{this.setState({page:"Explore"})}}/>}/>
             <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} newPage={()=>{this.setState({page:"Home"})}}/>}/>
             <Route exact path='/login' render={() => <Login getUser={this.getTheUser} newPage={()=>{this.setState({page:"Home"})}}/>}/>
-            <Route path='/profile/:username' render={(props) => <ProfileID userInSession={this.state.loggedInUser} newPage={()=>{this.setState({page:"Profile"})}} {...props}/>}/>
+            <Route path='/profile/:username' render={(props) => <ProfileID userInSession={this.state.loggedInUser} newPage={()=>{this.setState({page:"ProfileID"})}} {...props}/>}/>
             <Route exact path='/profile' render={() => <Profile userInSession={this.state.loggedInUser} newPage={()=>{this.setState({page:"Profile"})}}/>}/>
             <Route path='/scope/:id' render={(props) => <ScopeID  userInSession={this.state.loggedInUser} newPage={()=>{this.setState({page:"Scope"})}} newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>}/>
             <Route exact path='/camera/:id' render={(props) => <ScopeCameraID newPage={()=>{this.setState({page:"Scope"})}} newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>}/>
@@ -96,7 +95,7 @@ class App extends Component {
         </main>
         <div className="fix-bottom"></div>
         <footer>
-            <BottomMenu userInSession={this.state.loggedInUser}/>
+            <BottomMenu userInSession={this.state.loggedInUser} page= {this.state.page}/>
         </footer>
       </div>
     );

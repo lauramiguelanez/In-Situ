@@ -17,14 +17,34 @@ export default class Navbar extends Component {
 
   render() {
     let page = this.props.page;
-    console.log("Page in navBar "+page);
+    console.log("Page in navBar "+ page);
 
-    if (this.state.loggedInUser) {
+    if (this.state.loggedInUser && page == "Profile") {
       return (
         <nav className="nav-style box" id="top-nav">
           <ul className="nav-width">
             <li className="has-text-danger"><Link to='/'>Home</Link></li>
             <li><a onClick={this.handleLogout}>Logout</a></li>
+            <li><Link to='/profile'> @{this.state.loggedInUser.username}</Link></li>
+          </ul>
+        </nav>
+      )
+    } else if (this.state.loggedInUser && page == "ProfileID") {
+      return (
+        <nav className="nav-style box" id="top-nav">
+          <ul className="nav-width">
+            <li className="has-text-danger"><Link to='/'>Home</Link></li>
+            {/* <li>@{this.state.loggedInUser.username}</li> */}
+            <li><Link to='/profile'><img className="profile-pic" src="/user.svg"></img></Link></li>
+          </ul>
+        </nav>
+      )
+    } else if (this.state.loggedInUser) {
+      return (
+        <nav className="nav-style box" id="top-nav">
+          <ul className="nav-width">
+            <li className="has-text-danger"><Link to='/'>Home</Link></li>
+            {/* <li><a onClick={this.handleLogout}>Logout</a></li> */}
             <li><Link to='/profile'>{/* @{this.state.loggedInUser.username}*/}<img className="profile-pic" src="/user.svg"></img></Link></li>
           </ul>
         </nav>

@@ -18,6 +18,7 @@ export class ExploreMap extends Component {
       this.setState({ location: center });
     });
     this.getMarkers();
+    this.props.newPage();
   }
 
   setRedirect = marker => {
@@ -52,16 +53,18 @@ export class ExploreMap extends Component {
           options={{ center: this.state.location, zoom: 12 }}
           onMapLoad={map => {
             let markers = [];
-            spaces.forEach(space => {
-              let marker = new window.google.maps.Marker({
-                position: space.location,
-                map: map,
-                icon: "./marker.png",
-                url: space._id,
-                title: "Scope near you!"
+            if(spaces){
+              spaces.forEach(space => {
+                let marker = new window.google.maps.Marker({
+                  position: space.location,
+                  map: map,
+                  icon: "./marker.png",
+                  url: space._id,
+                  title: "Scope near you!"
+                });
+                markers.push(marker);
               });
-              markers.push(marker);
-            });
+            }
             markers.forEach(marker => {
               marker.addListener("click", e => {
                 this.setRedirect(marker.url);

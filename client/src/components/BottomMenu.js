@@ -12,8 +12,14 @@ export default class BottomMenu extends Component {
   }
 
   render() {
-   if (this.state.loggedInUser) {
+  let page = this.props.page;
+  console.log("Page in bottomMenu "+ page);
 
+    if(page == "Scope"){
+      return <div/>
+    }
+
+   if (this.state.loggedInUser && page !== "Scope") {
       return (
         <nav className="nav-style box" id="bottom-nav">
           <ul className="nav-width">

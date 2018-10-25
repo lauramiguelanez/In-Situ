@@ -12,11 +12,11 @@ export default class Profile extends Component {
       baseURL: `${process.env.REACT_APP_API_URL}/api`
     });
     this.getScopes();
+    this.props.newPage();
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
-    this.props.newPage();
   }
 
   getScopes = () => {
