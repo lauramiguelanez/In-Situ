@@ -8,6 +8,9 @@ import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
 import { runInThisContext } from "vm";
+import { UploadMediaImg } from "../upload/UploadMediaImg";
+import { UploadMediaVideo } from "../upload/UploadMediaVideo";
+import { UploadMediaText } from "../upload/UploadMediaText";
 require('dotenv').config();
 
 
@@ -32,10 +35,6 @@ export class ScopeID extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
-/*     if (this.props.userInSession){ 
-      console.log(this.props.userInSession._id);
-      console.log(this.state.loggedInUser._id);
-    } */
   }
 
   getImage = (id) => {
@@ -69,6 +68,7 @@ export class ScopeID extends React.Component {
 
   sendNewSpace = space => {
     this.props.newSpace(space._id, space.location);
+    this.props.newPage();
   }; 
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {
@@ -123,14 +123,18 @@ export class ScopeID extends React.Component {
     rendererCSS.setSize(window.innerWidth, window.innerHeight);
   };
 
-  handleChange = (event) => { 
+  toogleModal = (event) => { 
     if (this.state.modal){
       this.setState({modal: false});
-      console.log(this.state.modal);
+      this.setState({menu: "MEDIA"});
     } else{
       this.setState({modal: true});
-      console.log(this.state.modal);
+      this.setState({menu: "MEDIA"});
     }
+  }
+
+  mediaMenu = (event, menu)=>{
+      this.setState({menu: menu});
   }
 
   likeListener = () => {
@@ -166,29 +170,71 @@ export class ScopeID extends React.Component {
   render() {
     let id =  this.props.match.params.id;
     if (this.state.loggedInUser){
-      let isOwner = this.state.owner == this.state.loggedInUser._id;
-if(isOwner && !this.state.modal){
-  return (
-    <div id="scopediv">
-        <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
-        <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.handleChange(e)}>Add Media</button>
-    </div>
-  )
-} else if(isOwner && this.state.modal){
-  return (
-    <div>
-      <div className="card box">
-        <button className="button is-primary">Add Text</button>
-        <button className="button is-primary">Add Image</button>
-        <button className="button is-primary">Add Video</button>
-      </div>
-      <div id="scopediv">
-        <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.handleChange(e)}>Add Media</button>
-        <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
-      </div>
-    </div>
-  )
-}
+      let isOwner = (this.state.owner == this.state.loggedInUser._id);
+
+      console.log(this.state.modal)
+      console.log(this.state.menu)
+
+      if(isOwner && !this.state.modal){
+        return (
+          <div id="scopediv">
+              <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
+              <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.toogleModal(e)}>Add Media</button>
+          </div>
+        )
+      } 
+      else if (isOwner && this.state.modal && this.state.menu == "IMAGE"){
+        return (
+          <div>
+            <div className="card box modal">
+              <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
+            </div>
+            <div id="scopediv">
+                <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
+                <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.toogleModal(e)}>Add Media</button>
+            </div>
+          </div>
+        )
+      } else if (isOwner && this.state.modal && this.state.menu == "TEXT"){
+        return (
+          <div> 
+            <div className="card box modal">
+              <UploadMediaText userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
+            </div>
+            <div id="scopediv">
+                <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
+                <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.toogleModal(e)}>Add Media</button>
+            </div>
+          </div>
+        )
+      } else if (isOwner && this.state.modal && this.state.menu == "VIDEO"){
+        return (
+          <div>
+            <div className="card box modal">
+              <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>
+            </div>
+            <div id="scopediv">
+                <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
+                <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.toogleModal(e)}>Add Media</button>
+            </div>
+          </div>
+        )
+      }
+      else if(isOwner && this.state.modal && this.state.menu == "MEDIA"){
+        return (
+          <div>
+            <div className="card box modal">
+              <button className="button is-primary" onClick={ e => this.mediaMenu(e, "TEXT")}>Add Text</button>
+              <button className="button is-primary" onClick={ e => this.mediaMenu(e, "IMAGE")}>Add Image</button>
+              <button className="button is-primary" onClick={ e => this.mediaMenu(e, "VIDEO")}>Add Video</button>
+            </div>
+            <div id="scopediv">
+              <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.toogleModal(e)}>Add Media</button>
+              <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
+            </div>
+          </div>
+        )
+      }
     }
     let likes = this.state.likes;
     return (

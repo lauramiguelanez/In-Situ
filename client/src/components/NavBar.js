@@ -16,13 +16,16 @@ export default class Navbar extends Component {
   }
 
   render() {
+    let page = this.props.page;
+    console.log("Page in navBar "+page);
+
     if (this.state.loggedInUser) {
       return (
         <nav className="nav-style box" id="top-nav">
           <ul className="nav-width">
-            <li><a onClick={this.handleLogout}>Logout</a></li>
             <li className="has-text-danger"><Link to='/'>Home</Link></li>
-            <li><Link to='/profile'>{/* @{this.state.loggedInUser.username} */}<img className="profile-pic" src="/user.svg"></img></Link></li>
+            <li><a onClick={this.handleLogout}>Logout</a></li>
+            <li><Link to='/profile'>{/* @{this.state.loggedInUser.username}*/}<img className="profile-pic" src="/user.svg"></img></Link></li>
           </ul>
         </nav>
       )

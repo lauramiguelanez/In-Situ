@@ -79,13 +79,24 @@ main {
 .card {
   //min-height: 500px;
   align-self: center;
-  width: 300px;
+  //width: 300px;
   max-height: 270px;
   padding: 10px;
   border-radius: 10px;
   margin: 50px;
   z-index: 3;
 }
+
+.modal{
+  margin: 100px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: center;
+  z-index: 30;
+}
+
 .form-card {
   align-self: center;
   display: flex;
@@ -180,9 +191,7 @@ main {
   align-content: center;
   border-radius: 10vw;
 }
-/* .switch-button-container{
-  width: 100vw;
-} */
+
 .switch-button {
   position: absolute;
   top: 80px;
@@ -194,7 +203,8 @@ main {
 .likes-button{
   position: absolute;
   bottom: 80px;
-  margin: 0 auto;
+  //margin: 0 auto;
+  align-self: center;
   z-index: 30;
   margin: auto;
 }

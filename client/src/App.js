@@ -72,30 +72,26 @@ class App extends Component {
   render() {
     console.log("SPACE ID STATE APP")
     console.log(this.state.spaceId)
+    console.log(this.state.page)
     this.fetchUser();
     return (
       <div className="App">
         <header className="header">
-          <Navbar userInSession={this.state.loggedInUser} page ={this.state.page} logout={this.logout} />
+          <Navbar userInSession={this.state.loggedInUser} page ={this.state.page} logout={this.logout} page= {this.state.page}/>
         </header>
         <div className="fix-top"></div>
         <main>
           <Switch>
-            <Route exact path='/' render={() => <Welcome/> }/>  
-            <Route exact path='/feed' render={(props) => <Feed userInSession={this.state.loggedInUser} {...props}/>}/>
-            <Route exact path='/explore' render={(props) => <ExploreMap location={this.state.spaceLocation} {...props}/>}/>
-            <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
-            <Route exact path='/login' render={() => <Login getUser={this.getTheUser}/>}/>
-            <Route path='/profile/:username' render={(props) => <ProfileID userInSession={this.state.loggedInUser} {...props}/>}/>
-            <Route exact path='/profile' render={() => <Profile userInSession={this.state.loggedInUser}/>}/>
-            <Route path='/scope/:id' render={(props) => <ScopeID  userInSession={this.state.loggedInUser} newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>}/>
-            <Route exact path='/scope' render={() => <ScopeView id={this.state.spaceId}/>}/>
-            <Route exact path='/camera/:id' render={(props) => <ScopeCameraID newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>}/>
-            <Route exact path='/camera' render={() => <ScopeCamera id={this.state.spaceId}/>}/>
-            <Route exact path='/upload-scope' render={() => <UploadSpace newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>}/>
-            <Route exact path='/upload-media-img' render={() => <UploadMediaImg userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
-            <Route exact path='/upload-media-video' render={() => <UploadMediaVideo userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
-            <Route exact path='/upload-media-text' render={() => <UploadMediaText userInSession={this.state.loggedInUser} currentSpace={this.state.spaceId}/>}/>
+            <Route exact path='/' render={() => <Welcome newPage={()=>{this.setState({page:"Home"})}}/> }/>  
+            <Route exact path='/feed' render={(props) => <Feed userInSession={this.state.loggedInUser} newPage={()=>{this.setState({page:"Feed"})}} {...props}/>}/>
+            <Route exact path='/explore' render={(props) => <ExploreMap location={this.state.spaceLocation} {...props} newPage={()=>{this.setState({page:"Explore"})}}/>}/>
+            <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser} newPage={()=>{this.setState({page:"Home"})}}/>}/>
+            <Route exact path='/login' render={() => <Login getUser={this.getTheUser} newPage={()=>{this.setState({page:"Home"})}}/>}/>
+            <Route path='/profile/:username' render={(props) => <ProfileID userInSession={this.state.loggedInUser} newPage={()=>{this.setState({page:"Profile"})}} {...props}/>}/>
+            <Route exact path='/profile' render={() => <Profile userInSession={this.state.loggedInUser} newPage={()=>{this.setState({page:"Profile"})}}/>}/>
+            <Route path='/scope/:id' render={(props) => <ScopeID  userInSession={this.state.loggedInUser} newPage={()=>{this.setState({page:"Scope"})}} newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>}/>
+            <Route exact path='/camera/:id' render={(props) => <ScopeCameraID newPage={()=>{this.setState({page:"Scope"})}} newSpace={(space, location) => {this.actualizeSpace(space, location)}} {...props}/>}/>
+            <Route exact path='/upload-scope' render={() => <UploadSpace newPage={()=>{this.setState({page:"Upload"})}} newSpace={(space, location) => {this.actualizeSpace(space, location)}} userInSession={this.state.loggedInUser}/>}/>
           </Switch>
         </main>
         <div className="fix-bottom"></div>

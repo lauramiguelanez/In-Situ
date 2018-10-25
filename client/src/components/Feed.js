@@ -16,6 +16,7 @@ export default class Feed extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
+    this.props.newPage();
     this.getFeedScopes();
   }
 

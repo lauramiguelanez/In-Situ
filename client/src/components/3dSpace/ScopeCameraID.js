@@ -58,6 +58,7 @@ export class ScopeCameraID extends React.Component {
 
   sendNewSpace = space => {
     this.props.newSpace(space._id, space.location);
+    this.props.newPage();
   }; 
 
   init = ({ camera, scene, renderer, sceneCSS, rendererCSS }) => {

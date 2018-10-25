@@ -17,10 +17,9 @@ export default class BottomMenu extends Component {
       return (
         <nav className="nav-style box" id="bottom-nav">
           <ul className="nav-width">
-            <li><Link to='/upload-media-img'>+Image</Link></li>
-            <li><Link to='/upload-media-text'>+Text</Link></li>
-            <li>{/* <button className="button is-primary is-rounded"> */}<Link to='/upload-scope/'><img className="profile-pic" src="/add.svg"></img></Link>{/* </button> */}</li>
-            <li><Link to='/upload-media-video'>+Video</Link></li>
+            <li><Link to='/feed'>Feed</Link></li>
+            <li><Link to='/upload-scope/'><img className="profile-pic" src="/add.svg"></img></Link>{/* </button> */}</li>
+            <li><Link to='/explore'>Explore</Link></li>
           </ul>
         </nav>
       )

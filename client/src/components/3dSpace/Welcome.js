@@ -17,7 +17,8 @@ export class Welcome extends React.Component {
         1100
       ),
       scene: new THREE.Scene(),
-      renderer: new THREE.WebGLRenderer({ antialias: true })
+      renderer: new THREE.WebGLRenderer({ antialias: true }),
+      modal: false
     };
   }
 
@@ -33,9 +34,6 @@ export class Welcome extends React.Component {
       40
     );
     geometry.scale(-1, 1, 1); // invert the geometry on the x-axis so that all of the faces point inward
-    //const loader = new THREE.TextureLoader();
-    //const map = loader.load("/stripes.png");
-    //var material = new THREE.MeshBasicMaterial({ map });
     var material = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       wireframe: true,
@@ -68,6 +66,7 @@ export class Welcome extends React.Component {
   };
 
   componentDidMount = () => {
+    this.props.newPage();
     this.init(this.state);
     this.animate();
   };
