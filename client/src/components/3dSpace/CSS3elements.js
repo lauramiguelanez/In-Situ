@@ -59,7 +59,24 @@ const imageElement = (url, x, y, z, ry) => {
   //console.log(url);
   return object;
 };
-const reactionElement = (r) => {
+
+const textElement = (text, x, y, z, ry) => {
+  var div = document.createElement("div");
+  //div.style.width = `${elementSize}px`;
+  //div.style.height = `${elementSize}px`;
+  div.className = "div-on-scope";
+  var h2 = document.createElement("h2");
+  h2.className = "text-on-scope"
+  h2.innerHTML = text; 
+  div.appendChild(h2);
+  var object = new THREE.CSS3DObject(div);
+  object.position.set(x, y, z);
+  object.rotation.y = ry;
+  //console.log(text);
+  return object;
+};
+
+const reactionElement = (likes,r) => {
   let x = 0;
   let y = r;
   let z = 0;
@@ -68,7 +85,7 @@ const reactionElement = (r) => {
   button.className = "button is-primary"; //
   button.id = "like-button";
   button.style.borderRadius = "30px";
-  button.innerHTML = "like";
+  button.innerHTML = "LIKE";
   button.style.width = "60px";
   button.style.height = "60px";
   div.appendChild(button);
@@ -79,7 +96,7 @@ const reactionElement = (r) => {
   return object;
 };
 
-export const CSS3elements = (spaceRadius, media) => {
+export const CSS3elements = (spaceRadius, media, likes) => {
   console.log("MEDIA SEND TO CSS ELEMENTS");
   console.log(media);
   let radius = spaceRadius - 50;
@@ -99,12 +116,15 @@ export const CSS3elements = (spaceRadius, media) => {
     } else if (e.type == "YOUTUBE") {
       let newIFrame = new iframeElement(e.url, x, y, z, rot);
       group.add(newIFrame);
+    } else if (e.type == "TEXT") {
+      let newText = new textElement(e.url, x, y, z, rot);
+      group.add(newText);
     } else {
       console.log(e);
       let newIFrame = new iframeElement(e, x, y, z, rot);
       group.add(newIFrame);
     }
-    let reactions = new reactionElement(-radius);
+    let reactions = new reactionElement(likes, -radius);
     group.add(reactions);
   });
   return group;

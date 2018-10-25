@@ -12,27 +12,28 @@ export default class BottomMenu extends Component {
   }
 
   render() {
-   // if (this.state.loggedInUser) {
+   if (this.state.loggedInUser) {
 
       return (
         <nav className="nav-style box" id="bottom-nav">
-          <ul>
+          <ul className="nav-width">
             <li><Link to='/upload-media-img'>+Image</Link></li>
-            <li>{/* <button className="button is-primary is-rounded"> */}<Link to='/upload-scope/'>New</Link>{/* </button> */}</li>
+            <li><Link to='/upload-media-text'>+Text</Link></li>
+            <li>{/* <button className="button is-primary is-rounded"> */}<Link to='/upload-scope/'><img className="profile-pic" src="/add.svg"></img></Link>{/* </button> */}</li>
             <li><Link to='/upload-media-video'>+Video</Link></li>
           </ul>
         </nav>
       )
-    /* } else {
+    } else {
       return (
           <nav className="nav-style box" id="bottom-nav" role="navigation" aria-label="main navigation">
             <ul>
-            <li><Link to='/'>Home</Link></li>
+              <li><Link to='/explore'>Explore</Link></li>
             </ul>
           </nav>
           
       )
-    } */
+    }
   }
 }
 

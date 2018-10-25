@@ -95,7 +95,7 @@ export default class Feed extends Component {
     } else {
       return (
         <div className="profile-feed">
-          <h1>No profile</h1>
+          <h1>Follow other users to see their Scopes</h1>
         </div>
       );
     }

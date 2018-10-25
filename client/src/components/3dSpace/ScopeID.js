@@ -7,6 +7,7 @@ import TrackballControls from "../../lib/TrackballControls";
 import CSS3DRenderer from "../../lib/CSS3DRenderer";
 import {CSS3elements} from "./CSS3elements";
 import axios from "axios";
+import { runInThisContext } from "vm";
 require('dotenv').config();
 
 
@@ -22,7 +23,8 @@ export class ScopeID extends React.Component {
       rendererCSS: new CSS3DRenderer(),
       isInLocation: false,
       isLiked: false,
-      likes: 0
+      likes: 0,
+      modal: false
     };
     this.service = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`
@@ -30,6 +32,10 @@ export class ScopeID extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
+/*     if (this.props.userInSession){ 
+      console.log(this.props.userInSession._id);
+      console.log(this.state.loggedInUser._id);
+    } */
   }
 
   getImage = (id) => {
@@ -37,9 +43,8 @@ export class ScopeID extends React.Component {
     return this.service
       .get(`/spaces/${id}`)
       .then(space => {
-
         console.log(space.data.likes)
-        this.setState({ image: space.data.image, mediaIDs: space.data.media, likes:space.data.likes });
+        this.setState({ image: space.data.image, mediaIDs: space.data.media, likes:space.data.likes, owner: space.data.creator });
         this.sendNewSpace(space.data);
       })
       .then(()=>{
@@ -87,8 +92,9 @@ export class ScopeID extends React.Component {
 
     let media = this.state.media;
     let group;
+    let likes = this.state.likes;
     if(media!==undefined){
-      group = CSS3elements (this.state.spaceRadius, media);
+      group = CSS3elements (this.state.spaceRadius, media, likes);
       sceneCSS.add(group);
     }
   
@@ -116,6 +122,16 @@ export class ScopeID extends React.Component {
     renderer.setSize(window.innerWidth, window.innerHeight);
     rendererCSS.setSize(window.innerWidth, window.innerHeight);
   };
+
+  handleChange = (event) => { 
+    if (this.state.modal){
+      this.setState({modal: false});
+      console.log(this.state.modal);
+    } else{
+      this.setState({modal: true});
+      console.log(this.state.modal);
+    }
+  }
 
   likeListener = () => {
       document.body.addEventListener("click", e => {
@@ -149,10 +165,39 @@ export class ScopeID extends React.Component {
 
   render() {
     let id =  this.props.match.params.id;
-    return (
+    if (this.state.loggedInUser){
+      let isOwner = this.state.owner == this.state.loggedInUser._id;
+if(isOwner && !this.state.modal){
+  return (
     <div id="scopediv">
         <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
+        <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.handleChange(e)}>Add Media</button>
     </div>
+  )
+} else if(isOwner && this.state.modal){
+  return (
+    <div>
+      <div className="card box">
+        <button className="button is-primary">Add Text</button>
+        <button className="button is-primary">Add Image</button>
+        <button className="button is-primary">Add Video</button>
+      </div>
+      <div id="scopediv">
+        <button className="button is-white is-outlined is-rounded likes-button white" onClick={ e => this.handleChange(e)}>Add Media</button>
+        <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
+      </div>
+    </div>
+  )
+}
+    }
+    let likes = this.state.likes;
+    return (
+      <div>
+        <div id="scopediv">
+            <button className="button is-white is-outlined is-rounded switch-button white"><Link to={`/camera/${id}`}>AR</Link></button>
+            <button className="button is-white is-outlined is-rounded likes-button white" disabled>{likes} likes</button>
+        </div>
+      </div>
     );
   }
 }

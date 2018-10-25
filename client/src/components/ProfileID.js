@@ -21,14 +21,10 @@ export default class ProfileID extends Component {
 
   getScopes = () => {
     let username = this.props.match.params.username;
-    
-    console.log(username);
     let promises = [];
     this.service
       .get(`auth/user/${username}`)
       .then(user => {
-        console.log("USER FROM DB TO PROFILE");
-        console.log(user);
         this.setState({ userProfileID: user.data._id });
         let isFollowing = this.checkFollowing(user.data._id);
         console.log(isFollowing)
