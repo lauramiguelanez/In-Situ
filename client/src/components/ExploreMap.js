@@ -17,8 +17,7 @@ export class ExploreMap extends Component {
       console.log(center);
       this.setState({ location: center });
     });
-    this.getMarkers();
-    this.props.newPage();
+    
   }
 
   setRedirect = marker => {
@@ -41,6 +40,10 @@ export class ExploreMap extends Component {
       return <Redirect to={url} />;
     }
   };
+  componentDidMount(){
+    this.getMarkers();
+    this.props.newPage();
+  }
 
   render() {
     let spaces = this.state.spaces;
