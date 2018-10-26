@@ -92,16 +92,15 @@ export default class ProfileID extends Component {
     this.state.followed? isFollowText="Unfollow":isFollowText="Follow";
     if (userSpaces) {
       return (
-        <div>
-          <div className="profile-user">
-            <h1 className="profile-name">@{this.state.profileUser}</h1>
-            <form onSubmit={e => this.handleSubmit(e)}>
-              <button className={isFollowEnabled} type="submit">
-                {isFollowText}
-              </button>
-            </form>
-          </div>
           <div className="profile-feed">
+            <div className="profile-user">
+              <h1 className="profile-name">@{this.state.profileUser}</h1>
+              <form onSubmit={e => this.handleSubmit(e)}>
+                <button className={isFollowEnabled} type="submit">
+                  {isFollowText}
+                </button>
+              </form>
+            </div>
             {userSpaces.map(space => {
               return (
                 <div key={space._id} className="scope-in-feed">
@@ -116,7 +115,6 @@ export default class ProfileID extends Component {
               );
             })}
           </div>
-        </div>
       );
     } else {
       return (

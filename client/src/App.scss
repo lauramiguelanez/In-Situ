@@ -89,6 +89,7 @@ main {
 
 .modal{
   margin: auto auto;
+  bottom: 130px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -220,6 +221,7 @@ main {
 }
 .feed-user{
   text-align: center;
+  color: $bulma;
   margin-top: 15px;
   margin-bottom: 10px;
 }
@@ -228,24 +230,29 @@ main {
   flex-direction: row;
   //align-content: center;
   justify-content: space-between;
-  margin: 10px 30px;
+  margin: 10px 10px;
   color: $bulma;
   border-bottom: 1px dashed $bulma;
 }
 .profile-name{
-  right: 20px;
-  padding: 10px 10px;
+  left: 10px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 30px;
   color: $bulma;
   font-size: 120%;
-  border: none;
 }
 .follow-button{
-  border: none;
-  right: 20px;
+  right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  margin-right: 10px;
 }
-
 .profile-feed {
   width: 100vw;
+  
   max-width: 900px;
   display: flex;
   flex-direction: row;

@@ -80,7 +80,6 @@ export default class Feed extends Component {
       return (
         <div className="profile-feed">
           {feedSpaces.map(space => {
-            console.log(space);
             return (
               <div key={space._id} className="scope-in-feed">
                 <p className="feed-user">{space.username}</p>
