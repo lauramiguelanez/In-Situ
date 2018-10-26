@@ -218,6 +218,31 @@ main {
   justify-self: center;
   z-index: 10;
 }
+.feed-user{
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.profile-user{
+  display: flex;
+  flex-direction: row;
+  //align-content: center;
+  justify-content: space-between;
+  margin: 10px 30px;
+  color: $bulma;
+  border-bottom: 1px dashed $bulma;
+}
+.profile-name{
+  right: 20px;
+  padding: 10px 10px;
+  color: $bulma;
+  font-size: 120%;
+  border: none;
+}
+.follow-button{
+  border: none;
+  right: 20px;
+}
 
 .profile-feed {
   width: 100vw;

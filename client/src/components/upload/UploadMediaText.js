@@ -67,7 +67,7 @@ export class UploadMediaText extends React.Component {
       <div className="form-card">
         <div class="field">
           <form onSubmit={e => this.handleSubmit(e)}>
-          <label class="label">Add a Quote video to this Scope</label>
+          <label class="label">Add a quote to this Scope</label>
             <div class="control">
               <input
                 className="input is-primary"

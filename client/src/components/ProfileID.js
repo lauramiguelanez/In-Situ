@@ -29,7 +29,7 @@ export default class ProfileID extends Component {
         this.setState({ userProfileID: user.data._id });
         let isFollowing = this.checkFollowing(user.data._id);
         let catalogId = user.data.catalog;
-        this.setState({ catalogId: catalogId, followed:isFollowing });
+        this.setState({ catalogId: catalogId, followed:isFollowing, profileUser: username });
         return this.service.get(`/catalog/${catalogId}`);
       })
       .then(catalog => {
@@ -88,29 +88,34 @@ export default class ProfileID extends Component {
     let isFollowEnabled;
     let isFollowText;
     console.log("is followed " + this.state.followed);
-    this.state.followed? isFollowEnabled="button is-primary":isFollowEnabled="button is-primary is-outlined";
-    this.state.followed? isFollowText="Follow":isFollowText="UnFollow";
+    this.state.followed? isFollowEnabled="button is-primary is-outlined follow-button":isFollowEnabled="button is-primary follow-button";
+    this.state.followed? isFollowText="Unfollow":isFollowText="Follow";
     if (userSpaces) {
       return (
-        <div className="profile-feed">
-          <form onSubmit={e => this.handleSubmit(e)}>
-            <button className={isFollowEnabled} type="submit">
-              {isFollowText}
-            </button>
-          </form>
-          {userSpaces.map(space => {
-            return (
-              <div key={space._id} className="scope-in-feed">
-                <Link to={`/scope/${space._id}`}>
-                  <img
-                    className="panorama-feed"
-                    height="50px"
-                    src={space.image}
-                  />
-                </Link>
-              </div>
-            );
-          })}
+        <div>
+          <div className="profile-user">
+            <h1 className="profile-name">@{this.state.profileUser}</h1>
+            <form onSubmit={e => this.handleSubmit(e)}>
+              <button className={isFollowEnabled} type="submit">
+                {isFollowText}
+              </button>
+            </form>
+          </div>
+          <div className="profile-feed">
+            {userSpaces.map(space => {
+              return (
+                <div key={space._id} className="scope-in-feed">
+                  <Link to={`/scope/${space._id}`}>
+                    <img
+                      className="panorama-feed"
+                      height="50px"
+                      src={space.image}
+                    />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
         </div>
       );
     } else {

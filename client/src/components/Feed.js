@@ -83,7 +83,7 @@ export default class Feed extends Component {
             console.log(space);
             return (
               <div key={space._id} className="scope-in-feed">
-                <p>{space.username}</p>
+                <p className="feed-user">{space.username}</p>
                 <Link to={`/scope/${space._id}`}>
                   <img
                     className="panorama-feed"
