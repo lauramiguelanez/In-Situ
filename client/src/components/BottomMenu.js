@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default class BottomMenu extends Component {
   constructor(props) {
@@ -8,38 +8,44 @@ export default class BottomMenu extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] })
+    this.setState({ ...this.state, loggedInUser: nextProps["userInSession"] });
   }
 
   render() {
-  let page = this.props.page;
-  console.log("Page in bottomMenu "+ page);
+    let page = this.props.page;
+    console.log("Page in bottomMenu " + page);
 
-    if(page == "Scope"){
-      return <div/>
+    if (page == "Scope") {
+      return <div />;
     }
 
-   if (this.state.loggedInUser && page !== "Scope") {
+    if (this.state.loggedInUser && page !== "Scope") {
       return (
         <nav className="nav-style box" id="bottom-nav">
-          <ul className="nav-width">
-            <li><Link to='/feed'>Friends</Link></li>
-            <li><Link to='/upload-scope/'><img className="profile-pic" src="/add.svg"></img></Link>{/* </button> */}</li>
-            <li><Link to='/explore'>Explore</Link></li>
-          </ul>
+          <NavLink
+            className="not-filled-feed"
+            activeClassName="filled-feed"
+            to="/feed"
+          />
+          <NavLink className="not-filled-add" to="/upload-scope/" />
+          <NavLink
+            className="not-filled-explore"
+            activeClassName="filled-explore"
+            to="/explore"
+          />
         </nav>
-      )
+      );
     } else {
       return (
-          <nav className="nav-style box" id="bottom-nav" role="navigation" aria-label="main navigation">
-            <ul>
-              <li><Link to='/explore'>Explore</Link></li>
-            </ul>
-          </nav>
-          
-      )
+        <nav
+          className="nav-style box"
+          id="bottom-nav"
+          role="navigation"
+          aria-label="main navigation"
+        >
+          <NavLink className="not-filled-add" to="/upload-scope/" />
+        </nav>
+      );
     }
   }
 }
-
-
