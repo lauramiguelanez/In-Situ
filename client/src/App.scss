@@ -45,7 +45,7 @@ main {
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .profile-pic{
@@ -63,6 +63,13 @@ main {
 #bottom-nav {
   position: fixed;
   bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  height: 64px;
+  a {
+    display: block;
+  }
 }
 
 .grower{
@@ -272,6 +279,28 @@ main {
   height: 20vw;
   align-content: center;
   border-radius: 10vw;
+}
+.not-filled-explore{
+  content: url("/explore.svg");
+  width: 32px;
+  height: 32px;
+}
+.filled-explore{
+  content: url("/explore-active.svg");
+}
+.not-filled-feed{
+  content: url("/feed.svg");
+  width: 32px;
+  height: 32px;
+}
+.filled-feed{
+  content: url("/feed-active.svg");
+}
+
+.not-filled-add{
+  content: url("/add.svg");
+  width: 32px;
+  height: 32px;
 }
 
 @media only screen and (max-width: 500px){
