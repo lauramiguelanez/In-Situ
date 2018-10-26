@@ -33,15 +33,16 @@ main {
   & li {
     display: inline;
     text-decoration: none;
-    padding: 0px 10px;
+    //padding: 0px 10px;
   }
   a{
     color: $bulma;//$primary-color;
   }
 }
 .nav-width{
-  max-width: 800px;
-  min-width: 400px;
+  //max-width: 800px;
+  //min-width: 400px;
+  width: 100vw;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -58,6 +59,7 @@ main {
 #top-nav  {
   position: fixed;
   top: 0; 
+  padding: 0 30px;
 }
 
 #bottom-nav {
